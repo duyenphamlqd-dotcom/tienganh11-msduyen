@@ -1,0 +1,21 @@
+{
+  "name": "english-11-exam-system-ms-duyen",
+  "version": "1.0.0",
+  "description": "Hệ thống luyện thi trực tuyến Tiếng Anh 11 Giữa Kì 1 - Ms. Duyên (Global Success) - Hoạt động 24/24 trên Render",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "english-11",
+    "global-success",
+    "ms-duyen",
+    "render",
+    "online-exam"
+  ],
+  "author": "Ms. Duyen",
+  "license": "ISC"
+}

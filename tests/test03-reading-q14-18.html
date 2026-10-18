@@ -1,0 +1,682 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đề cương GKI – Test 03 – Q14-18 | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#edf3ff;--panel:#fff;--ink:#172642;
+ --muted:#53627a;--accent:#375bd8;--soft:#eaf0ff;
+ --border:#d6e0f0;--good:#167347;--bad:#b53b43;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,"Segoe UI",sans-serif;transition:background .3s}
+button,input{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;padding:10px 15px;font-weight:700}
+button:focus-visible,input:focus-visible{outline:3px solid #e3a72c;outline-offset:3px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.primary{background:var(--accent);color:white}
+.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--border)}
+.danger{background:#fff0f0;color:#9b2634}
+.wrap{max-width:1320px;margin:auto;padding:18px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:900;color:var(--accent)}
+.controls{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.theme{width:29px;height:29px;border:2px solid #fff;box-shadow:0 0 0 1px #9ba8bc;padding:0;border-radius:50%}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:22px;padding:23px;box-shadow:0 8px 30px #1c356010}
+.hero{text-align:center;padding:55px 25px;max-width:850px;margin:35px auto}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;font-style:italic;font-size:clamp(32px,5vw,62px);line-height:1.25;color:var(--accent);margin:12px 0}
+h2{font-size:22px;margin:0 0 14px}
+h3{margin:14px 0 8px}
+.eyebrow{letter-spacing:2px;font-weight:800;color:var(--accent);font-size:13px}
+.muted{color:var(--muted)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:550px;margin:25px auto}
+label{font-weight:700}
+input{width:100%;padding:12px;border:1px solid #a8b8d0;border-radius:10px;background:#fff;color:#172642}
+.hidden{display:none!important}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+.pill{background:var(--panel);border:1px solid var(--border);padding:8px 15px;border-radius:30px;font-weight:800}
+.progress{height:10px;background:#dbe4f2;border-radius:20px;overflow:hidden;margin:12px 0}
+#progressBar{height:100%;width:0;background:var(--accent);transition:width .3s}
+.layout{display:grid;grid-template-columns:1.08fr 1fr;gap:18px;align-items:start}
+.passage{position:sticky;top:12px;max-height:85vh;overflow:auto}
+.english{font-size:17px;line-height:1.95}
+.sentence{cursor:pointer;border-radius:5px}
+.sentence:hover,.sentence:focus{background:var(--soft)}
+.blank{color:var(--accent);font-weight:900;white-space:nowrap}
+.option{width:100%;text-align:left;display:flex;gap:12px;margin:10px 0;background:var(--panel);color:var(--ink);border:2px solid var(--border);font-weight:500}
+.option b{color:var(--accent)}
+.option.selected{border-color:var(--accent);background:var(--soft)}
+.option.correct{border-color:var(--good);background:#e5f6ec;color:#124c32}
+.option.wrong{border-color:var(--bad);background:#ffebed;color:#8b2632}
+.option small{display:block;font-size:14px;margin-top:5px;color:#43536a}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}
+.notice{padding:12px 15px;border-radius:12px;background:var(--soft);margin:12px 0}
+.feedback{border-left:4px solid var(--accent);padding:13px;background:var(--soft);border-radius:8px;margin-top:15px}
+.feedback p{margin:8px 0}
+table{border-collapse:collapse;width:100%}
+td,th{padding:9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
+.tab.active{background:var(--accent);color:white}
+#meaningBox{margin-top:12px}
+.matchrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;margin:9px 0}
+.matchrow select{width:100%;padding:10px;border-radius:9px;border:1px solid #a8b8d0;background:white;color:#172642}
+.flash{min-height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;border:2px dashed var(--accent);border-radius:20px;padding:22px;background:var(--soft)}
+.flash strong{font-size:25px}
+.certificate{border:7px double #b69a51;text-align:center;padding:28px;background:#fffdf5;color:#273349;margin-top:22px}
+.signature{font-family:"Brush Script MT","Segoe Script",cursive;font-style:italic;font-size:35px;color:#37518d}
+footer{text-align:center;padding:28px;color:var(--muted)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.passage{position:static;max-height:none}.fields{grid-template-columns:1fr}.wrap{padding:10px}.card{padding:16px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+@media print{
+ body{background:white}header,.actions,.tabs,.stats,footer,#intro,#quiz,#study,#resultInfo{display:none!important}
+ #result{display:block!important}.certificate{display:block!important;box-shadow:none}
+}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="brand">✦ ENGLISH LEARNING STUDIO · Ms.Duyen</div>
+ <div class="controls">
+  <span class="muted">Màu nền:</span>
+  <button class="theme" style="background:#edf3ff" onclick="theme('blue')" aria-label="Xanh"></button>
+  <button class="theme" style="background:#f3ecff" onclick="theme('purple')" aria-label="Tím"></button>
+  <button class="theme" style="background:#e7f6ee" onclick="theme('green')" aria-label="Xanh lá"></button>
+  <button class="theme" style="background:#fff3df" onclick="theme('gold')" aria-label="Vàng"></button>
+  <button class="theme" style="background:#19243a" onclick="theme('dark')" aria-label="Tối"></button>
+  <button class="secondary" id="soundBtn" onclick="toggleSound()">🔊 Âm thanh</button>
+ </div>
+</header>
+
+<section id="intro" class="card hero">
+ <div class="eyebrow">GRADE 11 · MIDTERM REVIEW · WEEK 6</div>
+ <h1 class="script">Twenty Minutes a Day</h1>
+ <h2>ĐỀ CƯƠNG GKI – TEST 03 – Q14–18</h2>
+ <p>Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <p class="muted">5 câu đọc hiểu · 50 phút · Giải thích chi tiết · 15 flashcards · 15 câu nối nghĩa</p>
+ <div class="fields">
+  <label>Họ và tên<input id="studentName" placeholder="Nhập họ và tên" maxlength="90"></label>
+  <label>Lớp<input id="studentClass" placeholder="Ví dụ: 11A1" maxlength="30"></label>
+ </div>
+ <button class="primary" onclick="start()">BẮT ĐẦU KHÁM PHÁ →</button>
+ <p class="muted">Giáo viên thiết kế: Ms.Duyen</p>
+</section>
+
+<section id="quiz" class="hidden">
+ <div class="stats">
+  <div class="pill">⏱ <span id="timer">50:00</span></div>
+  <div class="pill">Câu <span id="number">14</span>/18</div>
+  <div class="pill">Đã chọn: <span id="answered">0</span>/5</div>
+  <div class="pill" id="who"></div>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+ <div class="notice" id="motivation" aria-live="polite"></div>
+ <div class="layout">
+  <article class="card passage">
+   <div class="eyebrow">PART 2 · READING</div>
+   <h2>TWENTY MINUTES A DAY: THE QUIET POWER OF A HOBBY</h2>
+   <p class="muted">Nhấn vào từng câu để xem bản dịch tiếng Việt.</p>
+   <div class="english" id="passage"></div>
+   <p class="muted"><i>(Adapted from mentalhealth.org)</i></p>
+   <div id="meaningBox" class="notice hidden" aria-live="polite"></div>
+   <div class="actions">
+    <button class="secondary" onclick="showFull()">📖 Bài đọc hoàn chỉnh</button>
+    <button class="secondary" onclick="showTranslation()">🌐 Dịch bài đọc</button>
+   </div>
+   <div id="readingExtra" class="hidden"></div>
+  </article>
+  <article class="card">
+   <div class="eyebrow" id="questionLabel">QUESTION 14</div>
+   <h2>Choose the best answer.</h2>
+   <p class="muted">Chọn A, B, C hoặc D. Nhấn lại vào phương án để xem nghĩa tiếng Việt.</p>
+   <div id="options"></div>
+   <div class="actions">
+    <button class="secondary" onclick="previous()">← Trước</button>
+    <button class="secondary" onclick="next()">Tiếp →</button>
+    <button class="primary" onclick="explain()">💡 Correct Answer</button>
+   </div>
+   <div id="explanation" class="hidden feedback"></div>
+   <div class="actions">
+    <button class="primary" onclick="finish(false)">✓ Check My Answers</button>
+    <button class="danger" onclick="resetTest()">↺ Reset Test</button>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section id="result" class="hidden">
+ <div class="card" id="resultInfo">
+  <div class="eyebrow">YOUR LEARNING JOURNEY</div>
+  <h1 class="script">Every Step Is Progress!</h1>
+  <h2 id="resultTitle"></h2>
+  <div id="scoreText" style="font-size:28px;font-weight:900;color:var(--accent)"></div>
+  <p id="resultMessage"></p>
+  <div id="review"></div>
+  <div class="actions">
+   <button class="primary" onclick="showStudy()">📚 Ôn tập từ vựng</button>
+   <button class="secondary" onclick="showQuizReview()">📖 Xem lại bài đọc</button>
+   <button class="secondary" onclick="window.print()">🖨 In chứng nhận</button>
+   <button class="danger" onclick="resetTest()">↺ Làm lại</button>
+  </div>
+ </div>
+ <div id="certificate" class="certificate hidden">
+  <div class="eyebrow">CERTIFICATE OF COMPLETION</div>
+  <h1 class="script">Certificate of Achievement</h1>
+  <p>Chứng nhận hoàn thành bài ôn tập đọc hiểu</p>
+  <h2 id="certName"></h2>
+  <p id="certClass"></p>
+  <p>Đã hoàn thành <b>ĐỀ CƯƠNG GKI – TEST 03 – Q14–18</b></p>
+  <h2 id="certScore"></h2>
+  <p id="certDate"></p>
+  <p id="certCode"></p>
+  <p>Giáo viên ký xác nhận</p>
+  <div class="signature">Ms.Duyên</div>
+  <p>Giáo viên thiết kế: Ms.Duyen</p>
+ </div>
+</section>
+
+<section id="study" class="hidden card">
+ <h1 class="script">Vocabulary Adventure</h1>
+ <p>15 cụm từ được trích từ bài đọc. Ôn tập sau khi làm bài để ghi nhớ sâu hơn.</p>
+ <div class="tabs">
+  <button class="tab active" id="matchTab" onclick="switchStudy('match')">🧩 Nối nghĩa</button>
+  <button class="tab" id="flashTab" onclick="switchStudy('flash')">🃏 Flashcards</button>
+  <button class="secondary" onclick="returnResult()">← Kết quả</button>
+ </div>
+ <div id="matchPanel">
+  <p>Ghép từng cụm tiếng Anh với nghĩa tiếng Việt phù hợp.</p>
+  <div id="matching"></div>
+  <div class="actions">
+   <button class="primary" onclick="checkMatching()">Kiểm tra nối nghĩa</button>
+   <button class="secondary" onclick="buildMatching()">Làm lại phần nối nghĩa</button>
+  </div>
+  <div id="matchFeedback" aria-live="polite"></div>
+ </div>
+ <div id="flashPanel" class="hidden">
+  <p id="flashCount"></p>
+  <div class="flash" onclick="flipCard()" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flipCard()}">
+   <div id="flashContent"></div>
+  </div>
+  <div class="actions">
+   <button class="secondary" onclick="moveCard(-1)">← Thẻ trước</button>
+   <button class="primary" onclick="flipCard()">Lật thẻ</button>
+   <button class="secondary" onclick="moveCard(1)">Thẻ tiếp →</button>
+  </div>
+ </div>
+</section>
+
+<footer>✦ Learn with curiosity · Grow with confidence · Giáo viên thiết kế: Ms.Duyen</footer>
+</div>
+
+<script>
+"use strict";
+const LETTERS=["A","B","C","D"];
+const questions=[
+{
+ n:14,answer:0,
+ opts:[
+ "to recover from the pressures of modern life",
+ "to recovering from the pressures of modern life",
+ "for recover from the pressures of modern life",
+ "for recoverring from the pressures of modern life"
+ ],
+ vn:[
+ "để phục hồi sau những áp lực của cuộc sống hiện đại",
+ "để đang phục hồi sau những áp lực của cuộc sống hiện đại (sai cấu trúc)",
+ "cho phục hồi sau những áp lực của cuộc sống hiện đại (sai cấu trúc)",
+ "cho việc phục hồi sau những áp lực của cuộc sống hiện đại (sai cấu trúc và chính tả)"
+ ],
+ why:"A đúng: necessary + to-infinitive diễn đạt việc cần làm. Trong câu này, 'to recover' nêu mục đích của việc nghỉ ngơi. B sai vì 'to recovering' không phù hợp cấu trúc này; C sai vì 'for' không đi trực tiếp với động từ nguyên mẫu; D sai cấu trúc và 'recoverring' sai chính tả.",
+ grammar:"necessary + to V; to V diễn đạt mục đích.",
+ phrases:"recover from pressure = hồi phục sau áp lực; the pressures of modern life = những áp lực của cuộc sống hiện đại."
+},
+{
+ n:15,answer:1,
+ opts:[
+ "because you enjoy doing it a lot",
+ "that you truly enjoy doing",
+ "although many prefer expensive trips",
+ "so people often give up their hobbies"
+ ],
+ vn:[
+ "bởi vì bạn rất thích làm việc đó",
+ "mà bạn thực sự yêu thích thực hiện",
+ "mặc dù nhiều người thích những chuyến đi đắt tiền",
+ "vì vậy mọi người thường từ bỏ sở thích của họ"
+ ],
+ why:"B đúng: 'that you truly enjoy doing' là mệnh đề quan hệ bổ nghĩa cho 'an activity', tạo ý nghĩa tự nhiên và phù hợp với 'and can easily fit...'. A, C và D đều tạo liên kết ý hoặc cấu trúc không phù hợp với câu.",
+ grammar:"Relative clause: an activity (that) you enjoy doing; enjoy + V-ing.",
+ phrases:"enjoy doing something = thích làm việc gì; fit into an ordinary evening = phù hợp với một buổi tối bình thường."
+},
+{
+ n:16,answer:1,
+ opts:[
+ "usually makes people waste their free time",
+ "is good for your mind and your body",
+ "are helpful for your mind and your body",
+ "can be more harmful than doing nothing"
+ ],
+ vn:[
+ "thường khiến mọi người lãng phí thời gian rảnh",
+ "tốt cho tinh thần và cơ thể của bạn",
+ "có ích cho tinh thần và cơ thể của bạn (sai hòa hợp chủ vị)",
+ "có thể có hại hơn việc không làm gì"
+ ],
+ why:"B đúng: chủ ngữ 'Even a short time of...' là số ít nên dùng 'is'. Nội dung phù hợp với câu sau về điều hòa nhịp thở và giúp tinh thần nghỉ ngơi. C dùng 'are' sai hòa hợp chủ vị. A và D trái với ý tích cực của đoạn.",
+ grammar:"Subject–verb agreement: a short time ... is; be good for + noun.",
+ phrases:"be good for your mind and your body = tốt cho tinh thần và thể chất; regulate breathing = điều hòa nhịp thở."
+},
+{
+ n:17,answer:2,
+ opts:[
+ "They usually took too much time for students.",
+ "They could only be done with costly equipment.",
+ "They also lift the mood and build patience.",
+ "They may cause health problems if done often."
+ ],
+ vn:[
+ "Chúng thường chiếm quá nhiều thời gian của học sinh.",
+ "Chúng chỉ có thể được thực hiện với thiết bị đắt tiền.",
+ "Chúng còn cải thiện tâm trạng và rèn luyện tính kiên nhẫn.",
+ "Chúng có thể gây vấn đề sức khỏe nếu thực hiện thường xuyên."
+ ],
+ why:"C đúng: 'They' quy chiếu đến các sở thích/hoạt động được đề cập. Ý cải thiện tâm trạng và xây dựng tính kiên nhẫn liên kết hợp lý với kết quả 'feel calmer and have clearer thoughts'. A, B, D không phù hợp mạch ý tích cực.",
+ grammar:"Reference words: They = short daily hobbies/activities; present simple diễn đạt lợi ích thường xuyên.",
+ phrases:"lift the mood = cải thiện tâm trạng; build patience = rèn tính kiên nhẫn; as a result = kết quả là."
+},
+{
+ n:18,answer:1,
+ opts:[
+ "Although it is has been hard to continue",
+ "If you keep this habit every week",
+ "Because you will have far less free time",
+ "Unless you avoided every kind of hobby"
+ ],
+ vn:[
+ "Mặc dù việc tiếp tục là khó khăn (cấu trúc 'it is has been' sai)",
+ "Nếu bạn duy trì thói quen này mỗi tuần",
+ "Bởi vì bạn sẽ có ít thời gian rảnh hơn nhiều",
+ "Trừ khi bạn tránh mọi loại sở thích"
+ ],
+ why:"B đúng: câu điều kiện loại 1 'If + present simple, will + V' diễn đạt kết quả tích cực trong tương lai. A sai vì 'is has been'; C không hợp logic; D không phù hợp về thì và ý nghĩa.",
+ grammar:"First conditional: If + S + V(s/es), S + will + V.",
+ phrases:"keep this habit = duy trì thói quen này; for a long time = trong thời gian dài."
+}
+];
+
+const sentences=[
+[
+"Nowadays, many people feel that taking an extended break is necessary (14) _____.",
+"Ngày nay, nhiều người cảm thấy rằng việc nghỉ ngơi dài ngày là cần thiết để phục hồi sau những áp lực của cuộc sống hiện đại."
+],
+[
+"Research shows that even twenty minutes a day on a hobby can make a real difference.",
+"Nghiên cứu cho thấy ngay cả hai mươi phút mỗi ngày dành cho sở thích cũng có thể tạo ra sự khác biệt đáng kể."
+],
+[
+"The important thing is to choose an activity (15) _____ and can easily fit into an ordinary evening.",
+"Điều quan trọng là chọn một hoạt động mà bạn thực sự thích làm và có thể dễ dàng sắp xếp vào một buổi tối bình thường."
+],
+[
+"Even a short time of drawing, cooking, gardening, or playing an instrument (16)_____.",
+"Ngay cả một khoảng thời gian ngắn để vẽ, nấu ăn, làm vườn hoặc chơi nhạc cụ cũng tốt cho tinh thần và cơ thể."
+],
+[
+"Such activities regulate breathing and distract people from their concerns, giving the mind a chance to rest.",
+"Những hoạt động như vậy giúp điều hòa nhịp thở và khiến con người tạm quên đi những lo lắng, tạo cơ hội cho tâm trí nghỉ ngơi."
+],
+[
+"Because short daily hobbies are more realistic, it is easier to keep doing them than long projects that we start once a year.",
+"Vì các sở thích ngắn mỗi ngày thực tế hơn, việc duy trì chúng dễ dàng hơn so với những dự án dài mà chúng ta chỉ bắt đầu mỗi năm một lần."
+],
+[
+"(17) _____.",
+"Chúng còn giúp cải thiện tâm trạng và rèn luyện tính kiên nhẫn."
+],
+[
+"As a result, we can feel calmer and have clearer thoughts.",
+"Nhờ đó, chúng ta có thể cảm thấy bình tĩnh hơn và suy nghĩ sáng suốt hơn."
+],
+[
+"Besides improving mental well-being, hobbies can also benefit physical health.",
+"Ngoài việc cải thiện sức khỏe tinh thần, sở thích còn có thể mang lại lợi ích cho sức khỏe thể chất."
+],
+[
+"Engaging in hands-on activities can lower the heart rate, ease muscle tension, and promote better sleep.",
+"Tham gia các hoạt động thực hành có thể làm giảm nhịp tim, giảm căng cơ và giúp ngủ ngon hơn."
+],
+[
+"It can even ease the aches of a long day.",
+"Điều đó thậm chí có thể làm dịu những cơn đau nhức sau một ngày dài."
+],
+[
+"This makes a real difference to how healthy we feel overall.",
+"Điều này tạo ra sự khác biệt đáng kể đối với cảm nhận chung của chúng ta về sức khỏe."
+],
+[
+"So, start small this evening instead of waiting for a free week.",
+"Vì vậy, hãy bắt đầu bằng những việc nhỏ ngay tối nay thay vì chờ đến khi có cả một tuần rảnh rỗi."
+],
+[
+"(18) _____, you will feel stronger and happier for a long time.",
+"Nếu bạn duy trì thói quen này mỗi tuần, bạn sẽ cảm thấy khỏe mạnh và hạnh phúc hơn trong thời gian dài."
+]
+];
+
+const vocab=[
+["an extended break","/ən ɪkˈstendɪd breɪk/","kỳ nghỉ kéo dài","Syn: a long break"],
+["modern life","/ˈmɒdən laɪf/","cuộc sống hiện đại","Ant: traditional life"],
+["make a real difference","/meɪk ə rɪəl ˈdɪfrəns/","tạo ra sự khác biệt đáng kể","Syn: have a significant effect"],
+["an ordinary evening","/ən ˈɔːdənəri ˈiːvnɪŋ/","một buổi tối bình thường","Syn: a usual evening"],
+["play an instrument","/pleɪ ən ˈɪnstrəmənt/","chơi một nhạc cụ","Syn: play a musical instrument"],
+["regulate breathing","/ˈreɡjuleɪt ˈbriːðɪŋ/","điều hòa nhịp thở","Syn: control breathing"],
+["distract people from their concerns","/dɪˈstrækt ˈpiːpəl frəm ðeə kənˈsɜːnz/","giúp mọi người tạm quên lo lắng","Syn: take people's minds off worries"],
+["daily hobbies","/ˈdeɪli ˈhɒbiz/","những sở thích hằng ngày","Syn: everyday leisure activities"],
+["lift the mood","/lɪft ðə muːd/","cải thiện tâm trạng","Syn: improve one's mood"],
+["build patience","/bɪld ˈpeɪʃəns/","rèn luyện tính kiên nhẫn","Syn: develop patience"],
+["mental well-being","/ˈmentəl ˌwel ˈbiːɪŋ/","sức khỏe tinh thần","Syn: mental wellness"],
+["physical health","/ˈfɪzɪkəl helθ/","sức khỏe thể chất","Syn: bodily health"],
+["hands-on activities","/ˌhændz ˈɒn ækˈtɪvətiz/","các hoạt động thực hành","Syn: practical activities"],
+["ease muscle tension","/iːz ˈmʌsəl ˈtenʃən/","giảm căng cơ","Syn: relieve muscle tension"],
+["promote better sleep","/prəˈməʊt ˈbetə sliːp/","giúp ngủ ngon hơn","Syn: improve sleep quality"]
+];
+
+const fullPassage=`Nowadays, many people feel that taking an extended break is necessary to recover from the pressures of modern life. Research shows that even twenty minutes a day on a hobby can make a real difference. The important thing is to choose an activity that you truly enjoy doing and can easily fit into an ordinary evening.
+
+Even a short time of drawing, cooking, gardening, or playing an instrument is good for your mind and your body. Such activities regulate breathing and distract people from their concerns, giving the mind a chance to rest. Because short daily hobbies are more realistic, it is easier to keep doing them than long projects that we start once a year. They also lift the mood and build patience. As a result, we can feel calmer and have clearer thoughts.
+
+Besides improving mental well-being, hobbies can also benefit physical health. Engaging in hands-on activities can lower the heart rate, ease muscle tension, and promote better sleep. It can even ease the aches of a long day. This makes a real difference to how healthy we feel overall. So, start small this evening instead of waiting for a free week. If you keep this habit every week, you will feel stronger and happier for a long time.`;
+
+const translation=sentences.map(x=>x[1]).join("\n\n");
+const messages=[
+"Mỗi câu trả lời là một cơ hội để hiểu bài sâu hơn.",
+"Chậm mà chắc – hãy chú ý các từ nối trong đoạn văn.",
+"Bạn đang rèn luyện khả năng đọc hiểu từng bước!",
+"Hãy tìm bằng chứng từ ngữ pháp và ngữ cảnh.",
+"Tiến bộ bắt đầu từ những thói quen nhỏ mỗi ngày."
+];
+
+let answers=Array(5).fill(null);
+let current=0,remaining=3000,clock=null,started=false,finished=false;
+let sound=true,student="",studentClass="",flashIndex=0,flipped=false;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+})[c]);
+
+function theme(t){
+ const themes={
+ blue:["#edf3ff","#fff","#172642","#375bd8","#eaf0ff","#d6e0f0","#53627a"],
+ purple:["#f3ecff","#fff","#30214a","#7545b5","#f2eaff","#e0d1f3","#625474"],
+ green:["#e7f6ee","#fff","#183c2c","#167347","#e2f4e9","#c5e6d2","#4b6657"],
+ gold:["#fff3df","#fff","#493318","#986113","#fff0d4","#f0d9ad","#705b3e"],
+ dark:["#19243a","#263550","#f3f6ff","#9ab7ff","#344967","#536781","#c6d4ea"]
+ };
+ const keys=["--bg","--panel","--ink","--accent","--soft","--border","--muted"];
+ themes[t].forEach((v,i)=>document.documentElement.style.setProperty(keys[i],v));
+ localStorage.setItem("duyenTheme",t);
+}
+theme(localStorage.getItem("duyenTheme")||"blue");
+
+function toggleSound(){
+ sound=!sound;
+ $("soundBtn").textContent=sound?"🔊 Âm thanh":"🔇 Tắt tiếng";
+}
+function beep(ok){
+ if(!sound)return;
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sine";o.frequency.value=ok?660:330;
+  g.gain.setValueAtTime(.04,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.18);
+  o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.18);
+  o.onended=()=>ctx.close();
+ }catch(e){}
+}
+function start(){
+ student=$("studentName").value.trim();
+ studentClass=$("studentClass").value.trim();
+ if(!student||!studentClass){alert("Vui lòng nhập đầy đủ họ tên và lớp.");return;}
+ answers=Array(5).fill(null);current=0;remaining=3000;
+ started=true;finished=false;
+ $("intro").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("study").classList.add("hidden");
+ $("quiz").classList.remove("hidden");
+ $("who").textContent=student+" · "+studentClass;
+ renderPassage();renderQuestion();updateTimer();
+ clearInterval(clock);
+ clock=setInterval(()=>{
+  if(finished)return;
+  remaining=Math.max(0,remaining-1);
+  updateTimer();
+  if(remaining===0)finish(true);
+ },1000);
+ window.scrollTo(0,0);
+}
+function updateTimer(){
+ $("timer").textContent=String(Math.floor(remaining/60)).padStart(2,"0")+":"+
+ String(remaining%60).padStart(2,"0");
+}
+function renderPassage(){
+ const container=$("passage");container.innerHTML="";
+ const groups=[[0,1,2],[3,4,5,6,7],[8,9,10,11,12,13]];
+ groups.forEach(group=>{
+  const p=document.createElement("p");
+  group.forEach(i=>{
+   const span=document.createElement("span");
+   span.className="sentence";
+   span.tabIndex=0;span.setAttribute("role","button");
+   span.textContent=sentences[i][0]+" ";
+   span.onclick=()=>meaning(i);
+   span.onkeydown=e=>{if(e.key==="Enter")meaning(i)};
+   p.append(span);
+  });
+  container.append(p);
+ });
+}
+function meaning(i){
+ $("meaningBox").classList.remove("hidden");
+ $("meaningBox").textContent="🇻🇳 "+sentences[i][1];
+}
+function renderQuestion(){
+ const q=questions[current];
+ $("number").textContent=q.n;
+ $("questionLabel").textContent="QUESTION "+q.n;
+ $("answered").textContent=answers.filter(x=>x!==null).length;
+ $("progressBar").style.width=(answers.filter(x=>x!==null).length/5*100)+"%";
+ $("motivation").textContent="✦ "+messages[current];
+ $("options").innerHTML="";
+ q.opts.forEach((opt,i)=>{
+  const btn=document.createElement("button");
+  btn.className="option"+(answers[current]===i?" selected":"");
+  btn.innerHTML="<b>"+LETTERS[i]+".</b><span>"+esc(opt)+"</span>";
+  btn.onclick=()=>choose(i);
+  $("options").append(btn);
+ });
+ $("explanation").classList.add("hidden");
+}
+function choose(i){
+ if(finished)return;
+ answers[current]=i;
+ beep(i===questions[current].answer);
+ renderQuestion();
+ const btn=$("options").children[i];
+ const small=document.createElement("small");
+ small.textContent="🇻🇳 "+questions[current].vn[i];
+ btn.lastElementChild.append(small);
+ $("motivation").textContent=i===questions[current].answer?
+ "🌟 Lựa chọn rất tốt! Hãy xem giải thích để ghi nhớ.":
+ "🌱 Cứ tiếp tục khám phá – phần giải thích sẽ giúp bạn hiểu rõ hơn.";
+}
+function previous(){current=Math.max(0,current-1);renderQuestion()}
+function next(){current=Math.min(4,current+1);renderQuestion()}
+function explain(){
+ const q=questions[current],selected=answers[current];
+ if(selected===null&&!finished){
+  alert("Hãy chọn một đáp án trước khi mở phần tự học.");
+  return;
+ }
+ const correct=selected===q.answer;
+ $("explanation").classList.remove("hidden");
+ $("explanation").innerHTML=`
+ <h3>${correct?"🌟 Chính xác!":"🌱 Cùng học từ câu này!"}</h3>
+ <p><b>Correct answer: ${LETTERS[q.answer]}</b></p>
+ <p>${esc(q.why)}</p>
+ <h3>🇻🇳 Nghĩa của 4 phương án</h3>
+ ${q.vn.map((v,i)=>"<p><b>"+LETTERS[i]+":</b> "+esc(v)+"</p>").join("")}
+ <h3>📘 Grammar focus</h3><p>${esc(q.grammar)}</p>
+ <h3>🧠 Useful phrases</h3><p>${esc(q.phrases)}</p>`;
+ [...$("options").children].forEach((btn,i)=>{
+  btn.classList.remove("selected");
+  btn.classList.toggle("correct",i===q.answer);
+  btn.classList.toggle("wrong",i===selected&&i!==q.answer);
+ });
+}
+function showFull(){
+ const box=$("readingExtra");
+ box.classList.remove("hidden");
+ box.innerHTML="<h3>📖 Bài đọc hoàn chỉnh</h3>"+
+ fullPassage.split("\n\n").map(p=>"<p>"+esc(p)+"</p>").join("");
+}
+function showTranslation(){
+ const box=$("readingExtra");
+ box.classList.remove("hidden");
+ box.innerHTML="<h3>🌐 Bản dịch tiếng Việt</h3>"+
+ translation.split("\n\n").map(p=>"<p>"+esc(p)+"</p>").join("");
+}
+function finish(timeout){
+ if(finished)return;
+ const count=answers.filter(x=>x!==null).length;
+ if(!timeout&&count<5&&!confirm("Bạn mới trả lời "+count+"/5 câu. Bạn vẫn muốn nộp bài?"))return;
+ finished=true;clearInterval(clock);
+ const correct=answers.reduce((n,a,i)=>n+(a===questions[i].answer?1:0),0);
+ const score=(correct*2).toFixed(2);
+ $("quiz").classList.add("hidden");
+ $("result").classList.remove("hidden");
+ $("resultTitle").textContent=student+" · "+studentClass;
+ $("scoreText").textContent=correct+"/5 câu đúng · "+score+"/10 điểm";
+ $("resultMessage").textContent=correct>=4?
+ "Tuyệt vời! Bạn đã đạt trên 70%. Hãy tiếp tục phát huy khả năng đọc hiểu.":
+ "Bạn đã hoàn thành một chặng học tập. Hãy xem lại phần giải thích và thử thêm lần nữa nhé!";
+ if(timeout)$("resultMessage").textContent+=" Thời gian làm bài đã kết thúc.";
+ $("review").innerHTML="<h3>Đối chiếu đáp án</h3>"+
+ questions.map((q,i)=>{
+  const a=answers[i];
+  return "<p>Câu "+q.n+": Bạn chọn <b>"+(a===null?"Chưa trả lời":LETTERS[a])+
+  "</b> · Đáp án <b>"+LETTERS[q.answer]+"</b> · "+
+  (a===q.answer?"✓ Đúng":"Cần ôn lại")+"</p>";
+ }).join("");
+ const eligible=correct/5>.7;
+ $("certificate").classList.toggle("hidden",!eligible);
+ $("certName").textContent=student;
+ $("certClass").textContent="Lớp: "+studentClass;
+ $("certScore").textContent=score+"/10 · "+correct+"/5 câu đúng";
+ $("certDate").textContent="Ngày hoàn thành: "+new Date().toLocaleDateString("vi-VN");
+ $("certCode").textContent="Mã chứng nhận: GKI03-"+Date.now().toString(36).toUpperCase();
+ beep(eligible);
+ window.scrollTo(0,0);
+}
+function resetTest(){
+ if(started&&!confirm("Bạn muốn làm lại từ đầu? Kết quả hiện tại sẽ được xóa."))return;
+ clearInterval(clock);started=false;finished=false;
+ $("quiz").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("study").classList.add("hidden");
+ $("intro").classList.remove("hidden");
+ $("readingExtra").classList.add("hidden");
+ $("meaningBox").classList.add("hidden");
+ window.scrollTo(0,0);
+}
+function showQuizReview(){
+ $("result").classList.add("hidden");
+ $("quiz").classList.remove("hidden");
+ current=0;renderQuestion();
+ $("motivation").textContent="📖 Chế độ xem lại: Nhấn Correct Answer để xem lời giải.";
+ $("options").querySelectorAll("button").forEach(b=>b.disabled=true);
+ window.scrollTo(0,0);
+}
+function returnResult(){
+ $("study").classList.add("hidden");
+ $("quiz").classList.add("hidden");
+ $("result").classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+function showStudy(){
+ $("quiz").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("study").classList.remove("hidden");
+ buildMatching();renderFlash();switchStudy("match");
+ window.scrollTo(0,0);
+}
+function switchStudy(mode){
+ $("matchPanel").classList.toggle("hidden",mode!=="match");
+ $("flashPanel").classList.toggle("hidden",mode!=="flash");
+ $("matchTab").classList.toggle("active",mode==="match");
+ $("flashTab").classList.toggle("active",mode==="flash");
+}
+function shuffle(arr){
+ const a=[...arr];
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+function buildMatching(){
+ const order=shuffle([...vocab.keys()]);
+ $("matching").innerHTML="";
+ vocab.forEach((v,i)=>{
+  const row=document.createElement("div");
+  row.className="matchrow";
+  const label=document.createElement("label");
+  label.textContent=(i+1)+". "+v[0];
+  const select=document.createElement("select");
+  select.dataset.index=i;
+  select.innerHTML='<option value="">-- Chọn nghĩa --</option>'+
+  order.map(j=>'<option value="'+j+'">'+esc(vocab[j][2])+'</option>').join("");
+  row.append(label,select);$("matching").append(row);
+ });
+ $("matchFeedback").innerHTML="";
+}
+function checkMatching(){
+ let count=0;
+ document.querySelectorAll("#matching select").forEach(s=>{
+  const ok=Number(s.value)===Number(s.dataset.index)&&s.value!=="";
+  if(ok)count++;
+  s.style.borderColor=ok?"#167347":"#b53b43";
+ });
+ $("matchFeedback").innerHTML="<div class='notice'><b>Đúng "+count+"/15 cụm từ.</b> "+
+ (count===15?"Xuất sắc! Bạn đã ghép đúng toàn bộ.":"Hãy xem lại các ô viền đỏ và tiếp tục luyện tập.")+"</div>";
+ beep(count===15);
+}
+function renderFlash(){
+ const v=vocab[flashIndex];
+ $("flashCount").textContent="Flashcard "+(flashIndex+1)+"/15";
+ $("flashContent").innerHTML=flipped?
+ "<strong>"+esc(v[2])+"</strong><p>"+esc(v[3])+"</p><small>Nhấn để xem mặt trước</small>":
+ "<strong>"+esc(v[0])+"</strong><p>"+esc(v[1])+"</p><small>Nhấn để xem nghĩa và từ đồng nghĩa/trái nghĩa</small>";
+}
+function flipCard(){flipped=!flipped;renderFlash()}
+function moveCard(d){
+ flashIndex=(flashIndex+d+vocab.length)%vocab.length;
+ flipped=false;renderFlash();
+}
+document.addEventListener("keydown",e=>{
+ if(!$("quiz").classList.contains("hidden")&&!finished){
+  if(["a","b","c","d"].includes(e.key.toLowerCase())&&!["INPUT","TEXTAREA"].includes(document.activeElement.tagName)){
+   choose(LETTERS.indexOf(e.key.toUpperCase()));
+  }
+ }
+});
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+

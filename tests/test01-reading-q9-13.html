@@ -1,0 +1,808 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đề cương GKI – Test 01 – Q9-13 | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#edf3ff;--panel:#fff;--ink:#172640;
+ --muted:#52647e;--primary:#3159bd;
+ --soft:#e9efff;--line:#d7e1f1;
+ --good:#13764b;--bad:#b43b4b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.65 "Segoe UI",Arial,sans-serif;
+ transition:background .3s,color .3s}
+button,input{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;
+ padding:11px 16px;font-weight:650;
+ background:var(--primary);color:white;
+ transition:transform .18s,filter .18s}
+button:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,
+[tabindex]:focus-visible{outline:3px solid #edaa35;outline-offset:3px}
+button:disabled{opacity:.55;cursor:not-allowed}
+.secondary{background:var(--soft);color:var(--ink)}
+.danger{background:#b83b50}
+.wrap{max-width:1260px;margin:auto;padding:20px}
+.panel{background:var(--panel);border:1px solid var(--line);
+ border-radius:22px;padding:25px;box-shadow:0 8px 25px #1726400c}
+.hidden{display:none!important}
+.hero{text-align:center;max-width:850px;margin:7vh auto}
+.script{font-family:"Brush Script MT","Segoe Script",Georgia,serif;
+ font-style:italic;font-weight:700;font-size:clamp(34px,6vw,65px);
+ line-height:1.2;color:var(--primary)}
+.kicker{letter-spacing:3px;text-transform:uppercase;
+ font-size:12px;font-weight:800;color:var(--muted)}
+.subtitle{font-size:19px}
+.field{display:grid;gap:6px;text-align:left;margin:12px 0}
+input{padding:13px;border:1px solid var(--line);
+ border-radius:12px;background:var(--panel);color:var(--ink);width:100%}
+.formbox{max-width:460px;margin:25px auto}
+.header{display:flex;gap:12px;justify-content:space-between;
+ align-items:center;flex-wrap:wrap;margin-bottom:15px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{background:var(--soft);color:var(--ink);
+ border-radius:30px;padding:8px 14px;font-weight:700}
+.layout{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+h2,h3{line-height:1.35}
+h2{font-size:23px}
+small,.muted{color:var(--muted)}
+.sentence{padding:10px;border-radius:9px;cursor:pointer;
+ transition:background .2s}
+.sentence:hover{background:var(--soft)}
+.blank{font-weight:800;color:var(--primary)}
+.meaning{margin:6px 0 12px;padding:12px;
+ border-left:4px solid var(--primary);background:var(--soft);
+ border-radius:8px}
+.options{display:grid;gap:12px}
+.option{display:flex;gap:12px;align-items:center;
+ padding:15px;text-align:left;background:var(--soft);
+ color:var(--ink);border:2px solid var(--line);
+ border-radius:14px;width:100%}
+.option .letter{font-weight:800;border-radius:9px;
+ padding:3px 10px;background:var(--panel)}
+.option.selected{border-color:var(--primary);background:var(--panel)}
+.option.correct{border-color:var(--good);background:#ddf5e9;color:#104e34}
+.option.wrong{border-color:var(--bad);background:#ffe7e9;color:#802631}
+.feedback{margin-top:14px;padding:13px;border-radius:12px;background:var(--soft)}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.progress{height:10px;border-radius:20px;background:var(--line);overflow:hidden}
+.progress>div{height:100%;background:var(--primary);transition:width .3s}
+.study{margin-top:16px;padding:18px;background:var(--soft);border-radius:15px}
+.study p{margin:8px 0}
+.chip{display:inline-block;border-radius:20px;padding:5px 11px;
+ background:var(--soft);margin:4px}
+.themebtn{width:31px;height:31px;border:2px solid #a7b4c8;
+ border-radius:50%;padding:0}
+#motivation{text-align:center;font-style:italic;color:var(--muted);
+ margin:14px 0}
+#certificate{border:7px double #b58c36;padding:25px;text-align:center;
+ background:#fffdf4;color:#292a31;border-radius:8px}
+#certificate .script{color:#8a641c}
+#certificate h2{color:#8a641c}
+#certificate p{color:#292a31}
+.bigscore{font-size:44px;font-weight:800;color:var(--primary)}
+.matchrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;
+ align-items:center;margin:10px 0}
+.matchrow select{padding:10px;width:100%;border:1px solid var(--line);
+ border-radius:9px;background:var(--panel);color:var(--ink)}
+.flashcard{min-height:250px;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;
+ background:var(--soft);border:2px solid var(--line);
+ border-radius:20px;padding:24px;cursor:pointer}
+.flashcard h2{font-size:29px}
+.tag{font-size:12px;letter-spacing:1px;color:var(--muted)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+ background:#172640;color:#fff;padding:12px 20px;border-radius:14px;
+ z-index:30;max-width:90vw}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+.fade{animation:fade .3s ease}
+@keyframes fade{from{opacity:.35;transform:translateY(6px)}
+ to{opacity:1;transform:translateY(0)}}
+@media(max-width:800px){
+ .layout{grid-template-columns:1fr}
+ .wrap{padding:10px}.panel{padding:17px}
+ .header{align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important}
+}
+@media print{
+ body{background:white!important}
+ body *{visibility:hidden!important}
+ #certificate,#certificate *{visibility:visible!important}
+ #certificate{position:absolute;top:0;left:0;width:100%;
+  border:7px double #b58c36!important;print-color-adjust:exact}
+}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="toast" class="hidden" role="status"></div>
+
+<div class="wrap">
+<header class="header">
+ <div>
+  <strong>📚 ENGLISH 10 · GLOBAL SUCCESS</strong>
+  <div><small>Giáo viên thiết kế: Ms.Duyen</small></div>
+ </div>
+ <div class="toolbar">
+  <span class="muted">Màu nền:</span>
+  <button class="themebtn" style="background:#edf3ff" data-theme="blue" aria-label="Nền xanh"></button>
+  <button class="themebtn" style="background:#fff3e6" data-theme="warm" aria-label="Nền kem"></button>
+  <button class="themebtn" style="background:#e9f7ed" data-theme="green" aria-label="Nền xanh lá"></button>
+  <button class="themebtn" style="background:#252b3d" data-theme="dark" aria-label="Nền tối"></button>
+  <button class="secondary" id="soundBtn">🔊 Âm thanh</button>
+ </div>
+</header>
+
+<section id="welcome" class="panel hero fade">
+ <div class="kicker">English Learning Challenge</div>
+ <h1 class="script">Đề cương GKI</h1>
+ <h2>TEST 01 · QUESTIONS 9–13</h2>
+ <p class="subtitle">Life expectancy in Japan</p>
+ <p>Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <div class="formbox">
+  <label class="field">Họ và tên
+   <input id="studentName" placeholder="Nhập họ và tên" maxlength="90">
+  </label>
+  <label class="field">Lớp
+   <input id="studentClass" placeholder="Ví dụ: 10A1" maxlength="30">
+  </label>
+  <button id="startBtn" style="width:100%">🚀 Bắt đầu thử thách</button>
+ </div>
+ <div class="toolbar" style="justify-content:center">
+  <span class="pill">5 câu hỏi</span>
+  <span class="pill">50 phút</span>
+  <span class="pill">Tự học có giải thích</span>
+ </div>
+ <p><small>Đạt trên 70% (ít nhất 4/5 câu đúng) để nhận giấy chứng nhận.</small></p>
+</section>
+
+<section id="exam" class="hidden fade">
+ <div class="header">
+  <div>
+   <strong id="studentLabel"></strong>
+   <div><small>TEST 01 · PART 2. READING</small></div>
+  </div>
+  <div class="toolbar">
+   <span class="pill" id="timer">⏱ 50:00</span>
+   <span class="pill" id="counter">Câu 9/13</span>
+   <span class="pill" id="answered">0/5 đã chọn</span>
+  </div>
+ </div>
+ <div class="progress"><div id="bar" style="width:0%"></div></div>
+ <p id="motivation" aria-live="polite"></p>
+ <div class="layout">
+  <article class="panel">
+   <div class="kicker">Reading passage</div>
+   <h2>Life expectancy in Japan</h2>
+   <p><small>Nhấn vào từng câu để xem nghĩa tiếng Việt.</small></p>
+   <div id="passage"></div>
+   <div class="actions">
+    <button class="secondary" id="completeBtn">📖 Bài đọc hoàn chỉnh</button>
+    <button class="secondary" id="translateBtn">🇻🇳 Dịch bài đọc sang tiếng Việt</button>
+   </div>
+   <div id="passageExtra" class="study hidden"></div>
+  </article>
+  <article class="panel">
+   <div class="kicker">Choose the best answer</div>
+   <h2 id="questionTitle">Question 9</h2>
+   <p id="questionHint" class="muted"></p>
+   <div id="options" class="options"></div>
+   <div id="optionMeaning" class="meaning hidden"></div>
+   <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+   <div class="actions">
+    <button id="checkOne">✓ Check answer</button>
+    <button id="explainBtn" class="secondary">📘 Correct Answer</button>
+   </div>
+   <div id="explanation" class="study hidden"></div>
+   <div class="actions">
+    <button id="prevBtn" class="secondary">← Câu trước</button>
+    <button id="nextBtn">Câu tiếp →</button>
+   </div>
+  </article>
+ </div>
+ <div class="panel" style="margin-top:16px">
+  <h3>Question Navigator</h3>
+  <div id="navigator" class="toolbar"></div>
+  <div class="actions">
+   <button id="checkAll">✅ Check My Answers · Nộp bài</button>
+   <button id="resetBtn" class="danger">↻ Reset Test</button>
+  </div>
+ </div>
+</section>
+
+<section id="results" class="hidden panel fade">
+ <div class="kicker" style="text-align:center">Mission completed</div>
+ <h1 class="script" style="text-align:center">Wonderful Progress!</h1>
+ <h2 style="text-align:center">KẾT QUẢ BÀI LÀM</h2>
+ <p id="resultStudent" style="text-align:center"></p>
+ <div id="score" class="bigscore" style="text-align:center"></div>
+ <p id="resultFeedback" style="text-align:center"></p>
+ <div id="review" class="study"></div>
+ <div id="certificate" class="hidden" style="margin-top:22px">
+  <div class="kicker">Certificate of Completion</div>
+  <h1 class="script">Congratulations!</h1>
+  <h2>GIẤY CHỨNG NHẬN HOÀN THÀNH</h2>
+  <p>This certificate is proudly presented to</p>
+  <h2 id="certName"></h2>
+  <p id="certClass"></p>
+  <p>For successfully completing</p>
+  <strong>ĐỀ CƯƠNG GKI – TEST 01 – Q9-13</strong>
+  <p id="certScore"></p>
+  <p id="certDate"></p>
+  <p id="certCode" style="font-size:12px"></p>
+  <div style="margin-top:32px">
+   <strong>Giáo viên thiết kế</strong>
+   <div class="script" style="font-size:35px">Ms.Duyên</div>
+   <strong>Ms.Duyên</strong>
+  </div>
+ </div>
+ <div class="actions" style="justify-content:center">
+  <button id="printBtn" class="hidden">🖨 In / Lưu PDF chứng nhận</button>
+  <button id="retryBtn">↻ Làm lại bài</button>
+  <button id="studyBtn" class="secondary">📚 Ôn tập từ vựng</button>
+ </div>
+</section>
+
+<section id="vocabulary" class="hidden panel fade">
+ <div class="kicker">Vocabulary Lab · B1 Preparation</div>
+ <h1 class="script">Learn & Remember</h1>
+ <p>15 cụm từ được trích từ bài đọc. Phần này là hoạt động bổ trợ, không tính vào điểm bài kiểm tra.</p>
+ <div class="toolbar">
+  <button id="matchTab">🔗 Nối nghĩa 15 cụm từ</button>
+  <button id="flashTab" class="secondary">🃏 Flashcards 15 cụm từ</button>
+  <button id="backBtn" class="secondary">← Quay lại</button>
+ </div>
+ <div id="matchingArea">
+  <h2>Matching Challenge</h2>
+  <p>Chọn nghĩa tiếng Việt phù hợp với từng cụm từ.</p>
+  <div id="matchingRows"></div>
+  <div class="actions">
+   <button id="checkMatch">Kiểm tra 15 cụm từ</button>
+   <button id="resetMatch" class="secondary">Làm lại phần nối nghĩa</button>
+  </div>
+  <div id="matchResult" class="feedback hidden"></div>
+ </div>
+ <div id="flashArea" class="hidden">
+  <h2>Flashcard Practice</h2>
+  <p>Nhấn vào thẻ để lật xem nghĩa, IPA và ghi chú từ vựng.</p>
+  <div id="flashProgress" class="muted"></div>
+  <div id="flashcard" class="flashcard" role="button" tabindex="0"
+   aria-label="Lật thẻ từ vựng"></div>
+  <div class="actions" style="justify-content:center">
+   <button id="flashPrev" class="secondary">← Trước</button>
+   <button id="flipBtn">Lật thẻ</button>
+   <button id="flashNext" class="secondary">Tiếp →</button>
+  </div>
+ </div>
+</section>
+<footer style="text-align:center;padding:22px;color:var(--muted)">
+ English 10 · U1–U3 Review · Designed by Ms.Duyen
+</footer>
+</div>
+
+<script>
+"use strict";
+
+/* Original questions and option order are preserved. */
+const questions=[
+ {n:9,opts:["rose","has risen","will rise","rises"],ans:1,
+  meanings:["đã tăng (quá khứ đơn)","đã tăng (hiện tại hoàn thành)",
+   "sẽ tăng","tăng (hiện tại đơn)"],
+  reason:"Since 1990 chỉ mốc bắt đầu trong quá khứ và sự thay đổi kéo dài đến hiện tại. Cụm 'now stands at 84.3 years' củng cố cách dùng hiện tại hoàn thành.",
+  grammar:"Present perfect: S + have/has + V3/ed. Chủ ngữ 'Life expectancy' là số ít nên dùng 'has risen'. Rise – rose – risen.",
+  phrases:"life expectancy; since 1990; stand at 84.3 years.",
+  encouragement:"Tuyệt vời! Hãy nhớ tín hiệu 'since 1990'."},
+ {n:10,opts:["makes","does","takes","puts"],ans:0,
+  meanings:["thực hiện / tạo ra","làm","lấy / thực hiện","đặt / để"],
+  reason:"Cụm từ phù hợp là 'make efforts' (nỗ lực). Với chủ ngữ 'the country' và ngữ cảnh hiện tại, chọn 'makes'.",
+  grammar:"Collocation: make an effort / make efforts to do something. Không dùng 'do efforts', 'take efforts' hoặc 'put efforts' trong cấu trúc này.",
+  phrases:"make serious efforts; control chronic diseases; improve medical services.",
+  encouragement:"Rất tốt! Collocations là chìa khóa của câu này."},
+ {n:11,opts:["gave up","built up","brought up","looked up"],ans:0,
+  meanings:["từ bỏ / mất đi","xây dựng, phát triển dần",
+   "nuôi dưỡng; đề cập","tra cứu; cải thiện"],
+  reason:"'Give up hope' có nghĩa là từ bỏ hy vọng. Ngữ cảnh thiếu điều kiện chữa trị khiến nhiều gia đình mất hy vọng.",
+  grammar:"Give up + noun / V-ing. 'Gave' là dạng quá khứ của 'give', phù hợp với 'Thirty years ago'.",
+  phrases:"give up hope; good treatment; far from their village.",
+  encouragement:"Bạn đang phát triển kỹ năng suy luận theo ngữ cảnh!"},
+ {n:12,opts:["difference","indifferent","different","differently"],ans:2,
+  meanings:["sự khác biệt (danh từ)","thờ ơ (tính từ)",
+   "khác biệt (tính từ)","một cách khác biệt (trạng từ)"],
+  reason:"Sau linking verb 'looks' cần một tính từ mô tả 'the picture'. 'Different' đúng cả từ loại lẫn ý nghĩa.",
+  grammar:"Look + adjective. 'Very' bổ nghĩa cho tính từ 'different'. Phân biệt difference (n), different (adj), differently (adv).",
+  phrases:"look very different; today the picture looks...",
+  encouragement:"Chính xác! Nhận diện từ loại giúp làm bài nhanh hơn."},
+ {n:13,opts:["of","for","with","to"],ans:1,
+  meanings:["của","cho / có lợi cho","với","đến / tới"],
+  reason:"Cấu trúc cố định 'be good for' nghĩa là tốt cho sức khỏe hoặc có lợi cho điều gì.",
+  grammar:"Be good for + noun/noun phrase. Phân biệt 'good at' (giỏi về) và 'good for' (có lợi cho).",
+  phrases:"be good for the heart; brisk walking; the lungs and the mind.",
+  encouragement:"Hoàn thành rất tốt! Ghi nhớ 'be good for' nhé."}
+];
+
+const sentences=[
+ ["Life expectancy in Japan (9)_______ steadily since 1990 and now stands at 84.3 years, according to the Ministry of Health, Labour and Welfare.",
+ "Tuổi thọ ở Nhật Bản đã tăng đều đặn kể từ năm 1990 và hiện ở mức 84,3 năm, theo Bộ Y tế, Lao động và Phúc lợi."],
+ ["Officials say the country (10)________ serious efforts to control chronic diseases and to improve medical services in remote areas.",
+ "Các quan chức cho biết đất nước này đang nỗ lực nghiêm túc nhằm kiểm soát các bệnh mãn tính và cải thiện dịch vụ y tế ở những vùng xa xôi."],
+ ["In the 1990s, many patients suffered from malnutrition, and modern vaccines were not always available.",
+ "Vào những năm 1990, nhiều bệnh nhân bị suy dinh dưỡng và không phải lúc nào cũng có sẵn các loại vắc-xin hiện đại."],
+ ["“Thirty years ago, families often (11)________ hope because good treatment was far from their village,” recalled Dr. Suzuki Aiko, a retired doctor.",
+ "“Ba mươi năm trước, các gia đình thường mất hy vọng vì nơi có phương pháp điều trị tốt cách xa làng của họ,” bác sĩ Suzuki Aiko, một bác sĩ đã nghỉ hưu, nhớ lại."],
+ ["Today the picture looks very (12)________.",
+ "Ngày nay, tình hình trông rất khác."],
+ ["Supermarkets display clear food labels, and thousands of office workers join online walking challenges to reach 10,000 steps a day.",
+ "Các siêu thị trưng bày nhãn thực phẩm rõ ràng và hàng nghìn nhân viên văn phòng tham gia các thử thách đi bộ trực tuyến để đạt 10.000 bước mỗi ngày."],
+ ["Doctors add that thirty minutes of brisk walking is good (13)________ the heart, the lungs and the mind, but they warn that long screen hours and ultra-processed snacks may cancel out these gains.",
+ "Các bác sĩ nói thêm rằng ba mươi phút đi bộ nhanh có lợi cho tim, phổi và tinh thần, nhưng họ cảnh báo rằng việc dành nhiều giờ trước màn hình và ăn đồ ăn vặt siêu chế biến có thể làm mất đi những lợi ích này."]
+];
+
+const vocab=[
+ ["life expectancy","/ˈlaɪf ɪkˌspektənsi/","tuổi thọ","life span (gần nghĩa)"],
+ ["stand at","/stænd æt/","ở mức (một con số)","reach a level of (gần nghĩa)"],
+ ["make serious efforts","/meɪk ˈsɪəriəs ˈefəts/","thực hiện những nỗ lực nghiêm túc","try hard (gần nghĩa)"],
+ ["chronic diseases","/ˈkrɒnɪk dɪˈziːzɪz/","các bệnh mãn tính","long-term illnesses (gần nghĩa)"],
+ ["medical services","/ˈmedɪkəl ˈsɜːvɪsɪz/","dịch vụ y tế","healthcare services (gần nghĩa)"],
+ ["remote areas","/rɪˈməʊt ˈeəriəz/","các khu vực xa xôi","distant regions (gần nghĩa)"],
+ ["suffer from malnutrition","/ˈsʌfə frəm ˌmælnjuːˈtrɪʃən/","bị suy dinh dưỡng","experience malnutrition (gần nghĩa)"],
+ ["modern vaccines","/ˈmɒdən ˈvæksiːnz/","các loại vắc-xin hiện đại","—"],
+ ["give up hope","/ɡɪv ʌp həʊp/","từ bỏ hy vọng","lose hope (đồng nghĩa); remain hopeful (trái nghĩa)"],
+ ["good treatment","/ɡʊd ˈtriːtmənt/","phương pháp điều trị tốt","effective care (gần nghĩa)"],
+ ["food labels","/fuːd ˈleɪbəlz/","nhãn thực phẩm","—"],
+ ["office workers","/ˈɒfɪs ˈwɜːkəz/","nhân viên văn phòng","—"],
+ ["walking challenges","/ˈwɔːkɪŋ ˈtʃælɪndʒɪz/","các thử thách đi bộ","—"],
+ ["brisk walking","/brɪsk ˈwɔːkɪŋ/","đi bộ nhanh","fast walking (gần nghĩa)"],
+ ["cancel out these gains","/ˈkænsəl aʊt ðiːz ɡeɪnz/","làm mất đi những lợi ích này","offset these benefits (gần nghĩa)"]
+];
+
+const $=id=>document.getElementById(id);
+const letters=["A","B","C","D"];
+const storageKey="msduyen_gki_test01_q9_13";
+const themeKey="msduyen_theme";
+let state={
+ name:"",cls:"",index:0,answers:Array(5).fill(null),
+ checked:Array(5).fill(false),remaining:3000,
+ running:false,finished:false,sound:true,
+ showExplanation:Array(5).fill(false)
+};
+let interval=null,flashIndex=0,flipped=false;
+let previousScreen="results";
+
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+ })[c]);
+}
+function save(){
+ try{localStorage.setItem(storageKey,JSON.stringify(state))}catch(e){}
+}
+function toast(msg){
+ $("toast").textContent=msg;
+ $("toast").classList.remove("hidden");
+ clearTimeout(toast.t);
+ toast.t=setTimeout(()=>$("toast").classList.add("hidden"),2400);
+}
+function beep(success=true){
+ if(!state.sound)return;
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sine";o.frequency.value=success?660:360;
+  g.gain.setValueAtTime(.045,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.16);
+  o.connect(g);g.connect(ctx.destination);
+  o.start();o.stop(ctx.currentTime+.17);
+  o.onended=()=>ctx.close();
+ }catch(e){}
+}
+function screen(id){
+ ["welcome","exam","results","vocabulary"].forEach(x=>{
+  $(x).classList.toggle("hidden",x!==id);
+ });
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+const themes={
+ blue:{"--bg":"#edf3ff","--panel":"#fff","--ink":"#172640",
+ "--muted":"#52647e","--primary":"#3159bd","--soft":"#e9efff","--line":"#d7e1f1"},
+ warm:{"--bg":"#fff3e6","--panel":"#fffdfa","--ink":"#392817",
+ "--muted":"#72533b","--primary":"#925016","--soft":"#ffead4","--line":"#e7cdb0"},
+ green:{"--bg":"#e9f7ed","--panel":"#fff","--ink":"#153b2b",
+ "--muted":"#426453","--primary":"#176847","--soft":"#dcf3e3","--line":"#bcdcc8"},
+ dark:{"--bg":"#252b3d","--panel":"#30384c","--ink":"#f4f7ff",
+ "--muted":"#c3d0e7","--primary":"#9db8ff","--soft":"#414d68","--line":"#60718e"}
+};
+function applyTheme(t){
+ let v=themes[t]||themes.blue;
+ Object.entries(v).forEach(([k,val])=>
+  document.documentElement.style.setProperty(k,val));
+ if(t==="dark"){
+  document.documentElement.style.setProperty("--primary","#9db8ff");
+ }
+ localStorage.setItem(themeKey,t);
+}
+document.querySelectorAll("[data-theme]").forEach(b=>
+ b.addEventListener("click",()=>applyTheme(b.dataset.theme)));
+applyTheme(localStorage.getItem(themeKey)||"blue");
+
+$("soundBtn").onclick=()=>{
+ state.sound=!state.sound;
+ $("soundBtn").textContent=state.sound?"🔊 Âm thanh":"🔇 Tắt tiếng";
+ save();
+ if(state.sound)beep();
+};
+
+function renderPassage(){
+ $("passage").innerHTML=sentences.map((s,i)=>
+ `<div class="sentence" tabindex="0" role="button"
+ aria-label="Dịch câu ${i+1}" data-sentence="${i}">
+ ${escapeHTML(s[0]).replace(/\((\d+)\)_{5,}/g,
+ '<span class="blank">($1)_______</span>')}
+ <div class="meaning hidden" id="sentenceMeaning${i}">${escapeHTML(s[1])}</div>
+ </div>`).join("");
+ document.querySelectorAll("[data-sentence]").forEach(el=>{
+  const toggle=()=>{
+   $("sentenceMeaning"+el.dataset.sentence).classList.toggle("hidden");
+  };
+  el.onclick=toggle;
+  el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle()}};
+ });
+}
+function filledSentence(s){
+ return s.replace(/\((\d+)\)_{5,}/g,(_,n)=>{
+  const q=questions.find(x=>x.n===Number(n));
+  return q?q.opts[q.ans]:"";
+ });
+}
+$("completeBtn").onclick=()=>{
+ $("passageExtra").classList.remove("hidden");
+ $("passageExtra").innerHTML="<h3>📖 Complete Reading</h3><h3>Life expectancy in Japan</h3>"+
+ sentences.map(s=>"<p>"+escapeHTML(filledSentence(s[0]))+"</p>").join("");
+};
+$("translateBtn").onclick=()=>{
+ $("passageExtra").classList.remove("hidden");
+ $("passageExtra").innerHTML="<h3>🇻🇳 Bản dịch hoàn chỉnh</h3><h3>Tuổi thọ ở Nhật Bản</h3>"+
+ sentences.map(s=>"<p>"+escapeHTML(s[1])+"</p>").join("");
+};
+
+const messages=[
+ "Mỗi câu trả lời là một bước tiến!",
+ "Đọc ngữ cảnh trước khi chọn đáp án nhé!",
+ "Bạn đang luyện tư duy ngôn ngữ rất tốt!",
+ "Kiến thức nhỏ hôm nay tạo nên tiến bộ lớn!",
+ "Keep learning, keep growing!"
+];
+function renderQuestion(){
+ const i=state.index,q=questions[i];
+ $("questionTitle").textContent="Question "+q.n;
+ $("questionHint").textContent="Chọn A, B, C hoặc D. Nhấn vào phương án để xem nghĩa.";
+ $("counter").textContent=`Câu ${q.n}/13`;
+ $("answered").textContent=`${state.answers.filter(x=>x!==null).length}/5 đã chọn`;
+ $("bar").style.width=(state.answers.filter(x=>x!==null).length/5*100)+"%";
+ $("motivation").textContent=messages[i];
+ $("options").innerHTML=q.opts.map((opt,j)=>{
+  let cls=state.answers[i]===j?"selected":"";
+  if(state.checked[i]){
+   if(j===q.ans)cls="correct";
+   else if(j===state.answers[i])cls="wrong";
+  }
+  return `<button class="option ${cls}" data-opt="${j}"
+   aria-pressed="${state.answers[i]===j}">
+   <span class="letter">${letters[j]}</span>
+   <span>${escapeHTML(opt)}</span></button>`;
+ }).join("");
+ document.querySelectorAll("[data-opt]").forEach(b=>{
+  b.onclick=()=>selectOption(Number(b.dataset.opt));
+  b.disabled=state.checked[i]||state.finished;
+ });
+ $("optionMeaning").classList.add("hidden");
+ $("feedback").classList.toggle("hidden",!state.checked[i]);
+ if(state.checked[i]){
+  const good=state.answers[i]===q.ans;
+  $("feedback").textContent=(good?"✅ Chính xác! ":"💡 Cùng học từ đáp án này! ")+
+   (good?q.encouragement:`Đáp án đúng: ${letters[q.ans]}.`);
+ }
+ $("explanation").classList.toggle("hidden",!state.showExplanation[i]);
+ if(state.showExplanation[i])renderExplanation();
+ $("checkOne").disabled=state.checked[i]||state.finished;
+ $("explainBtn").disabled=!state.checked[i]&&!state.finished;
+ $("prevBtn").disabled=i===0;
+ $("nextBtn").disabled=i===4;
+ renderNavigator();
+ save();
+}
+function selectOption(j){
+ let i=state.index;
+ if(state.checked[i]||state.finished)return;
+ state.answers[i]=j;
+ const q=questions[i];
+ $("optionMeaning").classList.remove("hidden");
+ $("optionMeaning").innerHTML=`<strong>${letters[j]}. ${escapeHTML(q.opts[j])}</strong>
+ — ${escapeHTML(q.meanings[j])}`;
+ beep(true);
+ renderOptionsOnly();
+ save();
+}
+function renderOptionsOnly(){
+ const i=state.index;
+ document.querySelectorAll("[data-opt]").forEach(b=>{
+  let selected=Number(b.dataset.opt)===state.answers[i];
+  b.classList.toggle("selected",selected);
+  b.setAttribute("aria-pressed",String(selected));
+ });
+ $("answered").textContent=state.answers.filter(x=>x!==null).length+"/5 đã chọn";
+ $("bar").style.width=(state.answers.filter(x=>x!==null).length*20)+"%";
+}
+function checkCurrent(){
+ const i=state.index;
+ if(state.answers[i]===null){toast("Hãy chọn một phương án trước nhé!");return}
+ state.checked[i]=true;
+ state.showExplanation[i]=false;
+ beep(state.answers[i]===questions[i].ans);
+ renderQuestion();
+}
+function renderExplanation(){
+ const q=questions[state.index];
+ $("explanation").innerHTML=`
+ <h3>📘 Correct Answer: ${letters[q.ans]}. ${escapeHTML(q.opts[q.ans])}</h3>
+ <p><strong>Vì sao đúng?</strong> ${escapeHTML(q.reason)}</p>
+ <h4>🇻🇳 Nghĩa của 4 phương án</h4>
+ ${q.opts.map((o,j)=>`<p><strong>${letters[j]}. ${escapeHTML(o)}</strong>:
+ ${escapeHTML(q.meanings[j])}${j===q.ans?" ✓":""}</p>`).join("")}
+ <h4>🧠 Grammar Focus</h4>
+ <p>${escapeHTML(q.grammar)}</p>
+ <h4>📌 Phrases to Remember</h4>
+ <p>${escapeHTML(q.phrases)}</p>`;
+}
+$("checkOne").onclick=checkCurrent;
+$("explainBtn").onclick=()=>{
+ if(!state.checked[state.index]&&!state.finished){
+  toast("Hãy kiểm tra câu trả lời trước khi xem lời giải.");return;
+ }
+ state.showExplanation[state.index]=!state.showExplanation[state.index];
+ renderQuestion();
+};
+$("prevBtn").onclick=()=>{state.index--;renderQuestion()};
+$("nextBtn").onclick=()=>{state.index++;renderQuestion()};
+function renderNavigator(){
+ $("navigator").innerHTML=questions.map((q,i)=>{
+  let selected=state.answers[i]!==null;
+  let label=state.checked[i]?"✓":selected?"●":"";
+  return `<button class="${i===state.index?"":"secondary"}" data-nav="${i}"
+  aria-label="Đến câu ${q.n}">Q${q.n} ${label}</button>`;
+ }).join("");
+ document.querySelectorAll("[data-nav]").forEach(b=>
+  b.onclick=()=>{state.index=Number(b.dataset.nav);renderQuestion()});
+}
+
+function updateTimer(){
+ const m=Math.floor(state.remaining/60),s=state.remaining%60;
+ $("timer").textContent=`⏱ ${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+ if(state.remaining<=300)$("timer").style.color="#c24136";
+}
+function startClock(){
+ clearInterval(interval);
+ updateTimer();
+ interval=setInterval(()=>{
+  if(!state.running||state.finished)return;
+  state.remaining=Math.max(0,state.remaining-1);
+  updateTimer();save();
+  if(state.remaining===0)finish(true);
+ },1000);
+}
+function begin(){
+ let name=$("studentName").value.trim(),cls=$("studentClass").value.trim();
+ if(!name||!cls){toast("Vui lòng nhập đầy đủ Họ tên và Lớp.");return}
+ state={name,cls,index:0,answers:Array(5).fill(null),
+ checked:Array(5).fill(false),remaining:3000,running:true,
+ finished:false,sound:state.sound,
+ showExplanation:Array(5).fill(false)};
+ $("studentLabel").textContent=`${name} · ${cls}`;
+ renderPassage();renderQuestion();screen("exam");startClock();save();
+}
+$("startBtn").onclick=begin;
+function scoreCount(){
+ return questions.reduce((sum,q,i)=>sum+(state.answers[i]===q.ans?1:0),0);
+}
+function finish(expired=false){
+ if(state.finished)return;
+ const missing=state.answers.filter(x=>x===null).length;
+ if(!expired&&missing){
+  if(!confirm(`Còn ${missing} câu chưa chọn. Bạn vẫn muốn nộp bài?`))return;
+ }
+ state.finished=true;state.running=false;
+ clearInterval(interval);
+ state.checked=Array(5).fill(true);
+ save();showResults(expired);
+}
+$("checkAll").onclick=()=>finish(false);
+function showResults(expired=false){
+ const count=scoreCount(),points=(count/5*10).toFixed(2);
+ screen("results");
+ $("resultStudent").textContent=`${state.name} · Lớp ${state.cls}`;
+ $("score").textContent=`${count}/5 · ${points}/10`;
+ $("resultFeedback").textContent=expired?
+ "Hết thời gian! Hãy xem lại lời giải để tiếp tục tiến bộ.":
+ count===5?"Xuất sắc! Bạn đã nắm rất vững kiến thức của bài.":
+ count>=4?"Rất tốt! Bạn đã hoàn thành thử thách với kết quả đáng khích lệ.":
+ count>=2?"Bạn đã có nền tảng. Hãy xem lại các cấu trúc để tiến bộ hơn!":
+ "Mỗi lần luyện tập đều có giá trị. Hãy ôn lại và thử sức lần nữa nhé!";
+ $("review").innerHTML="<h3>📋 Review Your Answers</h3>"+
+ questions.map((q,i)=>{
+  const a=state.answers[i],ok=a===q.ans;
+  return `<p><strong>Question ${q.n}:</strong>
+  ${a===null?"Chưa trả lời":letters[a]+". "+escapeHTML(q.opts[a])}
+  ${ok?"✅":"✗"} · Đáp án đúng:
+  <strong>${letters[q.ans]}. ${escapeHTML(q.opts[q.ans])}</strong></p>`;
+ }).join("");
+ const pass=count>=4;
+ $("certificate").classList.toggle("hidden",!pass);
+ $("printBtn").classList.toggle("hidden",!pass);
+ if(pass){
+  $("certName").textContent=state.name;
+  $("certClass").textContent="Lớp: "+state.cls;
+  $("certScore").textContent=`Kết quả: ${count}/5 câu đúng · ${points}/10 điểm`;
+  $("certDate").textContent="Ngày hoàn thành: "+
+   new Date().toLocaleDateString("vi-VN");
+  $("certCode").textContent="Mã chứng nhận: GKI01-"+Date.now();
+  celebrate();
+ }
+}
+$("printBtn").onclick=()=>window.print();
+function reset(){
+ if(!confirm("Bạn muốn làm lại bài từ đầu? Tiến độ hiện tại sẽ được xóa."))return;
+ clearInterval(interval);
+ localStorage.removeItem(storageKey);
+ state={name:"",cls:"",index:0,answers:Array(5).fill(null),
+ checked:Array(5).fill(false),remaining:3000,running:false,
+ finished:false,sound:state.sound,
+ showExplanation:Array(5).fill(false)};
+ $("studentName").value="";$("studentClass").value="";
+ $("passageExtra").classList.add("hidden");
+ screen("welcome");
+}
+$("resetBtn").onclick=reset;
+$("retryBtn").onclick=reset;
+$("studyBtn").onclick=()=>openVocabulary("results");
+$("backBtn").onclick=()=>screen(previousScreen);
+function openVocabulary(from){
+ previousScreen=from;screen("vocabulary");renderMatching();
+}
+function celebrate(){
+ const canvas=$("confetti"),ctx=canvas.getContext("2d");
+ if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ canvas.width=innerWidth;canvas.height=innerHeight;
+ let pieces=Array.from({length:85},()=>({
+  x:Math.random()*canvas.width,y:-Math.random()*canvas.height,
+  v:2+Math.random()*4,size:4+Math.random()*5,
+  color:["#e5a839","#3979d5","#2a9d72","#e76586"][Math.floor(Math.random()*4)]
+ }));
+ let frames=0;
+ function frame(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pieces.forEach(p=>{
+   p.y+=p.v;ctx.fillStyle=p.color;
+   ctx.fillRect(p.x,p.y,p.size,p.size*.55);
+  });
+  if(++frames<145)requestAnimationFrame(frame);
+  else ctx.clearRect(0,0,canvas.width,canvas.height);
+ }
+ frame();
+}
+
+/* Vocabulary matching: 15 items, one-to-one shuffled meanings. */
+let matchOrder=[];
+function shuffle(a){
+ const x=[...a];
+ for(let i=x.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [x[i],x[j]]=[x[j],x[i]];
+ }
+ return x;
+}
+function renderMatching(){
+ matchOrder=shuffle(vocab.map((_,i)=>i));
+ const choices=matchOrder.map(i=>
+  `<option value="${i}">${escapeHTML(vocab[i][2])}</option>`).join("");
+ $("matchingRows").innerHTML=vocab.map((v,i)=>
+ `<div class="matchrow">
+ <strong>${i+1}. ${escapeHTML(v[0])}</strong>
+ <select id="match${i}" aria-label="Nghĩa của ${escapeHTML(v[0])}">
+ <option value="">-- Chọn nghĩa --</option>${choices}
+ </select></div>`).join("");
+ $("matchResult").classList.add("hidden");
+}
+$("checkMatch").onclick=()=>{
+ let correct=0,used=[];
+ vocab.forEach((v,i)=>{
+  let val=$("match"+i).value;
+  if(val!==""&&Number(val)===i)correct++;
+  if(val!=="")used.push(val);
+ });
+ let duplicates=used.length!==new Set(used).size;
+ $("matchResult").classList.remove("hidden");
+ $("matchResult").textContent=`Bạn ghép đúng ${correct}/15 cụm từ. `+
+ (duplicates?"Lưu ý: mỗi nghĩa chỉ nên dùng một lần. ":"")+
+ (correct===15?"Excellent! Bạn đã ghi nhớ cả 15 cụm từ!":
+ "Hãy xem lại những cụm chưa chính xác và thử tiếp nhé!");
+ beep(correct>=12);
+};
+$("resetMatch").onclick=renderMatching;
+$("matchTab").onclick=()=>{
+ $("matchingArea").classList.remove("hidden");
+ $("flashArea").classList.add("hidden");
+};
+$("flashTab").onclick=()=>{
+ $("matchingArea").classList.add("hidden");
+ $("flashArea").classList.remove("hidden");
+ renderFlash();
+};
+function renderFlash(){
+ const v=vocab[flashIndex];
+ $("flashProgress").textContent=`Thẻ ${flashIndex+1}/15`;
+ $("flashcard").innerHTML=flipped?
+ `<div class="tag">MEANING · IPA · B1</div>
+ <h2>${escapeHTML(v[2])}</h2>
+ <p>${escapeHTML(v[1])}</p>
+ <p><strong>Synonym / Antonym:</strong> ${escapeHTML(v[3])}</p>`:
+ `<div class="tag">ENGLISH PHRASE</div>
+ <h2>${escapeHTML(v[0])}</h2>
+ <p>Nhấn để xem nghĩa và phiên âm</p>`;
+}
+function flip(){flipped=!flipped;renderFlash();beep()}
+$("flashcard").onclick=flip;
+$("flashcard").onkeydown=e=>{
+ if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}
+};
+$("flipBtn").onclick=flip;
+$("flashPrev").onclick=()=>{
+ flashIndex=(flashIndex+14)%15;flipped=false;renderFlash();
+};
+$("flashNext").onclick=()=>{
+ flashIndex=(flashIndex+1)%15;flipped=false;renderFlash();
+};
+
+/* Keyboard shortcuts during the reading test. */
+document.addEventListener("keydown",e=>{
+ if($("exam").classList.contains("hidden"))return;
+ if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))return;
+ const k=e.key.toUpperCase();
+ if(["A","B","C","D"].includes(k)&&!state.checked[state.index]){
+  selectOption(letters.indexOf(k));
+ }
+});
+
+/* Restore an unfinished attempt when possible. */
+try{
+ const old=JSON.parse(localStorage.getItem(storageKey)||"null");
+ if(old&&old.name&&old.cls&&Array.isArray(old.answers)&&old.answers.length===5){
+  if(confirm("Bạn có bài làm trước đó. Tiếp tục bài đang làm?")){
+   state={...state,...old};
+   $("studentName").value=state.name;
+   $("studentClass").value=state.cls;
+   $("soundBtn").textContent=state.sound?"🔊 Âm thanh":"🔇 Tắt tiếng";
+   if(state.finished)showResults();
+   else{
+    state.running=true;
+    $("studentLabel").textContent=state.name+" · "+state.cls;
+    renderPassage();renderQuestion();screen("exam");
+    if(state.remaining<=0)finish(true);
+    else startClock();
+   }
+  }else localStorage.removeItem(storageKey);
+ }
+}catch(e){localStorage.removeItem(storageKey)}
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+

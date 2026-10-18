@@ -1,0 +1,657 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đề cương GKI – Test 02 – Q14-18 | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#edf3fc;--panel:#fff;--ink:#192943;
+ --muted:#52637d;--accent:#365de1;--soft:#e8edff;
+ --line:#d6dfec;--good:#08774c;--bad:#b42336;
+ --shadow:0 12px 36px #182b5014;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.65 system-ui,"Segoe UI",Arial,sans-serif;
+ transition:background .3s}
+body[data-theme="mint"]{--bg:#e7f7ef;--accent:#087c60;--soft:#dcf4e9;--line:#bcded0}
+body[data-theme="peach"]{--bg:#fff0e6;--accent:#ad4d26;--soft:#ffeadc;--line:#efd3c1}
+body[data-theme="night"]{--bg:#101d32;--panel:#1d2c45;--ink:#f5f7ff;--muted:#cad5e8;--accent:#a9bcff;--soft:#2d4167;--line:#405575;--good:#7eebba;--bad:#ffb0ba}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;padding:11px 16px;font-weight:700;transition:.15s}
+button:hover:not(:disabled){filter:brightness(.95);transform:translateY(-1px)}
+button:disabled{opacity:.55;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.primary{background:var(--accent);color:white}
+body[data-theme="night"] .primary{color:#101d32}
+.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+.danger{background:#fce5e8;color:#98243b}
+.shell{max-width:1320px;margin:auto;padding:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:23px;box-shadow:var(--shadow)}
+.hidden{display:none!important}
+.hero{text-align:center;padding:55px 25px;background:linear-gradient(135deg,var(--panel),var(--soft));border-radius:26px;border:1px solid var(--line)}
+.script{font-family:"Segoe Script","Brush Script MT",Georgia,serif;font-style:italic;letter-spacing:.3px}
+h1{font-size:clamp(30px,5vw,56px);line-height:1.25;margin:12px 0}
+h2{font-size:25px;line-height:1.35;margin:5px 0 15px}
+h3{margin:8px 0 12px}
+.subtitle{color:var(--muted)}
+.pill{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:30px;padding:6px 14px;font-size:14px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.brand{font-weight:850;font-size:18px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,input{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);width:100%}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:650px;margin:25px auto}
+label{font-weight:700}
+label input{margin-top:6px}
+.stats{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+.stat{background:var(--panel);border:1px solid var(--line);padding:9px 14px;border-radius:13px;font-weight:750}
+.progress{height:10px;background:var(--line);border-radius:20px;overflow:hidden}
+.progress div{height:100%;width:0;background:var(--accent);transition:width .3s}
+.layout{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:18px;align-items:start}
+.reading{position:sticky;top:12px;max-height:85vh;overflow:auto}
+.paragraph{margin:0 0 17px;text-align:justify;line-height:2}
+.sentence{cursor:pointer;border-radius:5px}
+.sentence:hover{background:var(--soft)}
+.blank{background:var(--soft);color:var(--accent);font-weight:850;padding:2px 5px;border-radius:5px}
+.meaning{padding:13px;border-radius:12px;background:var(--soft);border-left:4px solid var(--accent);margin:12px 0}
+.question{padding:18px 0;border-bottom:1px solid var(--line)}
+.question:last-child{border-bottom:0}
+.options{display:grid;gap:9px}
+.option{display:flex;text-align:left;align-items:flex-start;gap:10px;width:100%;background:var(--panel);color:var(--ink);border:1.5px solid var(--line);font-weight:500}
+.option b{color:var(--accent)}
+.option.selected{border-color:var(--accent);background:var(--soft)}
+.option.correct{border-color:var(--good);background:var(--soft)}
+.option.wrong{border-color:var(--bad)}
+.feedback{font-size:14px;font-weight:700;margin:8px 0}
+.good{color:var(--good)}.bad{color:var(--bad)}
+.explain{margin-top:12px;padding:16px;background:var(--soft);border-radius:14px}
+.explain p{margin:7px 0}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}
+.notice{border-left:4px solid var(--accent);background:var(--soft);padding:12px 16px;border-radius:10px}
+.section{margin-top:20px}
+.flash{min-height:270px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:var(--soft);border:2px dashed var(--accent);border-radius:20px;padding:25px;cursor:pointer}
+.flash .term{font-size:clamp(24px,4vw,35px);font-weight:850}
+.flash .ipa{font-size:20px;color:var(--muted)}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.matchitem{display:block;width:100%;text-align:left;margin-bottom:8px;background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+.matchitem.active{background:var(--soft);border:2px solid var(--accent)}
+.matchitem.matched{border-color:var(--good);opacity:.65}
+.certificate{text-align:center;border:7px double var(--accent);border-radius:15px;padding:28px;background:var(--panel)}
+.certificate h2{font-size:clamp(28px,5vw,45px)}
+.signature{font-family:"Segoe Script",cursive;font-size:27px;font-style:italic}
+.small{font-size:13px;color:var(--muted)}
+.footer{text-align:center;margin:26px;color:var(--muted)}
+@media(max-width:850px){.layout,.matchgrid{grid-template-columns:1fr}.reading{position:static;max-height:none}}
+@media(max-width:550px){.formgrid{grid-template-columns:1fr}.shell{padding:10px}.panel{padding:16px}.hero{padding:35px 15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+@media print{
+ body{background:white;color:black}
+ .no-print,header,.footer,#intro,#study,#testArea,.actions{display:none!important}
+ #result{display:block!important}
+ #result>*:not(#certificate){display:none!important}
+ #certificate{display:block!important;color:#111;border-color:#263d85;box-shadow:none}
+}
+</style>
+</head>
+<body data-theme="default">
+<div class="shell">
+<header class="topbar no-print">
+ <div class="brand">📚 English Learning Studio · Ms.Duyen</div>
+ <div class="controls">
+  <label for="theme">🎨 Giao diện</label>
+  <select id="theme" style="width:auto" onchange="changeTheme(this.value)">
+   <option value="default">Xanh thanh lịch</option>
+   <option value="mint">Xanh bạc hà</option>
+   <option value="peach">Cam ấm áp</option>
+   <option value="night">Chế độ tối</option>
+  </select>
+  <button class="secondary" onclick="toggleSound()" id="soundBtn">🔊 Âm thanh: Bật</button>
+ </div>
+</header>
+
+<section id="intro" class="hero">
+ <div class="pill">GRADE 11 · MIDTERM I · WEEK 6</div>
+ <h1 class="script">Đề cương GKI<br>Test 02 · Q14–18</h1>
+ <h2>AI AND THE SMART TRAFFIC REVOLUTION</h2>
+ <p class="subtitle">Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <div class="formgrid">
+  <label>Họ và tên<input id="studentName" maxlength="90" placeholder="Nhập họ và tên" autocomplete="name"></label>
+  <label>Lớp<input id="studentClass" maxlength="30" placeholder="Ví dụ: 11A1"></label>
+ </div>
+ <p>⏱ 50 phút · 5 câu hỏi · 10 điểm · 15 flashcards</p>
+ <button class="primary" onclick="startTest()">🚀 Bắt đầu thử thách</button>
+ <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
+</section>
+
+<main id="testArea" class="hidden">
+ <div class="panel">
+  <h2 class="script">Smart Traffic Challenge</h2>
+  <div id="welcome"></div>
+  <div class="stats">
+   <span class="stat">⏱ <span id="timer">50:00</span></span>
+   <span class="stat">📝 Đã chọn: <span id="answered">0</span>/5</span>
+   <span class="stat">📊 <span id="scoreStatus">Chưa chấm</span></span>
+  </div>
+  <div class="progress"><div id="progressFill"></div></div>
+  <p class="notice" id="motivation">Every small step makes you stronger!</p>
+ </div>
+
+ <div class="layout">
+  <article class="panel reading">
+   <h2>📖 Reading Passage</h2>
+   <h3>AI AND THE SMART TRAFFIC REVOLUTION</h3>
+   <p class="small">Nhấp vào từng câu để xem nghĩa tiếng Việt. Chỗ trống sẽ được dịch theo đáp án đúng.</p>
+   <div id="passage"></div>
+   <div class="actions">
+    <button class="secondary" onclick="showFullPassage()">📗 Bài đọc hoàn chỉnh</button>
+    <button class="secondary" onclick="showTranslation()">🇻🇳 Dịch bài đọc sang tiếng Việt</button>
+   </div>
+   <div id="readingExtra" class="hidden meaning"></div>
+   <p class="small">Adapted from: World Economic Forum (theo nguồn ghi trong đề).</p>
+  </article>
+
+  <section class="panel">
+   <h2>✍️ Questions 14–18</h2>
+   <p class="small">Chọn A/B/C/D. Nhấp lại phương án để xem nghĩa. Sau khi chọn, dùng “Correct Answer” để tự học.</p>
+   <div id="questions"></div>
+   <div class="actions">
+    <button class="primary" onclick="checkAnswers()">✓ Check My Answers</button>
+    <button class="secondary" onclick="resetTest()">↻ Reset Test</button>
+   </div>
+  </section>
+ </div>
+
+ <section id="study" class="section">
+  <div class="panel">
+   <h2>🧠 Vocabulary Lab</h2>
+   <p>15 cụm từ được trích từ bài đọc, phục vụ ôn tập từ vựng B1.</p>
+   <div class="actions">
+    <button class="secondary" onclick="switchStudy('matching')">🧩 Nối nghĩa</button>
+    <button class="secondary" onclick="switchStudy('flashcards')">🃏 Flashcards</button>
+   </div>
+   <div id="matchingArea">
+    <h3>Match the English phrases with their Vietnamese meanings</h3>
+    <p class="small">Chọn một cụm từ bên trái, sau đó chọn nghĩa tương ứng bên phải. Mỗi cặp đúng được 1 điểm.</p>
+    <div class="stats">
+     <span class="stat">Đúng: <span id="matchScore">0</span>/15</span>
+     <button class="secondary" onclick="resetMatching()">Trộn lại</button>
+    </div>
+    <div class="matchgrid"><div id="englishList"></div><div id="vietnameseList"></div></div>
+    <p id="matchFeedback" aria-live="polite"></p>
+   </div>
+   <div id="flashcardArea" class="hidden">
+    <div class="stats">
+     <span class="stat">Thẻ <span id="cardNumber">1</span>/15</span>
+     <span class="stat">Đã ôn: <span id="reviewCount">0</span>/15</span>
+    </div>
+    <div class="flash" id="flashCard" onclick="flipCard()" tabindex="0" role="button" aria-label="Lật thẻ" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flipCard()}"></div>
+    <div class="actions" style="justify-content:center">
+     <button class="secondary" onclick="moveCard(-1)">← Trước</button>
+     <button class="primary" onclick="markReviewed()">✓ Đã học</button>
+     <button class="secondary" onclick="moveCard(1)">Tiếp →</button>
+    </div>
+   </div>
+  </div>
+ </section>
+</main>
+
+<section id="result" class="hidden section">
+ <div class="panel" style="text-align:center">
+  <h1 class="script">Your Learning Journey</h1>
+  <h2 id="resultTitle"></h2>
+  <div id="resultDetails"></div>
+  <p id="resultMessage" class="notice"></p>
+  <div class="actions no-print" style="justify-content:center">
+   <button class="primary" onclick="reviewTest()">📖 Xem lại bài</button>
+   <button class="secondary" onclick="resetTest()">↻ Làm lại</button>
+   <button class="secondary" onclick="window.print()" id="printBtn">🖨 In chứng nhận</button>
+  </div>
+ </div>
+ <div id="certificate" class="certificate section hidden">
+  <div class="pill">CERTIFICATE OF ACHIEVEMENT</div>
+  <h2 class="script">Certificate of Completion</h2>
+  <h3>GIẤY CHỨNG NHẬN HOÀN THÀNH</h3>
+  <p>This certificate is proudly presented to</p>
+  <h2 id="certName"></h2>
+  <p>Lớp: <strong id="certClass"></strong></p>
+  <p>For successfully completing</p>
+  <h3>GKI – TEST 02 – Q14–18</h3>
+  <p id="certScore"></p>
+  <p id="certDate"></p>
+  <p class="small" id="certId"></p>
+  <p>Teacher's Signature / Chữ ký giáo viên</p>
+  <div class="signature">Ms.Duyên</div>
+  <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
+ </div>
+</section>
+<footer class="footer no-print">Made for learning with confidence · Designed by Ms.Duyen</footer>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LETTERS=["A","B","C","D"];
+const DURATION=3000;
+let student="",studentClass="",started=false,finished=false;
+let deadline=0,ticker=null,remaining=DURATION,sound=true,audioCtx=null;
+let answers={},revealed={},graded=false,finalResult=null;
+let cardIndex=0,cardFlipped=false,reviewed=new Set();
+let selectedEnglish=null,selectedVietnamese=null,matched=new Set();
+let matchOrder=[];
+
+const data=[
+{
+ n:14,correct:1,
+ options:[
+ "it is a chance for drivers to relax and enjoy music on their long trips",
+ "it is also a hidden cost to the environment, the economy, and public health",
+ "it is only a problem for drivers who choose to travel at the wrong time",
+ "it is when commuters spend their free time exploring the busy city streets"
+ ],
+ vi:[
+ "đó là cơ hội để người lái xe thư giãn và thưởng thức âm nhạc trong những chuyến đi dài.",
+ "nó còn gây ra những tổn thất tiềm ẩn đối với môi trường, nền kinh tế và sức khỏe cộng đồng.",
+ "đó chỉ là vấn đề đối với những người lái xe chọn đi vào thời điểm không phù hợp.",
+ "đó là lúc những người đi lại dành thời gian rảnh khám phá các con phố đông đúc."
+ ],
+ explanation:"Câu trước nói ùn tắc không chỉ lãng phí thời gian; câu sau đề cập nhiên liệu, ô nhiễm và căng thẳng. B bổ sung hệ quả phù hợp nhất.",
+ grammar:"not only ...; it is also ... diễn đạt sự bổ sung. Cấu trúc liên kết hai ý tương ứng.",
+ phrases:"a waste of time; a hidden cost; public health",
+ note:"A, C, D không phù hợp với các tác động tiêu cực được triển khai ngay sau chỗ trống."
+},
+{
+ n:15,correct:2,
+ options:[
+ "that collects live data from thousands of road cameras and sensors",
+ "who collect live data from thousands of road cameras and sensors",
+ "which collects live data from thousands of road cameras and sensors",
+ "which collect live data from thousands of road cameras and sensors"
+ ],
+ vi:[
+ "mà thu thập dữ liệu trực tiếp từ hàng nghìn camera giao thông và cảm biến.",
+ "người mà thu thập dữ liệu trực tiếp từ hàng nghìn camera giao thông và cảm biến.",
+ "hệ thống mà thu thập dữ liệu thời gian thực từ hàng nghìn camera giao thông và cảm biến.",
+ "mà thu thập dữ liệu thời gian thực từ hàng nghìn camera giao thông và cảm biến."
+ ],
+ explanation:"Đáp án C. Dấu phẩy trước chỗ trống mở đầu mệnh đề quan hệ không xác định. 'Which' thay cho 'a system known as City Brain'; động từ số ít 'collects' phù hợp với 'system'.",
+ grammar:"Non-defining relative clause: noun + , which + singular verb ... . Không dùng 'that' trong mệnh đề quan hệ không xác định.",
+ phrases:"live data; road cameras and sensors; collect data",
+ note:"A: that không dùng sau dấu phẩy ở đây. B: who chỉ người và collect không phù hợp. D: which đúng đại từ nhưng collect sai hòa hợp chủ–vị."
+},
+{
+ n:16,correct:3,
+ options:[
+ "must travel through crowded streets far more quickly",
+ "can travel through crowded streets quick",
+ "mustn’t travel through empty streets far more quickly",
+ "can travel through crowded streets far more quickly"
+ ],
+ vi:[
+ "phải di chuyển qua những con đường đông đúc nhanh hơn nhiều.",
+ "có thể di chuyển qua những con đường đông đúc nhanh (dùng sai dạng trạng từ).",
+ "không được di chuyển qua những con đường vắng nhanh hơn nhiều.",
+ "có thể di chuyển qua những con đường đông đúc nhanh hơn nhiều."
+ ],
+ explanation:"Đáp án D. 'Can' thể hiện khả năng nhờ AI, còn 'far more quickly' bổ nghĩa cho động từ 'travel' và thể hiện mức độ so sánh.",
+ grammar:"Modal verb + base verb: can travel. Comparative adverb: far + more + quickly. 'Quick' là tính từ, còn 'quickly' là trạng từ.",
+ phrases:"emergency vehicles; crowded streets; far more quickly",
+ note:"A: must thể hiện sự bắt buộc, không đúng ý về lợi ích. B: quick sai loại từ. C: mustn't mang nghĩa cấm đoán và không phù hợp ngữ cảnh."
+},
+{
+ n:17,correct:0,
+ options:[
+ "makes rescue work more effective",
+ "makes rescue work more effectively",
+ "makes rescue work unavailable",
+ "makes rescue work slower"
+ ],
+ vi:[
+ "khiến công tác cứu hộ hiệu quả hơn.",
+ "khiến công tác cứu hộ hiệu quả hơn (sai cấu trúc vì dùng trạng từ).",
+ "khiến công tác cứu hộ không thể thực hiện được.",
+ "khiến công tác cứu hộ chậm hơn."
+ ],
+ explanation:"Đáp án A. AI điều chỉnh đèn xanh cho xe cứu thương, giúp công tác cứu hộ hiệu quả hơn và có thể cứu sống con người.",
+ grammar:"make + object + adjective: makes rescue work more effective. 'Effectively' là trạng từ, không phù hợp vị trí này.",
+ phrases:"quick response; rescue work; save lives",
+ note:"B sai loại từ. C và D trái với ý nghĩa tích cực của việc phản ứng nhanh."
+},
+{
+ n:18,correct:1,
+ options:[
+ "if it is managed carefully",
+ "if they are managed carefully",
+ "unless they are managed carefully",
+ "unless it is managed carefully"
+ ],
+ vi:[
+ "nếu nó được quản lý cẩn thận.",
+ "nếu chúng được quản lý cẩn thận.",
+ "trừ khi chúng được quản lý cẩn thận.",
+ "trừ khi nó được quản lý cẩn thận."
+ ],
+ explanation:"Đáp án B. 'They' thay cho 'smart traffic systems' được nhắc ở câu trước. 'If' diễn đạt điều kiện tích cực để công cụ AI mang lại lợi ích.",
+ grammar:"First conditional with modal: If + present simple, subject + can + V. Passive voice: they are managed carefully.",
+ phrases:"smart traffic systems; managed carefully; urban transport",
+ note:"A sai số của đại từ quy chiếu. C, D dùng 'unless' (= if ... not), làm sai quan hệ điều kiện trong ngữ cảnh."
+}
+];
+
+const paragraphs=[
+[
+["Traffic congestion is one of the biggest headaches of modern urban life.","Ùn tắc giao thông là một trong những vấn đề đau đầu nhất của cuộc sống đô thị hiện đại."],
+["A traffic jam is not only a waste of time; (14) ______.","Tắc đường không chỉ gây lãng phí thời gian; (14) ______."],
+["Every hour spent in slow-moving traffic means more fuel burnt, more polluted air, and more stress for drivers.","Mỗi giờ bị kẹt trong dòng xe di chuyển chậm đồng nghĩa với việc tiêu tốn nhiều nhiên liệu hơn, không khí ô nhiễm hơn và người lái xe căng thẳng hơn."],
+["For this reason, many cities are now turning to artificial intelligence to keep their roads moving.","Vì lý do này, nhiều thành phố hiện đang ứng dụng trí tuệ nhân tạo để duy trì giao thông thông suốt."]
+],
+[
+["One well-known example of this approach comes from the city of Hangzhou.","Một ví dụ nổi tiếng về cách tiếp cận này đến từ thành phố Hàng Châu."],
+["In 2016, Hangzhou introduced a system known as “City Brain”, (15) ______.","Năm 2016, Hàng Châu giới thiệu một hệ thống có tên “City Brain”, (15) ______."],
+["The system analyses this information constantly and adjusts traffic lights to match the real flow of vehicles.","Hệ thống liên tục phân tích thông tin này và điều chỉnh đèn giao thông cho phù hợp với lưu lượng phương tiện thực tế."],
+["Instead of following a fixed timetable, the lights respond to what is actually happening on the streets.","Thay vì hoạt động theo lịch cố định, đèn giao thông phản ứng với tình hình thực tế trên đường."]
+],
+[
+["Another major benefit is faster emergency response.","Một lợi ích lớn khác là khả năng ứng phó khẩn cấp nhanh hơn."],
+["With AI traffic control, emergency vehicles (16) ______.","Nhờ hệ thống điều khiển giao thông bằng AI, các phương tiện khẩn cấp (16) ______."],
+["When an ambulance is on the way, the system can turn the lights green along its route before it arrives.","Khi xe cứu thương đang trên đường, hệ thống có thể chuyển các đèn giao thông trên tuyến đường của xe sang màu xanh trước khi xe đến."],
+["This kind of quick response (17) ______ and may even help save lives in critical moments.","Kiểu phản ứng nhanh này (17) ______ và thậm chí có thể giúp cứu sống con người trong những thời khắc nguy cấp."]
+],
+[
+["Of course, smart traffic systems still face challenges, such as high costs and concerns about how personal data is used.","Tất nhiên, các hệ thống giao thông thông minh vẫn đối mặt với những thách thức như chi phí cao và những lo ngại về cách dữ liệu cá nhân được sử dụng."],
+["However, (18) ______, AI tools can make urban transport safer, cleaner, and fairer.","Tuy nhiên, (18) ______, các công cụ AI có thể giúp giao thông đô thị an toàn hơn, sạch hơn và công bằng hơn."],
+["In this way, the city turns into a smarter network, where traffic flows smoothly, and residents can spend less time on the road and more time on what really matters to them.","Theo cách này, thành phố trở thành một mạng lưới thông minh hơn, nơi giao thông lưu thông thuận lợi và cư dân có thể dành ít thời gian trên đường hơn và nhiều thời gian hơn cho những điều thực sự quan trọng đối với họ."]
+]
+];
+
+const vocab=[
+["traffic congestion","/ˈtræfɪk kənˈdʒestʃən/","ùn tắc giao thông","Syn: traffic jams"],
+["urban life","/ˈɜːbən laɪf/","cuộc sống đô thị","Opp: rural life"],
+["a waste of time","/ə weɪst əv taɪm/","sự lãng phí thời gian","Opp: good use of time"],
+["slow-moving traffic","/ˌsləʊ ˈmuːvɪŋ ˈtræfɪk/","dòng xe di chuyển chậm","Related: traffic congestion"],
+["polluted air","/pəˈluːtɪd eə/","không khí ô nhiễm","Opp: clean air"],
+["artificial intelligence","/ˌɑːtɪˈfɪʃəl ɪnˈtelɪdʒəns/","trí tuệ nhân tạo","Abbreviation: AI"],
+["live data","/laɪv ˈdeɪtə/","dữ liệu thời gian thực","Related: real-time data"],
+["traffic lights","/ˈtræfɪk laɪts/","đèn giao thông","Related: traffic control"],
+["a fixed timetable","/ə fɪkst ˈtaɪmteɪbəl/","lịch trình cố định","Opp: flexible schedule"],
+["emergency response","/ɪˈmɜːdʒənsi rɪˈspɒns/","hoạt động ứng phó khẩn cấp","Related: rescue work"],
+["emergency vehicles","/ɪˈmɜːdʒənsi ˈviːɪkəlz/","phương tiện khẩn cấp","Example: ambulances"],
+["rescue work","/ˈreskjuː wɜːk/","công tác cứu hộ","Related: emergency response"],
+["save lives","/seɪv laɪvz/","cứu sống con người","Related: rescue work"],
+["personal data","/ˈpɜːsənəl ˈdeɪtə/","dữ liệu cá nhân","Related: privacy"],
+["urban transport","/ˈɜːbən ˈtrænspɔːt/","giao thông đô thị","Related: city transport"]
+];
+
+const messages=[
+"Every small step makes you stronger! 🌱",
+"Progress is more important than perfection! ✨",
+"Read carefully. You can do it! 💪",
+"Learning from mistakes builds confidence! 📚",
+"Stay curious and keep moving forward! 🚀"
+];
+
+function changeTheme(t){
+ document.body.dataset.theme=t;
+ localStorage.setItem("msduyen_theme",t);
+}
+(function init(){
+ const t=localStorage.getItem("msduyen_theme")||"default";
+ $("theme").value=t;changeTheme(t);
+ renderPassage();renderQuestions();resetMatching();renderCard();
+})();
+function toggleSound(){
+ sound=!sound;
+ $("soundBtn").textContent=sound?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+}
+function beep(ok=true){
+ if(!sound)return;
+ try{
+  audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.connect(g);g.connect(audioCtx.destination);
+  o.type="sine";o.frequency.value=ok?660:310;
+  g.gain.setValueAtTime(.055,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.16);
+  o.start();o.stop(audioCtx.currentTime+.17);
+ }catch(e){}
+}
+function startTest(){
+ student=$("studentName").value.trim();
+ studentClass=$("studentClass").value.trim();
+ if(!student||!studentClass){alert("Vui lòng nhập đầy đủ Họ tên và Lớp.");return}
+ started=true;finished=false;graded=false;
+ $("intro").classList.add("hidden");
+ $("testArea").classList.remove("hidden");
+ $("welcome").textContent=`Xin chào ${student} – Lớp ${studentClass}!`;
+ deadline=Date.now()+remaining*1000;
+ clearInterval(ticker);ticker=setInterval(tick,250);
+ tick();window.scrollTo(0,0);
+}
+function tick(){
+ if(!started||finished)return;
+ remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+ $("timer").textContent=String(Math.floor(remaining/60)).padStart(2,"0")+":"+String(remaining%60).padStart(2,"0");
+ if(remaining===0){checkAnswers(true)}
+}
+function renderPassage(){
+ $("passage").innerHTML=paragraphs.map((p,pi)=>
+ `<p class="paragraph">${p.map(([en,vi],i)=>
+ `<span class="sentence" tabindex="0" role="button" data-p="${pi}" data-s="${i}" title="Nhấp để dịch">${esc(en).replace(/\((1[4-8])\) ______/g,'<span class="blank">($1) ______</span>')}</span> `).join("")}</p>`).join("");
+ document.querySelectorAll(".sentence").forEach(el=>{
+  const action=()=>showSentence(+el.dataset.p,+el.dataset.s);
+  el.addEventListener("click",action);
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"){action()}});
+ });
+}
+function showSentence(p,s){
+ const [en,vi]=paragraphs[p][s];
+ $("readingExtra").classList.remove("hidden");
+ $("readingExtra").innerHTML=`<strong>🇻🇳 Nghĩa của câu:</strong><p>${esc(vi)}</p>`;
+}
+function renderQuestions(){
+ $("questions").innerHTML=data.map(q=>`
+ <div class="question" id="question${q.n}">
+ <h3>Question ${q.n}</h3>
+ <div class="options" id="options${q.n}">
+ ${q.options.map((o,i)=>`<button class="option" id="opt${q.n}_${i}" onclick="choose(${q.n},${i})"><b>${LETTERS[i]}.</b><span>${esc(o)}</span></button>`).join("")}
+ </div>
+ <div class="feedback" id="feedback${q.n}" aria-live="polite"></div>
+ <button class="secondary" style="margin-top:8px" onclick="explain(${q.n})">💡 Correct Answer · Giải thích & tự học</button>
+ <div class="explain hidden" id="explain${q.n}"></div>
+ </div>`).join("");
+}
+function choose(n,i){
+ if(finished||graded)return;
+ answers[n]=i;
+ data.find(q=>q.n===n).options.forEach((_,j)=>{
+  $("opt"+n+"_"+j).classList.toggle("selected",i===j);
+ });
+ const q=data.find(q=>q.n===n);
+ $("feedback"+n).innerHTML=`<span>🇻🇳 ${esc(q.vi[i])}</span>`;
+ $("answered").textContent=Object.keys(answers).length;
+ $("progressFill").style.width=(Object.keys(answers).length/5*100)+"%";
+ $("motivation").textContent=messages[Object.keys(answers).length%messages.length];
+ beep(true);
+}
+function explain(n){
+ const q=data.find(x=>x.n===n);
+ if(answers[n]===undefined&&!graded){
+  alert("Hãy chọn một đáp án trước khi xem lời giải.");return;
+ }
+ revealed[n]=true;
+ const el=$("explain"+n);
+ el.classList.remove("hidden");
+ el.innerHTML=`
+ <h3>✅ Correct Answer: ${LETTERS[q.correct]}</h3>
+ <p><strong>Giải thích:</strong> ${esc(q.explanation)}</p>
+ <p><strong>📘 Grammar:</strong> ${esc(q.grammar)}</p>
+ <p><strong>📌 Phrases to remember:</strong> ${esc(q.phrases)}</p>
+ <p><strong>🔍 Phân tích lựa chọn:</strong> ${esc(q.note)}</p>
+ <hr>
+ <strong>🇻🇳 Nghĩa của 4 phương án</strong>
+ ${q.vi.map((v,i)=>`<p><b>${LETTERS[i]}.</b> ${esc(v)} ${i===q.correct?"✓":""}</p>`).join("")}
+ <p class="small">Bạn đang học từ lời giải. Hãy ghi nhớ cấu trúc và ngữ cảnh!</p>`;
+ q.options.forEach((_,i)=>{
+  $("opt"+n+"_"+i).classList.toggle("correct",i===q.correct);
+ });
+ if(!graded)$("feedback"+n).innerHTML=
+ answers[n]===q.correct?
+ '<span class="good">✓ Chính xác! Great job!</span>':
+ '<span class="bad">Chưa đúng lần này. Hãy học từ lời giải nhé!</span>';
+ beep(answers[n]===q.correct);
+}
+function completedText(en,vi=false){
+ let text=en;
+ for(const q of data){
+  const replacement=vi?q.vi[q.correct]:q.options[q.correct];
+  text=text.replace(new RegExp("\\("+q.n+"\\) ______","g"),replacement);
+ }
+ return text;
+}
+function showFullPassage(){
+ $("readingExtra").classList.remove("hidden");
+ $("readingExtra").innerHTML="<h3>📗 Complete Reading Passage</h3>"+
+ paragraphs.map(p=>`<p>${esc(completedText(p.map(x=>x[0]).join(" ")))}</p>`).join("");
+}
+function showTranslation(){
+ $("readingExtra").classList.remove("hidden");
+ $("readingExtra").innerHTML="<h3>🇻🇳 Bản dịch hoàn chỉnh</h3>"+
+ paragraphs.map(p=>`<p>${esc(completedText(p.map(x=>x[1]).join(" "),true))}</p>`).join("");
+}
+function checkAnswers(timeout=false){
+ if(finished)return;
+ const count=Object.keys(answers).length;
+ if(!timeout&&count<5&&!confirm(`Bạn mới chọn ${count}/5 câu. Bạn vẫn muốn nộp bài?`))return;
+ const correct=data.filter(q=>answers[q.n]===q.correct).length;
+ const score=correct*2;
+ const percentage=correct/5*100;
+ graded=true;finished=true;
+ clearInterval(ticker);
+ finalResult={correct,score,percentage,remaining,timeout};
+ $("scoreStatus").textContent=`${score.toFixed(2)}/10`;
+ data.forEach(q=>{
+  q.options.forEach((_,i)=>{
+   const el=$("opt"+q.n+"_"+i);
+   el.disabled=true;
+   el.classList.toggle("correct",i===q.correct);
+   el.classList.toggle("wrong",answers[q.n]===i&&i!==q.correct);
+  });
+  $("feedback"+q.n).innerHTML=answers[q.n]===q.correct?
+   '<span class="good">✓ Correct!</span>':
+   `<span class="bad">Đáp án đúng: ${LETTERS[q.correct]}</span>`;
+ });
+ $("testArea").classList.add("hidden");
+ $("result").classList.remove("hidden");
+ $("resultTitle").textContent=percentage>70?"🎉 Congratulations!":"🌱 Keep Growing!";
+ $("resultDetails").innerHTML=
+ `<h2>${correct}/5 câu đúng · ${score.toFixed(2)}/10 điểm</h2>
+ <p>Tỉ lệ chính xác: ${percentage}%</p>
+ <p>${timeout?"⏰ Đã hết thời gian. Bài được tự động chấm.":"✓ Bạn đã hoàn thành phần kiểm tra."}</p>`;
+ $("resultMessage").textContent=percentage>70?
+ "Excellent progress! Bạn đã đạt điều kiện nhận chứng nhận. Hãy tiếp tục phát huy!":
+ "Mỗi câu trả lời đều giúp bạn học thêm điều mới. Hãy xem lại lời giải và thử lại nhé!";
+ const passed=percentage>70;
+ $("certificate").classList.toggle("hidden",!passed);
+ $("printBtn").classList.toggle("hidden",!passed);
+ if(passed){
+  $("certName").textContent=student;
+  $("certClass").textContent=studentClass;
+  $("certScore").textContent=`Kết quả: ${correct}/5 · ${score.toFixed(2)}/10 · ${percentage}%`;
+  $("certDate").textContent="Ngày hoàn thành: "+new Date().toLocaleDateString("vi-VN");
+  $("certId").textContent="Certificate ID: MD-GKI02-"+Date.now();
+ }
+ beep(passed);
+ window.scrollTo(0,0);
+}
+function reviewTest(){
+ $("result").classList.add("hidden");
+ $("testArea").classList.remove("hidden");
+ $("study").classList.remove("hidden");
+ $("scoreStatus").textContent=finalResult.score.toFixed(2)+"/10 · Đã chấm";
+ window.scrollTo(0,0);
+}
+function resetTest(){
+ if(started&&!confirm("Bạn muốn làm lại từ đầu? Kết quả bài hiện tại sẽ được xóa."))return;
+ clearInterval(ticker);
+ started=false;finished=false;graded=false;
+ remaining=DURATION;answers={};revealed={};finalResult=null;
+ $("intro").classList.remove("hidden");
+ $("testArea").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("readingExtra").classList.add("hidden");
+ $("answered").textContent="0";
+ $("scoreStatus").textContent="Chưa chấm";
+ $("progressFill").style.width="0";
+ $("timer").textContent="50:00";
+ renderQuestions();resetMatching();
+ reviewed.clear();cardIndex=0;cardFlipped=false;renderCard();
+ window.scrollTo(0,0);
+}
+function switchStudy(mode){
+ $("matchingArea").classList.toggle("hidden",mode!=="matching");
+ $("flashcardArea").classList.toggle("hidden",mode!=="flashcards");
+}
+function resetMatching(){
+ matched.clear();selectedEnglish=null;selectedVietnamese=null;
+ matchOrder=vocab.map((_,i)=>i);
+ for(let i=matchOrder.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [matchOrder[i],matchOrder[j]]=[matchOrder[j],matchOrder[i]];
+ }
+ $("matchFeedback").textContent="";
+ renderMatching();
+}
+function renderMatching(){
+ $("matchScore").textContent=matched.size;
+ $("englishList").innerHTML=vocab.map((v,i)=>`
+ <button class="matchitem ${matched.has(i)?"matched":""} ${selectedEnglish===i?"active":""}"
+ ${matched.has(i)?"disabled":""} onclick="selectMatch('en',${i})">
+ ${i+1}. ${esc(v[0])}</button>`).join("");
+ $("vietnameseList").innerHTML=matchOrder.map((idx,pos)=>`
+ <button class="matchitem ${matched.has(idx)?"matched":""} ${selectedVietnamese===idx?"active":""}"
+ ${matched.has(idx)?"disabled":""} onclick="selectMatch('vi',${idx})">
+ ${LETTERS[pos]||pos+1}. ${esc(vocab[idx][2])}</button>`).join("");
+}
+function selectMatch(side,i){
+ if(side==="en")selectedEnglish=i;
+ else selectedVietnamese=i;
+ if(selectedEnglish!==null&&selectedVietnamese!==null){
+  if(selectedEnglish===selectedVietnamese){
+   matched.add(selectedEnglish);
+   $("matchFeedback").textContent="✓ Chính xác! "+messages[matched.size%messages.length];
+   beep(true);
+  }else{
+   $("matchFeedback").textContent="Thử lại nhé! Hãy xem kỹ nghĩa của cụm từ.";
+   beep(false);
+  }
+  selectedEnglish=null;selectedVietnamese=null;
+ }
+ renderMatching();
+ if(matched.size===15)$("matchFeedback").textContent="🎉 Fantastic! Bạn đã nối đúng toàn bộ 15 cụm từ!";
+}
+function renderCard(){
+ const v=vocab[cardIndex];
+ $("cardNumber").textContent=cardIndex+1;
+ $("reviewCount").textContent=reviewed.size;
+ $("flashCard").innerHTML=cardFlipped?
+ `<div class="term">${esc(v[2])}</div>
+ <p><strong>${esc(v[0])}</strong></p>
+ <p class="ipa">${esc(v[1])}</p>
+ <p>${esc(v[3])}</p>
+ <p class="small">Nhấp để xem mặt trước</p>`:
+ `<div class="term">${esc(v[0])}</div>
+ <p class="ipa">${esc(v[1])}</p>
+ <p class="small">Nhấp để xem nghĩa, từ đồng nghĩa hoặc trái nghĩa</p>`;
+}
+function flipCard(){cardFlipped=!cardFlipped;renderCard();beep()}
+function moveCard(dir){cardIndex=(cardIndex+dir+15)%15;cardFlipped=false;renderCard()}
+function markReviewed(){
+ reviewed.add(cardIndex);
+ if(reviewed.size===15)alert("🎉 Bạn đã ôn xong 15 flashcards!");
+ moveCard(1);
+}
+</script>
+</body>
+</html>

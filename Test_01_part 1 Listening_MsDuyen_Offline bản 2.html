@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test 01 - Listening | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#eef3fb;--panel:#fff;--ink:#172744;
+ --muted:#536580;--accent:#355bda;--soft:#e9efff;
+ --good:#087b59;--bad:#b43342;--line:#dce4f0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,Arial,sans-serif;transition:background .3s}
+body[data-theme="mint"]{--bg:#e7f6ef;--accent:#087b59;--soft:#d7f2e6}
+body[data-theme="peach"]{--bg:#fff0e7;--accent:#a44727;--soft:#ffe0cf}
+body[data-theme="night"]{--bg:#111b30;--panel:#1d2b43;--ink:#f3f6ff;--muted:#c2cee1;--accent:#93b5ff;--soft:#304363;--line:#41516c;--good:#80e6bd;--bad:#ff9aa6}
+body[data-theme="lavender"]{--bg:#f1ebff;--accent:#7046b5;--soft:#e8dcff}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;padding:11px 16px;font-weight:700}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.primary{background:var(--accent);color:white}
+body[data-theme="night"] .primary{color:#111b30}
+.secondary{background:var(--soft);color:var(--ink)}
+.outline{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.wrap{max-width:1120px;margin:auto;padding:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:23px;margin:18px 0;box-shadow:0 7px 24px #182d5310}
+.hero{text-align:center;padding:40px 20px}
+.script{font-family:"Brush Script MT","Segoe Script",Georgia,serif;font-style:italic;font-weight:700;letter-spacing:.5px}
+h1{font-size:clamp(36px,7vw,68px);line-height:1.2;color:var(--accent);margin:15px 0}
+h2{font-size:25px;line-height:1.3;margin:0 0 15px}
+h3{margin:12px 0}
+.small{font-size:14px;color:var(--muted)}
+.muted{color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+input[type=text]{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:12px;border-radius:10px;width:100%;min-width:0}
+.field{flex:1;min-width:190px}
+.field label{display:block;font-weight:700;margin-bottom:5px}
+.hidden{display:none!important}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:10px}.panel{padding:17px}}
+.topbar{position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0}
+audio{width:100%;margin:10px 0}
+.progress{height:9px;border-radius:20px;background:var(--soft);overflow:hidden}
+.progress div{height:100%;background:var(--accent);width:0%;transition:width .3s}
+.question{border:1px solid var(--line);padding:17px;border-radius:16px;margin:14px 0}
+.option{display:block;width:100%;text-align:left;margin:8px 0;background:var(--soft);color:var(--ink);border:2px solid transparent}
+.option.selected{border-color:var(--accent)}
+.option.correct{border-color:var(--good)}
+.option.wrong{border-color:var(--bad)}
+.feedback{padding:11px;border-radius:10px;background:var(--soft);margin-top:10px}
+.translation{color:var(--muted);padding:8px 12px;border-left:3px solid var(--accent);margin:8px 0}
+.sentence{display:block;width:100%;background:transparent;color:var(--ink);text-align:left;font-weight:400;padding:7px;border-bottom:1px solid var(--line)}
+.sentence:hover{background:var(--soft)}
+.pill{background:var(--soft);padding:4px 10px;border-radius:20px;font-size:13px}
+.timer{font-size:23px;font-weight:800;font-variant-numeric:tabular-nums}
+.timer.warn{color:var(--bad)}
+.word{border-bottom:1px dashed var(--accent);cursor:pointer}
+.flash{min-height:190px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:2px solid var(--accent);border-radius:18px;padding:25px;background:var(--soft);cursor:pointer}
+.flash strong{font-size:26px}
+.matchrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+.certificate{border:7px double var(--accent);text-align:center;padding:30px;margin-top:20px;background:var(--panel)}
+.certificate h2{font-size:35px;color:var(--accent)}
+.score{font-size:50px;font-weight:800;color:var(--accent)}
+button:hover:not(:disabled){filter:brightness(.95)}
+footer{text-align:center;padding:25px;color:var(--muted)}
+@media print{
+ body{background:white!important;color:#172744!important}
+ .topbar,.no-print,footer{display:none!important}
+ .certificate{display:block!important;color:#172744!important;border-color:#355bda!important}
+ .certificate *{color:#172744!important}
+ .panel{box-shadow:none;border:0}
+}
+</style>
+</head>
+<body data-theme="blue">
+<div class="topbar no-print">
+ <div class="wrap row between" style="padding-top:0;padding-bottom:0">
+  <strong>🎧 Test 01 - Listening</strong>
+  <div class="row">
+   <span id="clock" class="timer">50:00</span>
+   <select id="theme" aria-label="Chọn màu nền" style="width:auto">
+    <option value="blue">💙 Blue</option>
+    <option value="mint">💚 Mint</option>
+    <option value="peach">🧡 Peach</option>
+    <option value="lavender">💜 Lavender</option>
+    <option value="night">🌙 Night</option>
+   </select>
+   <button class="secondary" id="soundButton">🔊</button>
+  </div>
+ </div>
+</div>
+
+<main class="wrap">
+<section id="welcome" class="panel hero">
+ <div style="font-size:55px">🎧 ✨ 📚</div>
+ <h1 class="script">Test 01 - Listening</h1>
+ <h2>English 11 · HKI Revision</h2>
+ <p class="muted">Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <p>4 câu hỏi · 50 phút · 2.0 điểm</p>
+ <div class="row" style="max-width:650px;margin:25px auto;text-align:left">
+  <div class="field"><label for="student">Họ và tên</label><input id="student" type="text" placeholder="Nhập họ và tên"></div>
+  <div class="field"><label for="studentClass">Lớp</label><input id="studentClass" type="text" placeholder="Ví dụ: 11A1"></div>
+ </div>
+ <div class="panel" style="max-width:650px;margin:auto;text-align:left">
+  <strong>🎵 Tệp nghe gốc</strong>
+  <p class="small">Chọn tệp MP3 được cung cấp cùng đề. Âm thanh được phát trực tiếp từ máy của bạn, không tải lên Internet.</p>
+  <input id="audioFile" type="file" accept="audio/*">
+  <p id="fileStatus" class="small">Chưa chọn tệp nghe.</p>
+ </div>
+ <p><button class="primary" id="startButton">BẮT ĐẦU THỬ THÁCH →</button></p>
+ <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
+</section>
+
+<section id="exam" class="hidden">
+ <div class="panel no-print">
+  <div class="row between">
+   <strong id="studentInfo"></strong>
+   <span id="answeredCount" class="pill">0/4 câu</span>
+  </div>
+  <div class="progress" style="margin:12px 0"><div id="bar"></div></div>
+  <p id="motivation" class="muted">Listen carefully. You've got this!</p>
+ </div>
+
+ <div class="panel no-print">
+  <h2>🎧 Listening Audio</h2>
+  <p class="small">Listen to the conversation and do the exercises to practise and improve your listening skills.</p>
+  <audio id="player" controls preload="metadata"></audio>
+  <div class="row">
+   <button class="secondary" id="rewind">↶ 10s</button>
+   <button class="secondary" id="forward">10s ↷</button>
+   <button class="secondary" id="slow">Speed: 1×</button>
+   <button class="secondary" id="replay">↻ Replay</button>
+  </div>
+  <p class="small" id="audioNote">Choose your original MP3 to enable listening.</p>
+ </div>
+
+ <div class="panel no-print">
+  <h2>PART 1. LISTENING (2.0 points)</h2>
+  <p><em>1. Listen to the conversation and do the exercises to practise and improve your listening skills. Decide if each sentence is True or False.</em></p>
+  <div id="questions"></div>
+  <div class="row">
+   <button class="primary" id="checkAll">✓ Check my answers</button>
+   <button class="secondary" id="finishButton">🏁 Finish Test</button>
+  </div>
+ </div>
+
+ <div class="panel no-print">
+  <h2>📖 Listening Transcript & Translation</h2>
+  <p class="small">Chọn từng câu để xem nghĩa tiếng Việt. Có thể hiện toàn bộ bản dịch sau khi hoàn thành phần kiểm tra.</p>
+  <div class="row">
+   <button class="secondary" id="showTranscript">Show English Transcript</button>
+   <button class="secondary" id="showTranslation">Show Full Vietnamese Translation</button>
+  </div>
+  <div id="transcriptArea" class="hidden" style="margin-top:16px"></div>
+ </div>
+
+ <div class="panel no-print">
+  <h2>🧩 Matching Challenge</h2>
+  <p>Nối 10 cụm từ trong bài nghe với nghĩa tiếng Việt tương ứng.</p>
+  <div id="matching"></div>
+  <button class="primary" id="checkMatching">Check Matching</button>
+  <p id="matchingResult"></p>
+ </div>
+
+ <div class="panel no-print">
+  <h2>🃏 B1 Flashcards</h2>
+  <p>10 cụm từ từ bài nghe · IPA · Nghĩa · Synonyms / Antonyms</p>
+  <div class="flash" id="flash" role="button" tabindex="0" aria-label="Lật flashcard"></div>
+  <div class="row between" style="margin-top:15px">
+   <button class="secondary" id="previousCard">← Previous</button>
+   <span id="cardNumber">1/10</span>
+   <button class="secondary" id="nextCard">Next →</button>
+  </div>
+ </div>
+</section>
+
+<section id="results" class="hidden">
+ <div class="panel hero">
+  <h1 class="script">Wonderful Progress!</h1>
+  <p id="resultName"></p>
+  <div class="score" id="resultScore"></div>
+  <h2 id="resultCorrect"></h2>
+  <p id="resultMessage"></p>
+  <div class="row between no-print" style="justify-content:center">
+   <button class="primary" id="reviewButton">📚 Review & Self-study</button>
+   <button class="secondary" id="restartButton">↻ New Attempt</button>
+  </div>
+  <div id="certificate" class="certificate hidden">
+   <div style="font-size:45px">🏆</div>
+   <h2 class="script">Certificate of Achievement</h2>
+   <p>GIẤY CHỨNG NHẬN HOÀN THÀNH</p>
+   <p>This certificate is proudly presented to</p>
+   <h2 id="certName"></h2>
+   <p id="certClass"></p>
+   <p>For successfully completing</p>
+   <h3>TEST 01 – LISTENING</h3>
+   <p id="certScore"></p>
+   <p id="certDate"></p>
+   <p class="script" style="font-size:30px">Ms.Duyên</p>
+   <p>Teacher's Signature</p>
+   <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
+  </div>
+  <button id="printCertificate" class="primary hidden no-print" style="margin-top:15px">🖨 Print Certificate / Save PDF</button>
+ </div>
+</section>
+</main>
+<footer>Made for learning with care · Giáo viên thiết kế: Ms.Duyen</footer>
+
+<script>
+"use strict";
+
+/* ORIGINAL TEST CONTENT */
+const questions=[
+ {
+  text:"Dan gets up at 5 o’clock every morning.",
+  vi:"Dan thức dậy lúc 5 giờ mỗi sáng.",
+  answer:0,
+  evidence:"I get up every day at 5 o’clock and go to the pool.",
+  detail:"Dan nói rõ mình thức dậy lúc 5 giờ mỗi ngày.",
+  wrong:"False không đúng vì thông tin trong câu trùng khớp với lời Dan.",
+  start:14,end:24
+ },
+ {
+  text:"He swims from 5 o’clock to 7 o’clock in the morning.",
+  vi:"Anh ấy bơi từ 5 giờ đến 7 giờ sáng.",
+  answer:1,
+  evidence:"Then I swim from 6 o’clock to 8 o’clock.",
+  detail:"Dan bơi từ 6 giờ đến 8 giờ, không phải từ 5 giờ đến 7 giờ. Cần phân biệt giờ thức dậy và thời gian bơi.",
+  wrong:"True không đúng vì cả thời điểm bắt đầu và kết thúc trong câu hỏi đều khác lời Dan.",
+  start:21,end:31
+ },
+ {
+  text:"Dan goes to university at 8 o’clock.",
+  vi:"Dan đến trường đại học lúc 8 giờ.",
+  answer:1,
+  evidence:"At 11 o’clock I go to university.",
+  detail:"Dan đi học đại học lúc 11 giờ. Lúc 8 giờ, anh ấy tắm, mặc quần áo và ăn sáng.",
+  wrong:"True không đúng vì 8 giờ là thời điểm Dan bắt đầu các hoạt động sau khi bơi, không phải giờ đến trường.",
+  start:47,end:58
+ },
+ {
+  text:"Dan has lunch at the university.",
+  vi:"Dan ăn trưa tại trường đại học.",
+  answer:0,
+  evidence:"I have lunch at about 2 o’clock at the university.",
+  detail:"Cụm 'at the university' xác nhận địa điểm ăn trưa.",
+  wrong:"False không đúng vì Dan xác nhận trực tiếp mình ăn trưa ở trường đại học.",
+  start:58,end:67
+ }
+];
+
+/* ENGLISH TRANSCRIPT AND VIETNAMESE TRANSLATION */
+const transcript=[
+ ["Interviewer: Hello, Dan.","Người phỏng vấn: Xin chào, Dan."],
+ ["Dan: Hi.","Dan: Chào bạn."],
+ ["Interviewer: Can you tell me about a typical day in your life for the school magazine?","Bạn có thể kể về một ngày điển hình trong cuộc sống của mình cho tạp chí trường được không?"],
+ ["Dan: Yeah, sure.","Dan: Vâng, tất nhiên rồi."],
+ ["Interviewer: So, what time do you get up?","Vậy bạn thức dậy lúc mấy giờ?"],
+ ["Dan: Oh, I get up very early. I get up every day at 5 o’clock and go to the pool. Then I swim from 6 o’clock to 8 o’clock.","Ồ, tôi thức dậy rất sớm. Ngày nào tôi cũng dậy lúc 5 giờ và đến hồ bơi. Sau đó tôi bơi từ 6 giờ đến 8 giờ."],
+ ["Interviewer: You get up at 5 o’clock? Wow, that’s early!","Bạn thức dậy lúc 5 giờ sao? Chà, sớm thật đấy!"],
+ ["Dan: Yeah. Then at 8 o’clock I have a shower, I get dressed and I have breakfast. I have a big breakfast: cereals, toast, bacon and eggs and orange juice.","Đúng vậy. Sau đó, lúc 8 giờ, tôi tắm, mặc quần áo và ăn sáng. Tôi ăn một bữa sáng thịnh soạn gồm ngũ cốc, bánh mì nướng, thịt xông khói, trứng và nước cam."],
+ ["Interviewer: What do you do after breakfast?","Bạn làm gì sau bữa sáng?"],
+ ["Dan: At 11 o’clock I go to university. I’m studying sports science and I have classes from 11 o’clock to 4 o’clock.","Lúc 11 giờ, tôi đến trường đại học. Tôi đang học ngành khoa học thể thao và có các tiết học từ 11 giờ đến 4 giờ."],
+ ["Interviewer: When do you have lunch?","Bạn ăn trưa lúc mấy giờ?"],
+ ["Dan: I have lunch at about 2 o’clock at the university.","Tôi ăn trưa vào khoảng 2 giờ tại trường đại học."],
+ ["Interviewer: What do you do after classes?","Bạn làm gì sau giờ học?"],
+ ["Dan: Sometimes I go to the gym and sometimes I meet my friends at a café.","Đôi khi tôi đến phòng tập thể hình và đôi khi tôi gặp bạn bè ở quán cà phê."],
+ ["Interviewer: What time do you have dinner?","Bạn ăn tối lúc mấy giờ?"],
+ ["Dan: I have dinner at 7 o’clock, then I watch TV or go online and I usually go to bed at 10 o’clock.","Tôi ăn tối lúc 7 giờ, sau đó xem TV hoặc lên mạng và thường đi ngủ lúc 10 giờ."],
+ ["Interviewer: Thanks, Dan. That’s a busy day!","Cảm ơn Dan. Đúng là một ngày bận rộn!"]
+];
+
+/* 10 PHRASES EXTRACTED FROM THE ORIGINAL TRANSCRIPT */
+const vocabulary=[
+ {en:"a typical day",vi:"một ngày điển hình",ipa:"/ə ˈtɪpɪkəl deɪ/",syn:"an ordinary day"},
+ {en:"school magazine",vi:"tạp chí của trường",ipa:"/skuːl ˌmæɡəˈziːn/",syn:"school publication"},
+ {en:"get up",vi:"thức dậy, ra khỏi giường",ipa:"/ɡet ʌp/",syn:"rise",ant:"go to bed"},
+ {en:"have a shower",vi:"tắm vòi sen",ipa:"/hæv ə ˈʃaʊə(r)/",syn:"take a shower"},
+ {en:"get dressed",vi:"mặc quần áo",ipa:"/ɡet drest/",syn:"put on clothes",ant:"get undressed"},
+ {en:"have breakfast",vi:"ăn sáng",ipa:"/hæv ˈbrekfəst/",syn:"eat breakfast"},
+ {en:"sports science",vi:"khoa học thể thao",ipa:"/spɔːts ˈsaɪəns/",syn:"—"},
+ {en:"go to the gym",vi:"đến phòng tập thể hình",ipa:"/ɡəʊ tə ðə dʒɪm/",syn:"visit a fitness centre"},
+ {en:"meet my friends",vi:"gặp gỡ bạn bè",ipa:"/miːt maɪ frendz/",syn:"get together with my friends"},
+ {en:"go online",vi:"truy cập Internet",ipa:"/ɡəʊ ˌɒnˈlaɪn/",syn:"connect to the Internet",ant:"go offline"}
+];
+
+const $=id=>document.getElementById(id);
+let answers=Array(4).fill(null);
+let checked=Array(4).fill(false);
+let remaining=3000;
+let timer=null,started=false,finished=false;
+let audioURL=null,sound=true,cardIndex=0,cardFlipped=false;
+let transcriptVisible=false,translationVisible=false;
+let name="",studentClass="";
+const player=$("player");
+
+function safe(t){
+ return String(t).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function tone(success=true){
+ if(!sound)return;
+ try{
+  const C=window.AudioContext||window.webkitAudioContext;
+  if(!C)return;
+  const ctx=new C(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sine";
+  o.frequency.value=success?660:350;
+  g.gain.setValueAtTime(.06,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.16);
+  o.connect(g);g.connect(ctx.destination);
+  o.start();o.stop(ctx.currentTime+.17);
+  o.onended=()=>ctx.close();
+ }catch(e){}
+}
+
+function updateAudio(file){
+ if(audioURL)URL.revokeObjectURL(audioURL);
+ audioURL=null;
+ player.removeAttribute("src");
+ if(!file){$("fileStatus").textContent="Chưa chọn tệp nghe.";return;}
+ if(!file.type.startsWith("audio/")&&!/\.mp3$/i.test(file.name)){
+  $("fileStatus").textContent="Vui lòng chọn tệp âm thanh.";
+  return;
+ }
+ audioURL=URL.createObjectURL(file);
+ player.src=audioURL;
+ $("fileStatus").textContent="✓ "+file.name;
+ $("audioNote").textContent="Original recording: "+file.name;
+}
+
+$("audioFile").addEventListener("change",e=>updateAudio(e.target.files[0]));
+$("theme").onchange=e=>{document.body.dataset.theme=e.target.value;localStorage.setItem("listenTheme",e.target.value)};
+const storedTheme=localStorage.getItem("listenTheme");
+if(["blue","mint","peach","lavender","night"].includes(storedTheme)){
+ $("theme").value=storedTheme;document.body.dataset.theme=storedTheme;
+}
+$("soundButton").onclick=()=>{
+ sound=!sound;$("soundButton").textContent=sound?"🔊":"🔇";
+};
+$("rewind").onclick=()=>{player.currentTime=Math.max(0,player.currentTime-10)};
+$("forward").onclick=()=>{player.currentTime=Math.min(player.duration||Infinity,player.currentTime+10)};
+$("replay").onclick=()=>{player.currentTime=0;player.play().catch(()=>{})};
+$("slow").onclick=()=>{
+ const speeds=[1,.85,.75,1.25];
+ let i=speeds.indexOf(player.playbackRate);
+ player.playbackRate=speeds[(i+1)%speeds.length];
+ $("slow").textContent="Speed: "+player.playbackRate+"×";
+};
+
+function renderQuestions(){
+ $("questions").innerHTML=questions.map((q,i)=>`
+ <article class="question" id="q${i}">
+  <h3>Question ${i+1}.</h3>
+  <button class="sentence" onclick="toggleQuestionTranslation(${i})">${safe(q.text)} <span class="small">🌐</span></button>
+  <div id="qvi${i}" class="translation hidden">${safe(q.vi)}</div>
+  ${["True","False"].map((a,j)=>`
+   <button class="option" id="opt${i}${j}" onclick="choose(${i},${j})">
+    <strong>${j===0?"A":"B"}.</strong> ${a}
+    <span class="small"> · 🌐</span>
+   </button>`).join("")}
+  <div id="optvi${i}" class="small hidden">True = Đúng · False = Sai</div>
+  <div class="row" style="margin-top:10px">
+   <button class="secondary" onclick="checkOne(${i})">✓ Check answer</button>
+   <button class="outline" onclick="explain(${i})">💡 Correct Answer</button>
+   <button class="outline" onclick="selfStudy(${i})">🎧 Listening for Self-study</button>
+  </div>
+  <div id="feedback${i}" class="feedback hidden" aria-live="polite"></div>
+  <div id="explanation${i}" class="feedback hidden"></div>
+  <div id="clip${i}" class="feedback hidden"></div>
+ </article>`).join("");
+}
+
+window.toggleQuestionTranslation=i=>$("qvi"+i).classList.toggle("hidden");
+
+window.choose=(i,j)=>{
+ if(finished||checked[i])return;
+ answers[i]=j;
+ $("optvi"+i).classList.remove("hidden");
+ for(let k=0;k<2;k++)$("opt"+i+k).classList.toggle("selected",j===k);
+ updateProgress();
+};
+
+function updateProgress(){
+ const n=answers.filter(x=>x!==null).length;
+ $("answeredCount").textContent=n+"/4 câu";
+ $("bar").style.width=n*25+"%";
+}
+
+window.checkOne=i=>{
+ if(finished||checked[i])return;
+ if(answers[i]===null){
+  $("feedback"+i).classList.remove("hidden");
+  $("feedback"+i).textContent="🎧 Hãy chọn True hoặc False trước nhé!";
+  return;
+ }
+ checked[i]=true;
+ const right=answers[i]===questions[i].answer;
+ tone(right);
+ const f=$("feedback"+i);
+ f.classList.remove("hidden");
+ f.textContent=right?
+ "🌟 Excellent! You listened carefully. Keep it up!":
+ "🌱 Good effort! Review the key detail and keep learning.";
+ for(let j=0;j<2;j++){
+  $("opt"+i+j).classList.toggle("correct",j===questions[i].answer);
+  $("opt"+i+j).classList.toggle("wrong",j===answers[i]&&!right);
+ }
+ const messages=[
+  "Small steps make great progress.",
+  "Every careful listen makes you stronger.",
+  "Learning grows through practice.",
+  "You're building your listening confidence!"
+ ];
+ $("motivation").textContent=messages[i];
+};
+
+window.explain=i=>{
+ const el=$("explanation"+i);
+ if(answers[i]===null&&!finished){
+  el.classList.remove("hidden");
+  el.textContent="Hãy chọn đáp án trước khi xem phần giải thích.";
+  return;
+ }
+ if(!checked[i]&&!finished)checkOne(i);
+ const q=questions[i],correct=q.answer===0?"A. True":"B. False";
+ el.classList.toggle("hidden");
+ el.innerHTML=`
+  <strong>✓ Correct Answer: ${correct}</strong>
+  <p><strong>Evidence to listen for:</strong> “${safe(q.evidence)}”</p>
+  <p><strong>Giải thích:</strong> ${safe(q.detail)}</p>
+  <p><strong>Phân tích A – True:</strong> ${q.answer===0?"Đúng. Nội dung câu hỏi phù hợp với thông tin nghe được.":safe(q.wrong)}</p>
+  <p><strong>Phân tích B – False:</strong> ${q.answer===1?"Đúng. Có sự khác biệt giữa câu hỏi và thông tin trong bài nghe.":safe(q.wrong)}</p>
+  <p><strong>Listening tip:</strong> ${i===3?"Listen for the place mentioned after 'have lunch'.":"Pay attention to the exact time expressions."}</p>`;
+};
+
+window.selfStudy=i=>{
+ const el=$("clip"+i);
+ el.classList.toggle("hidden");
+ if(el.classList.contains("hidden"))return;
+ const q=questions[i];
+ el.innerHTML=`
+  <strong>🎧 Listening for Self-study – Question ${i+1}</strong>
+  <p class="small">Phát đoạn nghe gốc tương ứng với thông tin trả lời.</p>
+  <button class="primary" onclick="playClip(${i})">▶ Play Key Audio</button>
+  <p><strong>Key sentence:</strong> ${safe(q.evidence)}</p>
+  <p><strong>Meaning:</strong> ${safe(q.detail)}</p>`;
+};
+
+let clipEnd=null;
+function playClip(i){
+ if(!audioURL){alert("Vui lòng chọn tệp MP3 gốc ở màn hình mở đầu.");return;}
+ const q=questions[i];
+ clipEnd=q.end;
+ player.currentTime=Math.min(q.start,player.duration||q.start);
+ player.play().catch(()=>{});
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+window.playClip=playClip;
+player.addEventListener("timeupdate",()=>{
+ if(clipEnd!==null&&player.currentTime>=clipEnd){
+  player.pause();clipEnd=null;
+ }
+});
+player.addEventListener("seeked",()=>{
+ if(clipEnd!==null&&player.currentTime>clipEnd+1)clipEnd=null;
+});
+
+function updateClock(){
+ const m=Math.floor(remaining/60),s=remaining%60;
+ $("clock").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+ $("clock").classList.toggle("warn",remaining<=300);
+}
+
+function begin(){
+ name=$("student").value.trim();
+ studentClass=$("studentClass").value.trim();
+ if(!name||!studentClass){alert("Vui lòng nhập đầy đủ Họ tên và Lớp.");return;}
+ if(!audioURL){
+  if(!confirm("Bạn chưa chọn file MP3. Tiếp tục vào bài và chọn âm thanh sau?"))return;
+ }
+ $("studentInfo").textContent=name+" · "+studentClass;
+ $("welcome").classList.add("hidden");
+ $("exam").classList.remove("hidden");
+ started=true;
+ renderQuestions();renderMatching();renderFlashcard();
+ updateClock();
+ timer=setInterval(()=>{
+  if(finished)return;
+  remaining--;updateClock();
+  if(remaining<=0)finish();
+ },1000);
+}
+$("startButton").onclick=begin;
+
+$("checkAll").onclick=()=>{
+ for(let i=0;i<4;i++)if(answers[i]!==null&&!checked[i])checkOne(i);
+ const missing=answers.filter(x=>x===null).length;
+ if(missing)alert("Bạn còn "+missing+" câu chưa trả lời.");
+ else $("motivation").textContent="🌟 Well done! You have checked all four questions.";
+};
+
+function finish(){
+ if(finished)return;
+ if(remaining>0&&answers.some(x=>x===null)){
+  if(!confirm("Bạn còn câu chưa trả lời. Câu bỏ trống sẽ được tính là chưa đúng. Nộp bài?"))return;
+ }
+ finished=true;clearInterval(timer);player.pause();
+ const correct=answers.filter((a,i)=>a===questions[i].answer).length;
+ const score=correct*.5;
+ $("exam").classList.add("hidden");
+ $("results").classList.remove("hidden");
+ $("resultName").textContent=name+" · "+studentClass;
+ $("resultScore").textContent=score.toFixed(2)+"/2.00";
+ $("resultCorrect").textContent=correct+"/4 correct answers";
+ $("resultMessage").textContent=correct===4?
+ "Outstanding! Your listening accuracy is excellent. Keep growing!":
+ correct===3?"Great work! Your listening skills are developing beautifully.":
+ correct===2?"Good progress! Review the time expressions and try again.":
+ "Every attempt is valuable. Listen again, learn the details and keep improving!";
+ if(correct/4>.7){
+  $("certificate").classList.remove("hidden");
+  $("printCertificate").classList.remove("hidden");
+  $("certName").textContent=name;
+  $("certClass").textContent="Class: "+studentClass;
+  $("certScore").textContent="Achievement: "+correct+"/4 · "+score.toFixed(2)+"/2.00";
+  $("certDate").textContent="Date: "+new Date().toLocaleDateString("vi-VN");
+ }
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+$("finishButton").onclick=finish;
+$("reviewButton").onclick=()=>{
+ $("results").classList.add("hidden");
+ $("exam").classList.remove("hidden");
+ for(let i=0;i<4;i++){
+  checked[i]=true;
+  const q=questions[i];
+  for(let j=0;j<2;j++){
+   $("opt"+i+j).classList.toggle("correct",j===q.answer);
+   $("opt"+i+j).classList.toggle("wrong",j===answers[i]&&answers[i]!==q.answer);
+  }
+ }
+ $("motivation").textContent="📚 Review Mode – Explore explanations, audio and vocabulary.";
+};
+$("restartButton").onclick=()=>location.reload();
+$("printCertificate").onclick=()=>window.print();
+
+function renderTranscript(){
+ const area=$("transcriptArea");
+ area.classList.toggle("hidden",!transcriptVisible&&!translationVisible);
+ area.innerHTML=transcript.map((t,i)=>`
+ <div style="padding:6px 0">
+  <button class="sentence" onclick="toggleLine(${i})">${safe(t[0])} 🌐</button>
+  <div class="translation ${translationVisible?"":"hidden"}" id="line${i}">${safe(t[1])}</div>
+ </div>`).join("");
+}
+window.toggleLine=i=>$("line"+i).classList.toggle("hidden");
+$("showTranscript").onclick=()=>{
+ transcriptVisible=!transcriptVisible;
+ renderTranscript();
+ $("showTranscript").textContent=transcriptVisible?"Hide English Transcript":"Show English Transcript";
+};
+$("showTranslation").onclick=()=>{
+ translationVisible=!translationVisible;
+ if(translationVisible)transcriptVisible=true;
+ renderTranscript();
+ $("showTranslation").textContent=translationVisible?"Hide Full Translation":"Show Full Vietnamese Translation";
+};
+
+/* MATCHING GAME */
+const shuffledOrder=[6,2,9,0,7,4,1,8,3,5];
+function renderMatching(){
+ $("matching").innerHTML=vocabulary.map((v,i)=>`
+ <div class="matchrow">
+  <div class="pill" style="border-radius:10px;padding:10px">${i+1}. ${safe(v.en)}</div>
+  <select id="match${i}" aria-label="Nghĩa của ${safe(v.en)}">
+   <option value="">-- Chọn nghĩa --</option>
+   ${shuffledOrder.map(k=>`<option value="${k}">${safe(vocabulary[k].vi)}</option>`).join("")}
+  </select>
+ </div>`).join("");
+}
+$("checkMatching").onclick=()=>{
+ let correct=0,complete=true;
+ vocabulary.forEach((v,i)=>{
+  const el=$("match"+i);
+  if(el.value==="")complete=false;
+  if(Number(el.value)===i&&el.value!=="")correct++;
+  el.style.borderColor=el.value!==""&&Number(el.value)===i?"var(--good)":"var(--bad)";
+ });
+ $("matchingResult").textContent=correct+"/10 correct matches. "+
+ (correct===10?"🌟 Excellent vocabulary mastery!":
+ complete?"Keep practising! Review the phrases and try again.":"Complete the remaining matches to practise all 10 phrases.");
+ tone(correct===10);
+};
+
+/* FLASHCARDS */
+function renderFlashcard(){
+ const v=vocabulary[cardIndex];
+ $("cardNumber").textContent=(cardIndex+1)+"/10";
+ $("flash").innerHTML=cardFlipped?`
+  <strong>${safe(v.vi)}</strong>
+  <p>IPA: ${safe(v.ipa)}</p>
+  <p>Synonym: ${safe(v.syn||"—")}</p>
+  ${v.ant?`<p>Antonym: ${safe(v.ant)}</p>`:""}
+  <span class="small">Tap to flip back</span>`:
+  `<strong>${safe(v.en)}</strong><p class="small">Tap to reveal the meaning, IPA and B1 vocabulary notes</p>`;
+}
+function flip(){cardFlipped=!cardFlipped;renderFlashcard()}
+$("flash").onclick=flip;
+$("flash").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}};
+$("previousCard").onclick=()=>{
+ cardIndex=(cardIndex+9)%10;cardFlipped=false;renderFlashcard();
+};
+$("nextCard").onclick=()=>{
+ cardIndex=(cardIndex+1)%10;cardFlipped=false;renderFlashcard();
+};
+
+updateClock();
+</script>
+</body>
+</html>

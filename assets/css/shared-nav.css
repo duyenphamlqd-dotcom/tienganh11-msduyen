@@ -1,0 +1,247 @@
+/* ==========================================================
+   SHARED NAVIGATION BAR - HỆ THỐNG ĐỀ CƯƠNG TIẾNG ANH 11
+   Giáo viên thiết kế: Ms. Duyên | Global Success
+   ========================================================== */
+
+#duyen-shared-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  background: rgba(18, 30, 56, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+#duyen-shared-bar * {
+  box-sizing: border-box;
+}
+
+.dsb-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dsb-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dsb-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dsb-home-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.6);
+  filter: brightness(1.1);
+}
+
+.dsb-home-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.dsb-test-selector-wrapper {
+  position: relative;
+}
+
+.dsb-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dsb-select-trigger:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.dsb-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 330px;
+  max-height: 480px;
+  overflow-y: auto;
+  background: #152238;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  display: none;
+  z-index: 100000;
+  animation: dsbSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dsb-dropdown.show {
+  display: block;
+}
+
+@keyframes dsbSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dsb-group-title {
+  padding: 6px 10px 4px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 6px;
+}
+
+.dsb-group-title:first-child {
+  margin-top: 0;
+}
+
+.dsb-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  color: #cbd5e1 !important;
+  text-decoration: none !important;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  margin: 2px 0;
+}
+
+.dsb-item:hover {
+  background: rgba(59, 130, 246, 0.22);
+  color: #ffffff !important;
+  transform: translateX(3px);
+}
+
+.dsb-item.active {
+  background: rgba(59, 130, 246, 0.4);
+  color: #60a5fa !important;
+  font-weight: 700;
+}
+
+.dsb-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dsb-student-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  color: #f8fafc;
+}
+
+.dsb-student-badge strong {
+  color: #38bdf8;
+}
+
+.dsb-ai-speech-box {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.35), rgba(15, 23, 42, 0.6));
+  border: 1px solid #3b82f6;
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+}
+
+.dsb-ai-speech-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dsb-ai-speech-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dsb-ai-speech-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.02);
+}
+
+@media print {
+  #duyen-shared-bar,
+  .dsb-ai-speech-box {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dsb-container {
+    padding: 6px 10px;
+  }
+  .dsb-student-badge {
+    display: none;
+  }
+  .dsb-dropdown {
+    width: 290px;
+  }
+}

@@ -1,0 +1,1452 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đề cương GKI – 12 câu sắp xếp | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#edf3ff;--panel:#ffffff;--ink:#18243c;
+ --muted:#53647e;--primary:#3259be;
+ --primaryText:#ffffff;--soft:#eaf0ff;--line:#d6e0f1;
+ --good:#14764a;--bad:#b53f50;--gold:#b1842e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Segoe UI",Arial,sans-serif;
+ font-size:16px;line-height:1.65;
+ transition:background .3s,color .3s;
+}
+button,input,select{font:inherit}
+button{
+ border:0;border-radius:12px;padding:11px 17px;
+ font-weight:700;cursor:pointer;
+ background:var(--primary);color:var(--primaryText);
+ transition:transform .18s,filter .18s;
+}
+button:hover:not(:disabled){
+ filter:brightness(1.08);transform:translateY(-1px);
+}
+button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+button:focus-visible,input:focus-visible,
+select:focus-visible,[tabindex]:focus-visible{
+ outline:3px solid #e5a73f;outline-offset:3px;
+}
+.secondary{background:var(--soft);color:var(--ink)}
+.danger{background:#b83b50;color:white}
+.wrap{max-width:1350px;margin:auto;padding:18px}
+.panel{
+ background:var(--panel);border:1px solid var(--line);
+ border-radius:22px;padding:24px;
+ box-shadow:0 8px 28px rgba(20,40,80,.07);
+}
+.hidden{display:none!important}
+.header{
+ display:flex;gap:13px;justify-content:space-between;
+ align-items:center;flex-wrap:wrap;margin-bottom:17px;
+}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.logo{font-weight:900;letter-spacing:.4px}
+.small,.muted,small{color:var(--muted)}
+.kicker{
+ color:var(--muted);font-size:12px;font-weight:900;
+ letter-spacing:3px;text-transform:uppercase;
+}
+.script{
+ font-family:"Brush Script MT","Segoe Script","URW Chancery L",Georgia,serif;
+ font-style:italic;font-size:clamp(35px,6vw,67px);
+ line-height:1.2;font-weight:700;color:var(--primary);
+}
+.pill{
+ padding:7px 14px;border-radius:25px;background:var(--soft);
+ color:var(--ink);font-weight:750;
+}
+.themebtn{
+ width:31px;height:31px;border:2px solid #8c9aaf;
+ border-radius:50%;padding:0;flex-shrink:0;
+}
+.hero{
+ max-width:860px;margin:6vh auto;text-align:center;
+ padding:36px 26px;
+}
+.hero h2{font-size:clamp(21px,4vw,32px)}
+.formbox{max-width:460px;margin:23px auto}
+.field{display:grid;gap:5px;text-align:left;margin:12px 0}
+.field input{
+ padding:13px;border:1px solid var(--line);
+ border-radius:12px;background:var(--panel);
+ color:var(--ink);width:100%;
+}
+.layout{
+ display:grid;grid-template-columns:1.13fr 1fr;
+ gap:18px;align-items:start;
+}
+h2,h3,h4{line-height:1.4}
+h2{font-size:23px}
+h3{font-size:19px}
+.question-header{margin-bottom:14px}
+.sentence{
+ margin:10px 0;padding:12px 14px;
+ border-radius:12px;background:var(--soft);
+ cursor:pointer;border:1px solid var(--line);
+}
+.sentence:hover{filter:brightness(.98)}
+.sentence .symbol{font-weight:850;color:var(--primary)}
+.meaning{
+ background:var(--panel);color:var(--ink);
+ border-left:4px solid var(--primary);
+ border-radius:9px;padding:11px 13px;margin-top:9px;
+}
+.instructions{margin:10px 0 18px}
+.choices{display:grid;gap:12px}
+.choice{
+ display:flex;align-items:center;gap:14px;
+ width:100%;background:var(--soft);
+ color:var(--ink);border:2px solid var(--line);
+ padding:15px;text-align:left;border-radius:14px;
+}
+.choice .letter{
+ display:inline-flex;justify-content:center;
+ align-items:center;min-width:37px;height:37px;
+ border-radius:10px;background:var(--panel);
+ color:var(--ink);font-weight:900;
+}
+.choice.selected{
+ border-color:var(--primary);background:var(--panel);
+}
+.choice.correct{
+ border-color:#167449;background:#ddf5e7;color:#154f35;
+}
+.choice.wrong{
+ border-color:#b64050;background:#ffe4e8;color:#852d38;
+}
+.choice.correct .letter,.choice.wrong .letter{
+ color:#18243c;background:white;
+}
+.feedback{
+ padding:13px;border-radius:12px;background:var(--soft);
+ margin-top:15px;color:var(--ink);
+}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.study{
+ background:var(--soft);color:var(--ink);
+ border-radius:15px;padding:18px;margin-top:16px;
+}
+.study p{margin:8px 0}
+.study hr{border:0;border-top:1px solid var(--line);margin:15px 0}
+.study ol{padding-left:23px}
+.study li{margin-bottom:9px}
+.progress{
+ height:10px;border-radius:20px;
+ background:var(--line);overflow:hidden;
+}
+.progress div{
+ height:100%;background:var(--primary);
+ transition:width .3s;
+}
+#motivation{text-align:center;color:var(--muted);font-style:italic}
+.navigator{
+ display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;
+}
+.navbtn{
+ min-width:70px;padding:10px 12px;
+}
+.navbtn.done{border:2px solid var(--good)}
+.navbtn.pending{border:2px solid var(--line)}
+#toast{
+ position:fixed;bottom:20px;left:50%;
+ transform:translateX(-50%);
+ padding:13px 20px;background:#18243c;
+ color:white;border-radius:12px;z-index:30;
+ box-shadow:0 7px 20px #0003;
+ max-width:92vw;text-align:center;
+}
+#certificate{
+ background:#fffdf4;color:#2b2c32;
+ border:7px double #b58b36;
+ border-radius:6px;padding:32px 25px;
+ text-align:center;margin-top:25px;
+}
+#certificate .script{color:#93691c}
+#certificate h2{color:#805a17}
+#certificate p{color:#2b2c32}
+.bigscore{
+ font-size:clamp(38px,6vw,60px);
+ font-weight:900;color:var(--primary);
+}
+.matchrow{
+ display:grid;grid-template-columns:1fr 1.2fr;
+ gap:10px;align-items:center;
+ padding:10px;border-bottom:1px solid var(--line);
+}
+.matchrow select{
+ padding:10px;width:100%;max-width:100%;
+ border-radius:9px;background:var(--panel);
+ color:var(--ink);border:1px solid var(--line);
+}
+.matchrow.correct{background:#e1f5e9;color:#164b31}
+.matchrow.wrong{background:#ffe6e9;color:#7b2636}
+.flashcard{
+ min-height:270px;padding:25px;
+ border-radius:20px;border:2px solid var(--line);
+ background:var(--soft);
+ display:flex;flex-direction:column;
+ justify-content:center;align-items:center;text-align:center;
+ cursor:pointer;user-select:none;
+}
+.flashcard h2{font-size:clamp(22px,4vw,33px)}
+.flashcard p{margin:8px}
+.vocab-tabs{margin:15px 0}
+.tab.active{outline:3px solid var(--gold)}
+#confetti{
+ position:fixed;inset:0;pointer-events:none;z-index:50;
+}
+.fade{animation:fade .35s ease}
+@keyframes fade{
+ from{opacity:.4;transform:translateY(8px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.footer{text-align:center;padding:24px;color:var(--muted)}
+@media(max-width:850px){
+ .layout{grid-template-columns:1fr}
+ .wrap{padding:10px}
+ .panel{padding:17px}
+ .header{align-items:flex-start}
+}
+@media(max-width:530px){
+ .matchrow{grid-template-columns:1fr}
+ button{padding:10px 12px}
+ .hero{padding:24px 14px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{
+  animation:none!important;transition:none!important;
+  scroll-behavior:auto!important;
+ }
+}
+@media print{
+ body{background:white!important}
+ body *{visibility:hidden!important}
+ #certificate,#certificate *{visibility:visible!important}
+ #certificate{
+  display:block!important;position:absolute;
+  left:0;top:0;width:100%;margin:0;
+  border:7px double #b58b36!important;
+  print-color-adjust:exact;
+  -webkit-print-color-adjust:exact;
+ }
+}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="toast" class="hidden" role="status"></div>
+
+<div class="wrap">
+<header class="header">
+ <div>
+  <div class="logo">📚 ENGLISH 11 · GLOBAL SUCCESS</div>
+  <small>Giáo viên thiết kế: Ms.Duyen</small>
+ </div>
+ <div class="toolbar">
+  <span class="muted">Màu nền:</span>
+  <button class="themebtn" data-theme="blue" style="background:#edf3ff" aria-label="Nền xanh"></button>
+  <button class="themebtn" data-theme="warm" style="background:#fff3e6" aria-label="Nền kem"></button>
+  <button class="themebtn" data-theme="green" style="background:#e9f7ed" aria-label="Nền xanh lá"></button>
+  <button class="themebtn" data-theme="dark" style="background:#252b3d" aria-label="Nền tối"></button>
+  <button id="soundBtn" class="secondary">🔊 Âm thanh</button>
+ </div>
+</header>
+
+<section id="welcome" class="panel hero fade">
+ <div class="kicker">Midterm Revision · Week 06</div>
+ <h1 class="script">Đề cương GKI</h1>
+ <h2>12 CÂU SẮP XẾP</h2>
+ <p style="font-size:20px">
+  TEST 1, 2, 3 · PART 3. WRITING
+ </p>
+ <p>Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <p class="muted">
+  Sắp xếp câu và lượt lời để tạo thành đoạn hội thoại,
+  email hoặc đoạn văn mạch lạc.
+ </p>
+ <div class="formbox">
+  <label class="field">
+   Họ và tên
+   <input id="studentName" placeholder="Nhập họ và tên" maxlength="90" autocomplete="name">
+  </label>
+  <label class="field">
+   Lớp
+   <input id="studentClass" placeholder="Ví dụ: 11A1" maxlength="30">
+  </label>
+  <button id="startBtn" style="width:100%">🚀 Bắt đầu thử thách</button>
+ </div>
+ <div class="toolbar" style="justify-content:center">
+  <span class="pill">12 câu hỏi</span>
+  <span class="pill">50 phút</span>
+  <span class="pill">120 điểm quy đổi / 12 câu</span>
+ </div>
+ <p><small>Thang điểm chính thức trong ứng dụng: 10 điểm. Đạt ít nhất 9/12 câu đúng để nhận chứng nhận.</small></p>
+ <p><small>Sau bài kiểm tra có 3 bộ ôn tập, mỗi bộ gồm 15 cụm từ với bài nối nghĩa và flashcard.</small></p>
+</section>
+
+<section id="exam" class="hidden fade">
+ <div class="header">
+  <div>
+   <strong id="studentLabel"></strong>
+   <div><small>TEST 1, 2, 3 · PART 3. WRITING</small></div>
+  </div>
+  <div class="toolbar">
+   <span id="timer" class="pill">⏱ 50:00</span>
+   <span id="counter" class="pill">Question 25/36</span>
+   <span id="answered" class="pill">0/12 đã chọn</span>
+  </div>
+ </div>
+ <div class="progress"><div id="bar" style="width:0%"></div></div>
+ <p id="motivation"></p>
+
+ <div class="layout">
+  <article class="panel">
+   <div class="kicker">Part 3 · Writing</div>
+   <h2>Arrange the Sentences</h2>
+   <p class="instructions">
+    Mark the letter A, B, C or D on your answer sheet
+    to indicate the best arrangement of utterances or
+    sentences to make a cohesive and coherent exchange
+    or text in each of the following questions.
+   </p>
+   <p class="muted">
+    Nhấn vào từng câu a, b, c, d, e để xem bản dịch tiếng Việt.
+   </p>
+   <div id="sentenceList"></div>
+   <div class="actions">
+    <button id="completeBtn" class="secondary">📖 Đoạn văn hoàn chỉnh</button>
+    <button id="translateBtn" class="secondary">🇻🇳 Dịch đoạn văn sang tiếng Việt</button>
+   </div>
+   <div id="passageExtra" class="study hidden"></div>
+  </article>
+
+  <article class="panel">
+   <div class="kicker">Choose the Best Arrangement</div>
+   <h2 id="questionTitle">Question 25</h2>
+   <p class="muted">
+    Chọn thứ tự đúng. Nhấn vào một phương án để xem
+    nghĩa các câu theo thứ tự đó.
+   </p>
+   <div id="choices" class="choices"></div>
+   <div id="choiceMeaning" class="study hidden"></div>
+   <div id="feedback" class="feedback hidden"></div>
+   <div class="actions">
+    <button id="checkOne">✓ Check Answer</button>
+    <button id="explainBtn" class="secondary">📘 Correct Answer</button>
+   </div>
+   <div id="explanation" class="study hidden"></div>
+   <div class="actions">
+    <button id="prevBtn" class="secondary">← Câu trước</button>
+    <button id="nextBtn">Câu tiếp →</button>
+   </div>
+  </article>
+ </div>
+
+ <div class="panel" style="margin-top:17px">
+  <h3>Question Navigator</h3>
+  <p class="muted">Chọn câu bất kỳ để chuyển nhanh.</p>
+  <div id="navigator" class="navigator"></div>
+  <div class="actions">
+   <button id="checkAll">✅ Check My Answers · Nộp bài</button>
+   <button id="resetBtn" class="danger">↻ Reset Test</button>
+  </div>
+ </div>
+</section>
+
+<section id="results" class="panel hidden fade">
+ <div style="text-align:center">
+  <div class="kicker">Mission Completed</div>
+  <h1 class="script">Wonderful Progress!</h1>
+  <h2>KẾT QUẢ BÀI LÀM</h2>
+  <p id="resultStudent"></p>
+  <div id="score" class="bigscore"></div>
+  <p id="resultFeedback"></p>
+ </div>
+ <div id="review" class="study"></div>
+ <div id="certificate" class="hidden">
+  <div class="kicker">Certificate of Completion</div>
+  <h1 class="script">Congratulations!</h1>
+  <h2>GIẤY CHỨNG NHẬN HOÀN THÀNH</h2>
+  <p>This certificate is proudly presented to</p>
+  <h2 id="certName"></h2>
+  <p id="certClass"></p>
+  <p>For successfully completing</p>
+  <h3>ĐỀ CƯƠNG GKI – 12 CÂU SẮP XẾP</h3>
+  <p id="certScore"></p>
+  <p id="certDate"></p>
+  <small id="certCode"></small>
+  <div style="margin-top:32px">
+   <strong>Giáo viên thiết kế</strong>
+   <div class="script" style="font-size:37px">Ms.Duyên</div>
+   <strong>Ms.Duyên</strong>
+  </div>
+ </div>
+ <div class="actions" style="justify-content:center">
+  <button id="printBtn" class="hidden">🖨 In / Lưu PDF chứng nhận</button>
+  <button id="retryBtn">↻ Làm lại bài</button>
+  <button id="studyBtn" class="secondary">📚 Ôn tập 45 cụm từ</button>
+ </div>
+</section>
+
+<section id="vocabulary" class="panel hidden fade">
+ <div class="kicker">Vocabulary Lab · B1 Exam Preparation</div>
+ <h1 class="script">Learn & Remember</h1>
+ <p>
+  45 cụm từ trích từ các câu 25–36, chia thành ba bộ.
+  Mỗi bộ có 15 câu nối nghĩa và 15 flashcard.
+  Đây là phần tự học bổ trợ, không tính vào điểm bài kiểm tra.
+ </p>
+ <div class="toolbar vocab-tabs">
+  <button class="tab active" data-group="0">Bộ 1 · Q25–28</button>
+  <button class="tab secondary" data-group="1">Bộ 2 · Q29–32</button>
+  <button class="tab secondary" data-group="2">Bộ 3 · Q33–36</button>
+ </div>
+ <div class="toolbar">
+  <button id="matchTab">🔗 Matching Challenge</button>
+  <button id="flashTab" class="secondary">🃏 Flashcards</button>
+  <button id="backBtn" class="secondary">← Quay lại</button>
+ </div>
+ <div id="matchingArea">
+  <h2 id="matchingTitle">Matching Challenge</h2>
+  <p>Chọn nghĩa tiếng Việt phù hợp với từng cụm từ.</p>
+  <div id="matchingRows"></div>
+  <div class="actions">
+   <button id="checkMatch">✅ Kiểm tra 15 cụm từ</button>
+   <button id="resetMatch" class="secondary">↻ Làm lại nối nghĩa</button>
+  </div>
+  <div id="matchResult" class="feedback hidden"></div>
+ </div>
+ <div id="flashArea" class="hidden">
+  <h2 id="flashTitle">Flashcard Practice</h2>
+  <p>Nhấn vào thẻ để xem nghĩa, IPA và từ đồng nghĩa / trái nghĩa B1 nếu có.</p>
+  <p id="flashProgress" class="muted"></p>
+  <div id="flashcard" class="flashcard" role="button" tabindex="0"></div>
+  <div class="actions" style="justify-content:center">
+   <button id="flashPrev" class="secondary">← Trước</button>
+   <button id="flipBtn">🔄 Lật thẻ</button>
+   <button id="flashNext" class="secondary">Tiếp →</button>
+  </div>
+ </div>
+</section>
+
+<footer class="footer">
+ English 11 · Đề cương GKI · Week 06
+ <div>Giáo viên thiết kế: Ms.Duyen</div>
+</footer>
+</div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   ORIGINAL QUESTIONS 25–36
+   The English source sentences and A/B/C/D order are retained.
+   Vietnamese translations are supplementary learning notes.
+========================================================= */
+
+const questions = [
+{
+ n:25,type:"dialogue",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","Mai: I try to walk 10,000 steps a day, and I have stopped drinking soft drinks.","Mai: Mình cố gắng đi bộ 10.000 bước mỗi ngày và đã ngừng uống nước ngọt."],
+  ["b","Trang: That’s impressive! I should do the same — I sit at my desk all day long.","Trang: Thật ấn tượng! Mình cũng nên làm như thế — mình ngồi ở bàn học suốt cả ngày."],
+  ["c","Trang: You seem so fit and cheerful lately. What is your secret?","Trang: Dạo gần đây trông bạn thật khỏe mạnh và vui vẻ. Bí quyết của bạn là gì?"]
+ ],
+ options:["a – b – c","c – a – b","b – c – a","a – c – b"],
+ answer:1,
+ logic:"Câu c là lời mở đầu vì Trang hỏi Mai bí quyết để khỏe mạnh. Câu a là lời đáp của Mai, giải thích thói quen đi bộ và bỏ nước ngọt. Câu b là phản hồi của Trang sau khi nghe bí quyết.",
+ clues:"What is your secret? → I try to walk... → That’s impressive!",
+ grammar:"Present simple diễn tả thói quen: I try to walk...; Present perfect: I have stopped drinking...; stop + V-ing: ngừng làm việc gì.",
+ phrases:"walk 10,000 steps a day; stop drinking soft drinks; sit at my desk; all day long.",
+ encourage:"Bạn đang luyện cách xác định câu hỏi và câu trả lời rất tốt!"
+},
+{
+ n:26,type:"dialogue",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","Phong: You should switch off all screens earlier and go to bed before eleven.","Phong: Bạn nên tắt tất cả màn hình sớm hơn và đi ngủ trước 11 giờ."],
+  ["b","Quan: That makes sense. I’ll try it for a month and see how I feel.","Quan: Nghe hợp lý đấy. Mình sẽ thử trong một tháng và xem mình cảm thấy thế nào."],
+  ["c","Quan: I feel sleepy in class every morning. Could my phone be the reason?","Quan: Sáng nào mình cũng thấy buồn ngủ trong lớp. Có phải điện thoại là nguyên nhân không?"],
+  ["d","Quan: Yes, I usually scroll through short videos until one in the morning.","Quan: Đúng vậy, mình thường lướt các video ngắn đến tận một giờ sáng."],
+  ["e","Phong: Probably. Do you often use it late at night?","Phong: Có lẽ vậy. Bạn có thường dùng nó vào đêm khuya không?"]
+ ],
+ options:["d – a – c – e – b","c – a – b – e – d","d – e – b – a – c","c – e – d – a – b"],
+ answer:3,
+ logic:"Quan bắt đầu bằng việc nêu vấn đề ở câu c. Phong hỏi thêm ở e; Quan xác nhận ở d. Sau khi biết nguyên nhân, Phong khuyên ở a và Quan chấp nhận ở b.",
+ clues:"Could my phone be the reason? → Do you often use it...? → Yes... → You should... → That makes sense.",
+ grammar:"Could + S + V...? dùng để hỏi khả năng. Should + V nguyên mẫu để đưa lời khuyên. Stop/switch off + object.",
+ phrases:"feel sleepy in class; scroll through short videos; switch off all screens; go to bed; make sense.",
+ encourage:"Hãy quan sát cặp câu hỏi – câu trả lời và đại từ thay thế!"
+},
+{
+ n:27,type:"letter",
+ intro:"Hi Alex,\n\nHow are you? I would like to tell you about the people I live with.",
+ introVi:"Chào Alex,\n\nBạn có khỏe không? Mình muốn kể cho bạn nghe về những người sống cùng mình.",
+ outro:"Do you live with your grandparents too? I would love to hear about your family as well.\n\nSee you soon,\n\nKhang",
+ outroVi:"Bạn có sống cùng ông bà không? Mình cũng rất muốn nghe về gia đình bạn.\n\nHẹn sớm gặp lại,\n\nKhang",
+ lines:[
+  ["a","I live with my parents and my grandmother, so there are three generations in one small flat.","Mình sống cùng bố mẹ và bà nên có ba thế hệ sống trong một căn hộ nhỏ."],
+  ["b","Even so, we never stay angry for long, because she always listens to me in the end. I think every family has moments like this.","Dù vậy, chúng mình không bao giờ giận nhau lâu vì cuối cùng bà luôn lắng nghe mình. Mình nghĩ gia đình nào cũng có những lúc như thế."],
+  ["c","Sometimes, though, I feel the age gap. She believes I should stay at home in the evening, but I want to join my friends at the cinema.","Tuy nhiên, đôi khi mình cảm nhận được khoảng cách thế hệ. Bà cho rằng mình nên ở nhà vào buổi tối, nhưng mình muốn đi xem phim với bạn bè."],
+  ["d","She also does not understand why I spend so long taking photos for social media.","Bà cũng không hiểu tại sao mình dành nhiều thời gian chụp ảnh để đăng lên mạng xã hội."],
+  ["e","Every Sunday we cook together, and she tells me stories about her childhood.","Chủ nhật nào chúng mình cũng nấu ăn cùng nhau và bà kể cho mình nghe những câu chuyện thời thơ ấu."]
+ ],
+ options:["e – a – c – b – d","a – c – e – b – d","a – e – c – d – b","e – c – a – d – b"],
+ answer:2,
+ logic:"Câu a giới thiệu người sống cùng Khang. Câu e nói về hoạt động tích cực với bà. Câu c chuyển sang khác biệt thế hệ bằng 'Sometimes, though'. Câu d thêm một ví dụ về khác biệt và câu b kết luận bằng 'Even so'.",
+ clues:"I live with... → Every Sunday... → Sometimes, though... → She also... → Even so...",
+ grammar:"Present simple diễn tả sinh hoạt; spend + time + V-ing; would like + to V; 'though' và 'even so' thể hiện quan hệ tương phản.",
+ phrases:"three generations; age gap; stay at home; join my friends; taking photos for social media.",
+ encourage:"Bạn đang nhận diện rất tốt mối liên kết giữa các ý trong email!"
+},
+{
+ n:28,type:"paragraph",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","These different habits also change the way each group listens, since older people often enjoy a whole album while younger ones prefer single tracks.","Những thói quen khác nhau này cũng làm thay đổi cách mỗi nhóm nghe nhạc, vì người lớn tuổi thường thích nghe cả album, còn người trẻ thích từng bài hát riêng lẻ."],
+  ["b","For this reason, sharing playlists can become a simple and enjoyable way of understanding one another.","Vì lý do này, việc chia sẻ danh sách phát nhạc có thể trở thành một cách đơn giản và thú vị để thấu hiểu nhau."],
+  ["c","For example, many parents grew up with cassettes and radio programmes, while their children stream millions of songs on a phone.","Ví dụ, nhiều bậc cha mẹ lớn lên cùng băng cassette và chương trình radio, còn con cái họ nghe trực tuyến hàng triệu bài hát trên điện thoại."],
+  ["d","Moreover, the argument is not only about sound but also about identity, because the songs we love show who we want to be.","Hơn nữa, sự bất đồng không chỉ liên quan đến âm thanh mà còn liên quan đến bản sắc, bởi những bài hát chúng ta yêu thích thể hiện con người mà chúng ta muốn trở thành."],
+  ["e","Music is one of the clearest signs of the distance between generations.","Âm nhạc là một trong những dấu hiệu rõ ràng nhất của khoảng cách giữa các thế hệ."]
+ ],
+ options:["c – e – a – b – d","e – c – a – d – b","c – a – e – d – b","e – a – c – b – d"],
+ answer:1,
+ logic:"Câu e nêu chủ đề chung của đoạn văn. Câu c cung cấp ví dụ bằng 'For example'. Câu a tiếp tục phân tích 'These different habits'. Câu d bổ sung ý bằng 'Moreover', còn câu b đưa ra giải pháp và kết luận.",
+ clues:"Music is... → For example... → These different habits... → Moreover... → For this reason...",
+ grammar:"While diễn tả sự tương phản; not only...but also...; the way + clause; V-ing làm chủ ngữ: sharing playlists.",
+ phrases:"distance between generations; grow up with cassettes; stream millions of songs; single tracks; sharing playlists.",
+ encourage:"Hãy tìm câu chủ đề và dấu hiệu kết luận của đoạn văn!"
+},
+{
+ n:29,type:"dialogue",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","Duc: I started doing ten minutes of squats and push-ups every single morning.","Đức: Mình bắt đầu tập squat và chống đẩy mười phút vào mỗi buổi sáng."],
+  ["b","Huy: That sounds easy enough. Maybe I should stop scrolling and try it too.","Huy: Nghe có vẻ khá dễ. Có lẽ mình cũng nên ngừng lướt điện thoại và thử làm như vậy."],
+  ["c","Huy: You seem to have a lot more energy in our PE lessons lately.","Huy: Dạo gần đây bạn có vẻ có nhiều năng lượng hơn hẳn trong các tiết Thể dục."]
+ ],
+ options:["a – b – c","c – a – b","b – c – a","a – c – b"],
+ answer:1,
+ logic:"Huy nhận xét về Đức ở c. Đức giải thích lý do ở a. Huy phản hồi và muốn thử phương pháp đó ở b.",
+ clues:"You seem to have... → I started doing... → That sounds easy enough.",
+ grammar:"Start + V-ing; stop + V-ing; seem + to V; should + V nguyên mẫu.",
+ phrases:"squats and push-ups; every single morning; stop scrolling; have a lot more energy.",
+ encourage:"Tốt lắm! Nhận xét → giải thích → phản hồi là một mạch hội thoại quen thuộc."
+},
+{
+ n:30,type:"dialogue",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","Mai: Yes, I took a Waymo robotaxi. There was no driver at all, and the steering wheel turned by itself!","Mai: Có, mình đã đi một chiếc taxi tự lái Waymo. Hoàn toàn không có tài xế và vô lăng tự quay!"],
+  ["b","Mai: A little at first, but it drove very carefully and always stopped for pedestrians.","Mai: Ban đầu có hơi sợ, nhưng xe chạy rất cẩn thận và luôn dừng lại nhường đường cho người đi bộ."],
+  ["c","Ben: Then maybe I’ll try one someday, if they ever come to our city.","Ben: Vậy có lẽ một ngày nào đó mình sẽ thử đi một chiếc nếu chúng xuất hiện ở thành phố của chúng ta."],
+  ["d","Ben: Did you try anything special on your trip to San Francisco?","Ben: Bạn có thử điều gì đặc biệt trong chuyến đi San Francisco không?"],
+  ["e","Ben: Weren’t you scared? I’m not sure I could trust a car with nobody behind the wheel.","Ben: Bạn không sợ sao? Mình không chắc có thể tin tưởng một chiếc xe không có ai ngồi sau vô lăng."]
+ ],
+ options:["d – a – e – b – c","a – d – b – e – c","d – b – e – a – c","a – e – d – b – c"],
+ answer:0,
+ logic:"Câu d mở đầu bằng câu hỏi về chuyến đi. Câu a trả lời và giới thiệu robotaxi. Ben lo lắng ở e; Mai phản hồi ở b. Cuối cùng Ben cân nhắc thử trải nghiệm này ở c.",
+ clues:"Did you try...? → Yes, I took... → Weren’t you scared? → A little at first... → Then maybe...",
+ grammar:"Past simple cho trải nghiệm đã xảy ra; if + present simple, will + V để diễn đạt điều kiện có thể xảy ra; by itself = tự nó.",
+ phrases:"take a Waymo robotaxi; turn by itself; stop for pedestrians; behind the wheel.",
+ encourage:"Bạn đang tìm đúng mạch hội thoại hỏi – đáp – phản hồi!"
+},
+{
+ n:31,type:"letter",
+ intro:"Dear Ms. Hoa,\n\nI am writing on behalf of the residents of Sunrise Tower to suggest an upgrade to our building’s car park.",
+ introVi:"Kính gửi cô Hoa,\n\nTôi viết thư thay mặt cư dân tòa nhà Sunrise Tower để đề xuất nâng cấp bãi đỗ xe của tòa nhà.",
+ outro:"I would be grateful if we could discuss this proposal at the next residents’ meeting. Thank you for your time and support.\n\nBest regards,\n\nBao Anh",
+ outroVi:"Tôi sẽ rất biết ơn nếu chúng ta có thể thảo luận đề xuất này tại cuộc họp cư dân tiếp theo. Xin cảm ơn cô đã dành thời gian và hỗ trợ.\n\nTrân trọng,\n\nBao Anh",
+ lines:[
+  ["a","To solve this, we suggest installing ten more chargers connected to a smart booking app.","Để giải quyết vấn đề này, chúng tôi đề xuất lắp đặt thêm mười bộ sạc được kết nối với ứng dụng đặt chỗ thông minh."],
+  ["b","The number of electric cars and motorbikes in our building has risen sharply this year.","Số lượng ô tô điện và xe máy điện trong tòa nhà của chúng ta đã tăng mạnh trong năm nay."],
+  ["c","Such a system would also reduce the fire risks caused by unsafe charging inside apartments.","Hệ thống như vậy cũng sẽ làm giảm nguy cơ cháy nổ do việc sạc điện không an toàn bên trong các căn hộ."],
+  ["d","However, there are only two charging points, so residents often have to wait for hours.","Tuy nhiên, chỉ có hai điểm sạc nên cư dân thường phải chờ hàng giờ."],
+  ["e","This app would let residents reserve a time slot and pay for the electricity online.","Ứng dụng này sẽ cho phép cư dân đặt trước khung giờ và thanh toán tiền điện trực tuyến."]
+ ],
+ options:["b – a – d – e – c","d – b – a – c – e","b – d – e – a – c","b – d – a – e – c"],
+ answer:3,
+ logic:"Câu b nêu thực trạng xe điện tăng. Câu d nói vấn đề thiếu điểm sạc. Câu a đưa ra giải pháp, câu e giải thích chức năng của ứng dụng và câu c bổ sung lợi ích an toàn.",
+ clues:"has risen sharply → However... → To solve this... → This app... → Such a system...",
+ grammar:"Present perfect: has risen; suggest + V-ing; let + object + V nguyên mẫu; would + V để trình bày đề xuất và lợi ích dự kiến.",
+ phrases:"on behalf of the residents; charging points; reserve a time slot; fire risks; unsafe charging.",
+ encourage:"Cách sắp xếp vấn đề → giải pháp → lợi ích rất hữu ích trong bài Writing!"
+},
+{
+ n:32,type:"paragraph",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","For example, many parents do not believe that making videos is real work, yet they still drive their children to media classes.","Ví dụ, nhiều phụ huynh không tin rằng làm video là một công việc thực sự, nhưng họ vẫn đưa con đến các lớp học truyền thông."],
+  ["b","However, these limits can also protect young people from spending every free hour in front of a screen.","Tuy nhiên, những giới hạn này cũng có thể bảo vệ người trẻ khỏi việc dành toàn bộ thời gian rảnh trước màn hình."],
+  ["c","Mothers may forbid photo posting, while older brothers and sisters take a softer view, which gives teenagers someone to ask.","Các bà mẹ có thể cấm đăng ảnh, trong khi anh chị lớn tuổi có cái nhìn thoáng hơn, nhờ đó thanh thiếu niên có người để hỏi ý kiến."],
+  ["d","Growing up with parents who never used the internet at school can make online life hard to explain at home.","Việc lớn lên cùng cha mẹ vốn chưa từng sử dụng Internet khi đi học có thể khiến cuộc sống trực tuyến trở nên khó giải thích ở nhà."],
+  ["e","In this way, the digital gap at home is not really a wall, but a space where two generations slowly learn from each other.","Theo cách này, khoảng cách số trong gia đình không thực sự là một bức tường, mà là nơi hai thế hệ dần học hỏi lẫn nhau."]
+ ],
+ options:["c – d – e – a – b","d – c – a – b – e","c – e – a – d – b","d – b – a – c – e"],
+ answer:1,
+ logic:"Câu d giới thiệu sự khác biệt giữa cha mẹ và con cái trong thế giới trực tuyến. Câu c cho một biểu hiện cụ thể của sự khác biệt trong gia đình; câu a bổ sung ví dụ. Câu b xem xét mặt tích cực của các giới hạn, và câu e tổng kết quá trình hai thế hệ học hỏi lẫn nhau.",
+ clues:"Growing up with parents... → Mothers may... → For example... → However, these limits... → In this way...",
+ grammar:"V-ing làm chủ ngữ; protect somebody from + V-ing; while và yet diễn tả tương phản; not really...but...",
+ phrases:"online life; making videos; photo posting; spending every free hour; digital gap at home.",
+ encourage:"Bạn đã biết sử dụng các từ nối để nhận ra cấu trúc đoạn văn!"
+},
+{
+ n:33,type:"dialogue",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","Nam: Really? So every step I take could help light up the station?","Nam: Thật sao? Vậy mỗi bước chân của mình có thể giúp thắp sáng nhà ga à?"],
+  ["b","Vy: Exactly! And the more people walk on them, the more power the tiles produce.","Vy: Chính xác! Và càng nhiều người bước lên chúng thì những viên gạch càng tạo ra nhiều điện."],
+  ["c","Vy: Some train stations now have floor tiles that turn footsteps into electricity.","Vy: Một số nhà ga hiện có những viên gạch lát sàn có thể biến bước chân thành điện năng."]
+ ],
+ options:["a – b – c","c – a – b","b – a – c","c – b – a"],
+ answer:1,
+ logic:"Câu c giới thiệu công nghệ gạch lát tạo điện. Nam ngạc nhiên và hỏi thêm ở a. Vy xác nhận, giải thích thêm ở b.",
+ clues:"floor tiles...electricity → Really? → Exactly!",
+ grammar:"Relative clause: tiles that turn...; could + V; the + comparative..., the + comparative... diễn tả càng...càng...",
+ phrases:"train stations; floor tiles; turn footsteps into electricity; light up the station.",
+ encourage:"Excellent! 'Really?' và 'Exactly!' giúp xác định lượt lời rất nhanh."
+},
+{
+ n:34,type:"dialogue",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","Linh: Then this would be perfect for you. You just tap your senior card at the crossing.","Linh: Vậy điều này sẽ rất phù hợp với ông. Ông chỉ cần chạm thẻ người cao tuổi tại chỗ qua đường."],
+  ["b","Grandpa: That’s clever! I hope our city will try something like that soon.","Ông: Thật thông minh! Ông hy vọng thành phố chúng ta sẽ sớm áp dụng điều tương tự."],
+  ["c","Linh: Grandpa, did you know that older people in Singapore can get extra time to cross the road?","Linh: Ông ơi, ông có biết người cao tuổi ở Singapore có thể được thêm thời gian để qua đường không?"],
+  ["d","Linh: Me too. It would make the streets much safer for everyone.","Linh: Cháu cũng vậy. Điều đó sẽ khiến đường phố an toàn hơn nhiều cho mọi người."],
+  ["e","Grandpa: Really? I always feel rushed when the light changes so quickly.","Ông: Thật sao? Ông luôn cảm thấy phải vội vàng khi đèn tín hiệu đổi quá nhanh."]
+ ],
+ options:["c – a – e – b – d","e – c – a – b – d","c – e – a – b – d","c – e – b – a – d"],
+ answer:2,
+ logic:"Linh mở đầu câu chuyện ở c. Ông bày tỏ khó khăn tại e. Linh giới thiệu cách sử dụng thẻ ở a; ông khen ý tưởng ở b và Linh đồng tình ở d.",
+ clues:"did you know...? → Really? → Then this... → That’s clever! → Me too.",
+ grammar:"Did you know that...?; can + V; would + V; make + object + adjective.",
+ phrases:"extra time to cross the road; tap your senior card; at the crossing; make the streets much safer.",
+ encourage:"Bạn đã tìm được mạch trao đổi về một giải pháp thực tế!"
+},
+{
+ n:35,type:"letter",
+ intro:"Dear Minh,",
+ introVi:"Minh thân mến,",
+ outro:"Best wishes,\n\nAn",
+ outroVi:"Thân ái,\n\nAn",
+ lines:[
+  ["a","There, I visited a neighbourhood where all the houses were built by a giant 3D printer.","Ở đó, mình đã đến thăm một khu dân cư nơi tất cả các ngôi nhà được xây bằng một máy in 3D khổng lồ."],
+  ["b","I’ll send you some photos soon, so tell me what you think!","Mình sẽ sớm gửi bạn vài bức ảnh, vậy hãy cho mình biết bạn nghĩ gì nhé!"],
+  ["c","The printer built the walls layer by layer, just like squeezing icing onto a cake.","Máy in xây các bức tường từng lớp một, giống như bóp kem trang trí lên một chiếc bánh."],
+  ["d","Sorry for not writing sooner — I’ve been busy with my summer trip to Texas.","Xin lỗi vì đã không viết thư sớm hơn — mình đã bận rộn với chuyến đi mùa hè đến Texas."],
+  ["e","Can you believe the walls of each house took only a few weeks to print?","Bạn có tin rằng việc in các bức tường của mỗi ngôi nhà chỉ mất vài tuần không?"]
+ ],
+ options:["a – d – c – e – b","d – c – a – e – b","a – c – d – e – b","d – a – c – e – b"],
+ answer:3,
+ logic:"Câu d mở đầu bức thư bằng lời xin lỗi và giới thiệu chuyến đi Texas. Câu a dùng 'There' để nói về nơi được nhắc đến. Câu c giải thích công nghệ xây dựng; câu e bổ sung điều gây ngạc nhiên; câu b kết thúc thân mật bằng lời hứa gửi ảnh.",
+ clues:"my summer trip to Texas → There, I visited... → The printer... → Can you believe...? → I’ll send you...",
+ grammar:"Present perfect: I've been busy...; Past simple: visited, built, took; Passive voice: were built by...",
+ phrases:"summer trip to Texas; a giant 3D printer; layer by layer; a few weeks.",
+ encourage:"Hãy chú ý từ chỉ nơi chốn 'There' và cách mở đầu, kết thúc thư!"
+},
+{
+ n:36,type:"paragraph",
+ intro:"",introVi:"",outro:"",outroVi:"",
+ lines:[
+  ["a","Their children, however, live in a world of freelancing, where changing jobs is quite normal.","Tuy nhiên, con cái họ sống trong thế giới làm việc tự do, nơi việc thay đổi công việc là khá bình thường."],
+  ["b","To avoid conflict, both sides should explain their reasons calmly instead of criticising each other.","Để tránh xung đột, cả hai bên nên bình tĩnh giải thích lý do của mình thay vì chỉ trích lẫn nhau."],
+  ["c","Parents who grew up in difficult times usually value a stable job with a fixed monthly salary.","Cha mẹ lớn lên trong thời kỳ khó khăn thường coi trọng một công việc ổn định với mức lương cố định hằng tháng."],
+  ["d","Such different opinions often cause tension whenever career plans are discussed at home.","Những quan điểm khác nhau như vậy thường gây căng thẳng mỗi khi kế hoạch nghề nghiệp được thảo luận tại nhà."],
+  ["e","Many arguments between parents and their children begin with different ideas about work.","Nhiều cuộc tranh cãi giữa cha mẹ và con cái bắt đầu từ những quan điểm khác nhau về công việc."]
+ ],
+ options:["c – a – d – e – b","e – a – c – b – d","c – e – a – d – b","e – c – a – d – b"],
+ answer:3,
+ logic:"Câu e là câu chủ đề. Câu c nêu quan điểm của cha mẹ, câu a đối chiếu với quan điểm của con cái bằng 'however'. Câu d nói hệ quả của các ý kiến khác nhau, và câu b nêu cách tránh xung đột.",
+ clues:"Many arguments... → Parents... → Their children, however... → Such different opinions... → To avoid conflict...",
+ grammar:"Relative clause: parents who grew up...; V-ing làm chủ ngữ: changing jobs; instead of + V-ing; passive voice: are discussed.",
+ phrases:"a stable job; a fixed monthly salary; changing jobs; cause tension; avoid conflict.",
+ encourage:"Rất tốt! Câu chủ đề → tương phản → hệ quả → giải pháp là cấu trúc cần ghi nhớ."
+}
+];
+
+const letters=["A","B","C","D"];
+const STORAGE="msduyen_gki_12_arrangement_v1";
+const THEME_STORAGE="msduyen_arrangement_theme";
+
+/* =========================================================
+   VOCABULARY: 3 GROUPS × 15 PHRASES
+   IPA uses a broadly British English convention.
+========================================================= */
+const vocabGroups=[
+{
+ title:"Bộ 1 · Questions 25–28",
+ items:[
+  ["10,000 steps a day","/ten ˈθaʊzənd steps ə deɪ/","10.000 bước mỗi ngày","—"],
+  ["stop drinking soft drinks","/stɒp ˈdrɪŋkɪŋ sɒft drɪŋks/","ngừng uống nước ngọt","give up soft drinks (gần nghĩa)"],
+  ["sit at my desk","/sɪt ət maɪ desk/","ngồi tại bàn học / bàn làm việc","—"],
+  ["switch off all screens","/swɪtʃ ɒf ɔːl skriːnz/","tắt tất cả màn hình","turn off all screens (đồng nghĩa); switch on (trái nghĩa)"],
+  ["go to bed","/ɡəʊ tə bed/","đi ngủ","—"],
+  ["scroll through short videos","/skrəʊl θruː ʃɔːt ˈvɪdiəʊz/","lướt qua các video ngắn","browse short videos (gần nghĩa)"],
+  ["stay angry","/steɪ ˈæŋɡri/","tiếp tục tức giận","remain angry (đồng nghĩa); calm down (trái nghĩa)"],
+  ["age gap","/eɪdʒ ɡæp/","khoảng cách tuổi tác","generation gap (liên quan)"],
+  ["join my friends","/dʒɔɪn maɪ frendz/","tham gia cùng bạn bè","meet up with my friends (gần nghĩa)"],
+  ["taking photos for social media","/ˈteɪkɪŋ ˈfəʊtəʊz fə ˈsəʊʃəl ˈmiːdiə/","chụp ảnh cho mạng xã hội","—"],
+  ["grew up with cassettes","/ɡruː ʌp wɪð kəˈsets/","lớn lên cùng băng cassette","was raised with (gần nghĩa theo ngữ cảnh)"],
+  ["stream millions of songs","/striːm ˈmɪljənz əv sɒŋz/","nghe trực tuyến hàng triệu bài hát","—"],
+  ["single tracks","/ˈsɪŋɡəl træks/","các bài hát riêng lẻ","individual songs (gần nghĩa)"],
+  ["sharing playlists","/ˈʃeərɪŋ ˈpleɪlɪsts/","chia sẻ danh sách phát nhạc","—"],
+  ["understanding one another","/ˌʌndəˈstændɪŋ wʌn əˈnʌðə/","thấu hiểu lẫn nhau","understanding each other (đồng nghĩa)"]
+ ]
+},
+{
+ title:"Bộ 2 · Questions 29–32",
+ items:[
+  ["squats and push-ups","/skwɒts ənd ˈpʊʃ ʌps/","động tác squat và chống đẩy","—"],
+  ["every single morning","/ˈevri ˈsɪŋɡəl ˈmɔːnɪŋ/","mỗi buổi sáng, không bỏ ngày nào","every morning (gần nghĩa)"],
+  ["stop scrolling","/stɒp ˈskrəʊlɪŋ/","ngừng lướt điện thoại / màn hình","—"],
+  ["have a lot more energy","/hæv ə lɒt mɔːr ˈenədʒi/","có nhiều năng lượng hơn hẳn","feel more energetic (gần nghĩa)"],
+  ["took a Waymo robotaxi","/tʊk ə ˈweɪməʊ ˈrəʊbəʊˌtæksi/","đã đi taxi tự lái Waymo","—"],
+  ["turned by itself","/tɜːnd baɪ ɪtˈself/","tự quay / tự chuyển động","moved on its own (gần nghĩa)"],
+  ["stopped for pedestrians","/stɒpt fə pəˈdestriənz/","dừng lại nhường người đi bộ","—"],
+  ["behind the wheel","/bɪˈhaɪnd ðə wiːl/","ngồi sau vô lăng","driving (gần nghĩa theo ngữ cảnh)"],
+  ["on behalf of the residents","/ɒn bɪˈhɑːf əv ðə ˈrezɪdənts/","thay mặt các cư dân","representing the residents (gần nghĩa)"],
+  ["suggest an upgrade","/səˈdʒest ən ˈʌpɡreɪd/","đề xuất một sự nâng cấp","propose an improvement (gần nghĩa)"],
+  ["charging points","/ˈtʃɑːdʒɪŋ pɔɪnts/","các điểm sạc điện","charging stations (gần nghĩa)"],
+  ["wait for hours","/weɪt fər ˈaʊəz/","chờ hàng giờ","—"],
+  ["reserve a time slot","/rɪˈzɜːv ə taɪm slɒt/","đặt trước khung giờ","book a time slot (đồng nghĩa)"],
+  ["pay for the electricity online","/peɪ fə ði ɪˌlekˈtrɪsəti ˌɒnˈlaɪn/","thanh toán tiền điện trực tuyến","—"],
+  ["digital gap at home","/ˈdɪdʒɪtəl ɡæp ət həʊm/","khoảng cách số trong gia đình","digital divide at home (gần nghĩa)"]
+ ]
+},
+{
+ title:"Bộ 3 · Questions 33–36",
+ items:[
+  ["train stations","/treɪn ˈsteɪʃənz/","các nhà ga","railway stations (đồng nghĩa)"],
+  ["floor tiles","/flɔː taɪlz/","các viên gạch lát sàn","—"],
+  ["turn footsteps into electricity","/tɜːn ˈfʊtsteps ˈɪntuː ɪˌlekˈtrɪsəti/","biến bước chân thành điện năng","convert footsteps into electricity (gần nghĩa)"],
+  ["light up the station","/laɪt ʌp ðə ˈsteɪʃən/","thắp sáng nhà ga","illuminate the station (gần nghĩa)"],
+  ["extra time to cross the road","/ˈekstrə taɪm tə krɒs ðə rəʊd/","thêm thời gian để qua đường","—"],
+  ["tap your senior card","/tæp jɔː ˈsiːniə kɑːd/","chạm thẻ người cao tuổi","—"],
+  ["at the crossing","/ət ðə ˈkrɒsɪŋ/","tại chỗ qua đường","—"],
+  ["make the streets much safer","/meɪk ðə striːts mʌtʃ ˈseɪfə/","làm đường phố an toàn hơn nhiều","improve road safety (gần nghĩa)"],
+  ["a giant 3D printer","/ə ˈdʒaɪənt θriː diː ˈprɪntə/","một máy in 3D khổng lồ","—"],
+  ["layer by layer","/ˈleɪə baɪ ˈleɪə/","từng lớp một","one layer at a time (gần nghĩa)"],
+  ["a few weeks","/ə fjuː wiːks/","một vài tuần","several weeks (gần nghĩa)"],
+  ["a stable job","/ə ˈsteɪbəl dʒɒb/","một công việc ổn định","a secure job (gần nghĩa); an unstable job (trái nghĩa)"],
+  ["a fixed monthly salary","/ə fɪkst ˈmʌnθli ˈsæləri/","mức lương cố định hằng tháng","a regular monthly salary (gần nghĩa)"],
+  ["changing jobs","/ˈtʃeɪndʒɪŋ dʒɒbz/","thay đổi công việc","switching jobs (đồng nghĩa)"],
+  ["avoid conflict","/əˈvɔɪd ˈkɒnflɪkt/","tránh xung đột","prevent disagreement (gần nghĩa)"]
+ ]
+}
+];
+
+/* =========================================================
+   STATE, HELPERS, THEMES
+========================================================= */
+const $=id=>document.getElementById(id);
+const escapeHTML=value=>String(value).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+})[c]);
+
+function newState(){
+ return {
+  name:"",cls:"",index:0,
+  answers:Array(12).fill(null),
+  checked:Array(12).fill(false),
+  explanation:Array(12).fill(false),
+  deadline:null,finished:false,
+  sound:true,certificateId:null,
+  completionDate:null,expired:false
+ };
+}
+let state=newState();
+let clock=null;
+let vocabGroup=0,flashIndex=0,flipped=false;
+let returnScreen="results";
+
+const themes={
+ blue:{
+  "--bg":"#edf3ff","--panel":"#ffffff","--ink":"#18243c",
+  "--muted":"#53647e","--primary":"#3259be",
+  "--primaryText":"#ffffff","--soft":"#eaf0ff","--line":"#d6e0f1"
+ },
+ warm:{
+  "--bg":"#fff3e6","--panel":"#fffdfa","--ink":"#382717",
+  "--muted":"#71523a","--primary":"#96501b",
+  "--primaryText":"#ffffff","--soft":"#ffead4","--line":"#e8cdb0"
+ },
+ green:{
+  "--bg":"#e9f7ed","--panel":"#ffffff","--ink":"#153b2a",
+  "--muted":"#426350","--primary":"#176847",
+  "--primaryText":"#ffffff","--soft":"#ddf2e4","--line":"#bbdcc8"
+ },
+ dark:{
+  "--bg":"#252b3d","--panel":"#30384c","--ink":"#f4f7ff",
+  "--muted":"#cbd6eb","--primary":"#b4c8ff",
+  "--primaryText":"#19253e","--soft":"#414d68","--line":"#63738e"
+ }
+};
+
+function applyTheme(name){
+ const theme=themes[name]||themes.blue;
+ Object.entries(theme).forEach(([k,v])=>
+  document.documentElement.style.setProperty(k,v));
+ try{localStorage.setItem(THEME_STORAGE,name)}catch(e){}
+}
+document.querySelectorAll("[data-theme]").forEach(b=>
+ b.onclick=()=>applyTheme(b.dataset.theme)
+);
+applyTheme(localStorage.getItem(THEME_STORAGE)||"blue");
+
+function save(){
+ try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){}
+}
+
+function toast(message){
+ $("toast").textContent=message;
+ $("toast").classList.remove("hidden");
+ clearTimeout(toast.timeout);
+ toast.timeout=setTimeout(()=>
+  $("toast").classList.add("hidden"),2800);
+}
+
+function playSound(success=true){
+ if(!state.sound)return;
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  const ctx=new AC();
+  const oscillator=ctx.createOscillator();
+  const gain=ctx.createGain();
+  oscillator.type="sine";
+  oscillator.frequency.value=success?660:370;
+  gain.gain.setValueAtTime(.045,ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.19);
+  oscillator.connect(gain);
+  gain.connect(ctx.destination);
+  oscillator.start();
+  oscillator.stop(ctx.currentTime+.20);
+  oscillator.onended=()=>ctx.close();
+ }catch(e){}
+}
+
+$("soundBtn").onclick=()=>{
+ state.sound=!state.sound;
+ $("soundBtn").textContent=state.sound?"🔊 Âm thanh":"🔇 Tắt tiếng";
+ save();
+ if(state.sound)playSound();
+};
+
+function screen(id){
+ ["welcome","exam","results","vocabulary"].forEach(x=>
+  $(x).classList.toggle("hidden",x!==id));
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function selectedCount(){
+ return state.answers.filter(x=>x!==null).length;
+}
+function scoreCount(){
+ return questions.reduce((total,q,i)=>
+  total+(state.answers[i]===q.answer?1:0),0);
+}
+function orderOf(q,optionIndex){
+ return q.options[optionIndex].split(/\s*–\s*/);
+}
+function getLine(q,id){
+ return q.lines.find(x=>x[0]===id);
+}
+function formatText(t){
+ return escapeHTML(t).replace(/\n/g,"<br>");
+}
+function isLocked(index){
+ return state.checked[index]||state.finished;
+}
+
+const motivations=[
+ "Every sentence tells a story. Find the connection!",
+ "Look for pronouns and linking words!",
+ "Small steps lead to big achievements!",
+ "Read carefully, think confidently!",
+ "You are building stronger reading skills!",
+ "Find the opening sentence first!",
+ "Context is your best clue!",
+ "Pay attention to cause and effect!",
+ "Keep learning, keep growing!",
+ "Consistency is more important than speed!",
+ "You are almost at the finish line!",
+ "Every question is a chance to improve!"
+];
+
+/* =========================================================
+   RENDER QUESTION
+========================================================= */
+function renderQuestion(){
+ const i=state.index,q=questions[i];
+ $("questionTitle").textContent="Question "+q.n;
+ $("counter").textContent=`Question ${q.n}/36`;
+ $("answered").textContent=`${selectedCount()}/12 đã chọn`;
+ $("bar").style.width=(selectedCount()/12*100)+"%";
+ $("motivation").textContent=motivations[i];
+
+ let html="";
+ if(q.intro){
+  html+=`<div class="sentence" data-translate="intro"
+  role="button" tabindex="0">
+  ${formatText(q.intro)}
+  <div class="meaning hidden" id="meaning-intro">${formatText(q.introVi)}</div>
+  </div>`;
+ }
+ q.lines.forEach(line=>{
+  html+=`<div class="sentence" data-translate="${line[0]}"
+   role="button" tabindex="0">
+   <span class="symbol">${line[0]}.</span>
+   ${escapeHTML(line[1])}
+   <div class="meaning hidden" id="meaning-${line[0]}">${escapeHTML(line[2])}</div>
+   </div>`;
+ });
+ if(q.outro){
+  html+=`<div class="sentence" data-translate="outro"
+  role="button" tabindex="0">
+  ${formatText(q.outro)}
+  <div class="meaning hidden" id="meaning-outro">${formatText(q.outroVi)}</div>
+  </div>`;
+ }
+ $("sentenceList").innerHTML=html;
+
+ document.querySelectorAll("[data-translate]").forEach(el=>{
+  const toggle=()=>
+   $("meaning-"+el.dataset.translate).classList.toggle("hidden");
+  el.onclick=toggle;
+  el.onkeydown=e=>{
+   if(e.key==="Enter"||e.key===" "){
+    e.preventDefault();toggle();
+   }
+  };
+ });
+
+ $("choices").innerHTML=q.options.map((opt,j)=>{
+  let cl=state.answers[i]===j?"selected":"";
+  if(isLocked(i)){
+   if(j===q.answer)cl="correct";
+   else if(j===state.answers[i])cl="wrong";
+  }
+  return `<button class="choice ${cl}" data-choice="${j}"
+   aria-pressed="${state.answers[i]===j}">
+    <span class="letter">${letters[j]}</span>
+    <span>${escapeHTML(opt)}</span>
+   </button>`;
+ }).join("");
+
+ document.querySelectorAll("[data-choice]").forEach(el=>{
+  el.onclick=()=>choose(Number(el.dataset.choice));
+  el.disabled=isLocked(i);
+ });
+
+ $("choiceMeaning").classList.add("hidden");
+ $("passageExtra").classList.add("hidden");
+
+ $("feedback").classList.toggle("hidden",!isLocked(i));
+ if(isLocked(i)){
+  const correct=state.answers[i]===q.answer;
+  $("feedback").innerHTML=correct?
+   `✅ <strong>Excellent!</strong> ${escapeHTML(q.encourage)}`:
+   `💡 <strong>Learning moment!</strong>
+    Đáp án đúng là ${letters[q.answer]}. 
+    Hãy xem giải thích để nhận diện các từ nối và mạch ý.`;
+ }
+
+ $("explanation").classList.toggle("hidden",!state.explanation[i]);
+ if(state.explanation[i])renderExplanation();
+
+ $("checkOne").disabled=isLocked(i);
+ $("explainBtn").disabled=!isLocked(i);
+ $("prevBtn").disabled=i===0;
+ $("nextBtn").disabled=i===11;
+ $("nextBtn").textContent=i===11?"Câu cuối ✓":"Câu tiếp →";
+
+ renderNavigator();
+ save();
+}
+
+function choose(j){
+ const i=state.index;
+ if(isLocked(i))return;
+ state.answers[i]=j;
+
+ document.querySelectorAll("[data-choice]").forEach(el=>{
+  const chosen=Number(el.dataset.choice)===j;
+  el.classList.toggle("selected",chosen);
+  el.setAttribute("aria-pressed",String(chosen));
+ });
+
+ const q=questions[i];
+ const order=orderOf(q,j);
+ const orderedTranslations=order.map(id=>getLine(q,id)[2]);
+
+ $("choiceMeaning").classList.remove("hidden");
+ $("choiceMeaning").innerHTML=`
+  <h4>🇻🇳 Nghĩa của phương án ${letters[j]}</h4>
+  <p><strong>Thứ tự:</strong> ${escapeHTML(q.options[j])}</p>
+  <ol>${orderedTranslations.map(t=>
+   `<li>${escapeHTML(t)}</li>`).join("")}</ol>
+  <p class="muted">Bản dịch giúp hiểu nội dung. Hãy dựa vào sự liên kết câu để quyết định thứ tự đúng.</p>`;
+
+ $("answered").textContent=`${selectedCount()}/12 đã chọn`;
+ $("bar").style.width=(selectedCount()/12*100)+"%";
+ playSound();
+ save();
+}
+
+function checkCurrent(){
+ const i=state.index;
+ if(state.answers[i]===null){
+  toast("Hãy chọn một phương án trước nhé!");
+  return;
+ }
+ if(isLocked(i))return;
+ state.checked[i]=true;
+ playSound(state.answers[i]===questions[i].answer);
+ renderQuestion();
+}
+$("checkOne").onclick=checkCurrent;
+
+function renderExplanation(){
+ const q=questions[state.index];
+ const correctOrder=orderOf(q,q.answer);
+
+ $("explanation").innerHTML=`
+ <h3>📘 Correct Answer: ${letters[q.answer]}</h3>
+ <p><strong>Correct arrangement:</strong>
+ ${escapeHTML(q.options[q.answer])}</p>
+ <h4>✅ Vì sao đúng?</h4>
+ <p>${escapeHTML(q.logic)}</p>
+ <h4>🔍 Cohesion & Coherence Clues</h4>
+ <p>${escapeHTML(q.clues)}</p>
+ <h4>🇻🇳 Dịch nghĩa cả 4 phương án</h4>
+ ${q.options.map((opt,j)=>{
+  const ids=orderOf(q,j);
+  return `<details style="margin:9px 0">
+   <summary><strong>${letters[j]}. ${escapeHTML(opt)}</strong>
+   ${j===q.answer?" ✅":""}</summary>
+   <ol>${ids.map(id=>`<li>${escapeHTML(getLine(q,id)[2])}</li>`).join("")}</ol>
+   </details>`;
+ }).join("")}
+ <h4>🧠 Grammar Focus</h4>
+ <p>${escapeHTML(q.grammar)}</p>
+ <h4>📌 Phrases to Remember</h4>
+ <p>${escapeHTML(q.phrases)}</p>
+ <h4>📖 Correctly Arranged English Text</h4>
+ ${q.intro?`<p>${formatText(q.intro)}</p>`:""}
+ ${correctOrder.map(id=>`<p>${escapeHTML(getLine(q,id)[1])}</p>`).join("")}
+ ${q.outro?`<p>${formatText(q.outro)}</p>`:""}
+ `;
+}
+$("explainBtn").onclick=()=>{
+ const i=state.index;
+ if(!isLocked(i)){
+  toast("Hãy kiểm tra đáp án trước khi xem lời giải.");
+  return;
+ }
+ state.explanation[i]=!state.explanation[i];
+ renderQuestion();
+};
+$("prevBtn").onclick=()=>{
+ if(state.index>0){state.index--;renderQuestion()}
+};
+$("nextBtn").onclick=()=>{
+ if(state.index<11){state.index++;renderQuestion()}
+};
+
+function renderNavigator(){
+ $("navigator").innerHTML=questions.map((q,i)=>{
+  const answered=state.answers[i]!==null;
+  const locked=isLocked(i);
+  return `<button class="navbtn ${locked?"done":answered?"":"pending"}
+   ${state.index===i?"":"secondary"}"
+   data-nav="${i}">
+   Q${q.n} ${locked?"✓":answered?"●":""}
+   </button>`;
+ }).join("");
+ document.querySelectorAll("[data-nav]").forEach(el=>
+  el.onclick=()=>{
+   state.index=Number(el.dataset.nav);
+   renderQuestion();
+  });
+}
+
+/* =========================================================
+   CORRECTLY ARRANGED TEXT / VIETNAMESE TRANSLATION
+========================================================= */
+function showArranged(translate=false){
+ const i=state.index,q=questions[i];
+ if(!isLocked(i)){
+  toast("Hãy Check Answer trước khi mở đoạn văn hoàn chỉnh nhé!");
+  return;
+ }
+ const ids=orderOf(q,q.answer);
+ const text=q.intro?translate?q.introVi:q.intro:"";
+ const end=q.outro?translate?q.outroVi:q.outro:"";
+ const content=ids.map(id=>getLine(q,id)[translate?2:1]);
+
+ $("passageExtra").classList.remove("hidden");
+ $("passageExtra").innerHTML=`
+ <h3>${translate?"🇻🇳 Bản dịch tiếng Việt":"📖 Đoạn văn hoàn chỉnh"}</h3>
+ ${text?`<p>${formatText(text)}</p>`:""}
+ ${content.map(s=>`<p>${escapeHTML(s)}</p>`).join("")}
+ ${end?`<p>${formatText(end)}</p>`:""}
+ <p><strong>Correct arrangement:
+ ${letters[q.answer]}. ${escapeHTML(q.options[q.answer])}</strong></p>
+ `;
+}
+$("completeBtn").onclick=()=>showArranged(false);
+$("translateBtn").onclick=()=>showArranged(true);
+
+/* =========================================================
+   TIMER – 50 MINUTES
+========================================================= */
+function updateTimer(){
+ if(!state.deadline)return;
+ const remaining=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));
+ const m=Math.floor(remaining/60);
+ const s=remaining%60;
+ $("timer").textContent=`⏱ ${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+ $("timer").style.color=remaining<=300?"#b43d36":"";
+ if(remaining<=0&&!state.finished)finish(true);
+}
+function startClock(){
+ clearInterval(clock);
+ updateTimer();
+ clock=setInterval(updateTimer,500);
+}
+function stopClock(){
+ clearInterval(clock);clock=null;
+}
+
+function startTest(){
+ const name=$("studentName").value.trim();
+ const cls=$("studentClass").value.trim();
+ if(!name||!cls){
+  toast("Vui lòng nhập đầy đủ Họ tên và Lớp.");
+  return;
+ }
+ const sound=state.sound;
+ state=newState();
+ state.sound=sound;
+ state.name=name;
+ state.cls=cls;
+ state.deadline=Date.now()+50*60*1000;
+ $("studentLabel").textContent=`${name} · ${cls}`;
+ renderQuestion();
+ screen("exam");
+ startClock();
+ save();
+}
+$("startBtn").onclick=startTest;
+
+/* =========================================================
+   SUBMISSION, RESULTS AND CERTIFICATE
+========================================================= */
+function finish(expired=false){
+ if(state.finished)return;
+ if(!expired){
+  const missing=state.answers.filter(x=>x===null).length;
+  if(missing&&
+    !confirm(`Bạn còn ${missing} câu chưa trả lời. Bạn vẫn muốn nộp bài?`)){
+   return;
+  }
+ }
+ state.finished=true;
+ state.expired=expired;
+ state.checked=Array(12).fill(true);
+ state.completionDate=Date.now();
+ state.certificateId="GKI12-"+state.completionDate;
+ stopClock();
+ save();
+ showResults(true);
+}
+
+$("checkAll").onclick=()=>finish(false);
+
+function showResults(celebration=false){
+ screen("results");
+ const correct=scoreCount();
+ const points=(correct/12*10).toFixed(2);
+ $("resultStudent").textContent=`${state.name} · Lớp ${state.cls}`;
+ $("score").textContent=`${correct}/12 · ${points}/10`;
+
+ let comment="";
+ if(state.expired)comment+="Đã hết thời gian làm bài. ";
+ if(correct===12){
+  comment+="Xuất sắc! Bạn đã làm đúng tất cả các câu hỏi!";
+ }else if(correct>=9){
+  comment+="Rất tốt! Bạn đã hoàn thành thử thách. Hãy tiếp tục phát huy kỹ năng liên kết câu!";
+ }else if(correct>=6){
+  comment+="Bạn đã có nền tảng tốt. Ôn lại các từ nối và câu chủ đề sẽ giúp bạn tiến bộ hơn!";
+ }else{
+  comment+="Mỗi lần luyện tập là một cơ hội tiến bộ. Hãy đọc kỹ phần giải thích và thử sức lần nữa nhé!";
+ }
+ $("resultFeedback").textContent=comment;
+
+ $("review").innerHTML=`
+ <h3>📋 Review Your Answers</h3>
+ ${questions.map((q,i)=>{
+  const a=state.answers[i];
+  const right=a===q.answer;
+  return `<details style="padding:10px;border-bottom:1px solid var(--line)">
+   <summary>
+    <strong>Question ${q.n}</strong> —
+    ${a===null?"Chưa trả lời":letters[a]+". "+escapeHTML(q.options[a])}
+    ${right?"✅":"✗"}
+   </summary>
+   <p>Đáp án đúng:
+   <strong>${letters[q.answer]}. ${escapeHTML(q.options[q.answer])}</strong></p>
+   <p><strong>Giải thích:</strong> ${escapeHTML(q.logic)}</p>
+   <p><strong>Dấu hiệu:</strong> ${escapeHTML(q.clues)}</p>
+   <p><strong>Ngữ pháp:</strong> ${escapeHTML(q.grammar)}</p>
+   <p><strong>Cụm từ:</strong> ${escapeHTML(q.phrases)}</p>
+  </details>`;
+ }).join("")}
+ `;
+ const passed=correct>=9;
+ $("certificate").classList.toggle("hidden",!passed);
+ $("printBtn").classList.toggle("hidden",!passed);
+
+ if(passed){
+  $("certName").textContent=state.name;
+  $("certClass").textContent="Lớp: "+state.cls;
+  $("certScore").textContent=
+   `Kết quả: ${correct}/12 câu đúng · ${points}/10 điểm`;
+  $("certDate").textContent="Ngày hoàn thành: "+
+   new Date(state.completionDate).toLocaleDateString("vi-VN");
+  $("certCode").textContent=
+   "Mã chứng nhận: "+state.certificateId;
+  if(celebration){
+   playSound(true);
+   celebrate();
+  }
+ }
+}
+$("printBtn").onclick=()=>window.print();
+
+function resetTest(){
+ if(!confirm("Bạn muốn xóa tiến độ hiện tại và làm lại bài từ đầu?"))return;
+ stopClock();
+ const sound=state.sound;
+ state=newState();
+ state.sound=sound;
+ localStorage.removeItem(STORAGE);
+ $("studentName").value="";
+ $("studentClass").value="";
+ $("passageExtra").classList.add("hidden");
+ screen("welcome");
+}
+$("resetBtn").onclick=resetTest;
+$("retryBtn").onclick=resetTest;
+
+/* =========================================================
+   VOCABULARY LAB – MATCHING + FLASHCARDS
+========================================================= */
+function shuffle(array){
+ const a=[...array];
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+
+function openVocabulary(from){
+ returnScreen=from;
+ screen("vocabulary");
+ switchGroup(0);
+}
+$("studyBtn").onclick=()=>openVocabulary("results");
+$("backBtn").onclick=()=>screen(returnScreen);
+
+function switchGroup(n){
+ vocabGroup=n;
+ flashIndex=0;flipped=false;
+ document.querySelectorAll("[data-group]").forEach(b=>{
+  const selected=Number(b.dataset.group)===n;
+  b.classList.toggle("active",selected);
+  b.classList.toggle("secondary",!selected);
+ });
+ $("matchingTitle").textContent=
+  "Matching Challenge · "+vocabGroups[n].title;
+ $("flashTitle").textContent=
+  "Flashcard Practice · "+vocabGroups[n].title;
+ renderMatching();renderFlash();
+}
+document.querySelectorAll("[data-group]").forEach(b=>
+ b.onclick=()=>switchGroup(Number(b.dataset.group))
+);
+
+function renderMatching(){
+ const items=vocabGroups[vocabGroup].items;
+ const order=shuffle(items.map((_,i)=>i));
+ const options=order.map(i=>
+  `<option value="${i}">${escapeHTML(items[i][2])}</option>`).join("");
+
+ $("matchingRows").innerHTML=items.map((item,i)=>`
+ <div class="matchrow" id="matchrow${i}">
+  <strong>${i+1}. ${escapeHTML(item[0])}</strong>
+  <select id="match${i}" aria-label="Nghĩa của ${escapeHTML(item[0])}">
+   <option value="">-- Chọn nghĩa --</option>${options}
+  </select>
+ </div>`).join("");
+ $("matchResult").classList.add("hidden");
+}
+
+$("checkMatch").onclick=()=>{
+ const items=vocabGroups[vocabGroup].items;
+ let correct=0;
+ const used=[];
+ items.forEach((item,i)=>{
+  const val=$("match"+i).value;
+  const right=val!==""&&Number(val)===i;
+  if(right)correct++;
+  if(val!=="")used.push(val);
+  $("matchrow"+i).classList.toggle("correct",right);
+  $("matchrow"+i).classList.toggle("wrong",!right);
+ });
+ const duplicates=used.length!==new Set(used).size;
+ $("matchResult").classList.remove("hidden");
+ $("matchResult").innerHTML=`
+ <strong>Kết quả: ${correct}/15 cụm từ chính xác.</strong>
+ <p>${correct===15?
+ "Excellent! Bạn đã ghép đúng tất cả 15 cụm từ!":
+ "Các dòng màu xanh đã chính xác. Hãy xem lại các dòng còn lại và thử tiếp nhé!"}</p>
+ ${duplicates?"<p>Lưu ý: mỗi nghĩa chỉ nên được ghép với một cụm từ.</p>":""}`;
+ playSound(correct>=12);
+};
+$("resetMatch").onclick=renderMatching;
+
+$("matchTab").onclick=()=>{
+ $("matchingArea").classList.remove("hidden");
+ $("flashArea").classList.add("hidden");
+};
+$("flashTab").onclick=()=>{
+ $("matchingArea").classList.add("hidden");
+ $("flashArea").classList.remove("hidden");
+ renderFlash();
+};
+
+function renderFlash(){
+ const item=vocabGroups[vocabGroup].items[flashIndex];
+ $("flashProgress").textContent=`Thẻ ${flashIndex+1}/15`;
+ $("flashcard").innerHTML=flipped?
+ `<div class="kicker">Vietnamese · IPA · B1</div>
+ <h2>${escapeHTML(item[2])}</h2>
+ <p><strong>IPA:</strong> ${escapeHTML(item[1])}</p>
+ <p><strong>Synonym / Antonym:</strong> ${escapeHTML(item[3])}</p>`:
+ `<div class="kicker">English Phrase</div>
+ <h2>${escapeHTML(item[0])}</h2>
+ <p>Nhấn để xem nghĩa tiếng Việt và phiên âm.</p>`;
+ $("flashcard").setAttribute("aria-label",
+  "Thẻ "+(flashIndex+1)+". Nhấn để lật.");
+}
+function flipFlash(){
+ flipped=!flipped;renderFlash();playSound();
+}
+$("flashcard").onclick=flipFlash;
+$("flashcard").onkeydown=e=>{
+ if(e.key==="Enter"||e.key===" "){
+  e.preventDefault();flipFlash();
+ }
+};
+$("flipBtn").onclick=flipFlash;
+$("flashPrev").onclick=()=>{
+ flashIndex=(flashIndex+14)%15;flipped=false;renderFlash();
+};
+$("flashNext").onclick=()=>{
+ flashIndex=(flashIndex+1)%15;flipped=false;renderFlash();
+};
+
+/* =========================================================
+   SUBTLE CELEBRATION EFFECT
+========================================================= */
+function celebrate(){
+ if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const canvas=$("confetti");
+ const ctx=canvas.getContext("2d");
+ canvas.width=window.innerWidth;
+ canvas.height=window.innerHeight;
+ const colors=["#e5a839","#3979d5","#2a9d72","#e76586"];
+ const particles=Array.from({length:90},()=>({
+  x:Math.random()*canvas.width,
+  y:-Math.random()*canvas.height,
+  v:2+Math.random()*4,
+  s:4+Math.random()*5,
+  color:colors[Math.floor(Math.random()*colors.length)]
+ }));
+ let frames=0;
+ function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+   p.y+=p.v;
+   ctx.fillStyle=p.color;
+   ctx.fillRect(p.x,p.y,p.s,p.s*.6);
+  });
+  if(++frames<140)requestAnimationFrame(animate);
+  else ctx.clearRect(0,0,canvas.width,canvas.height);
+ }
+ animate();
+}
+
+/* =========================================================
+   KEYBOARD SUPPORT
+========================================================= */
+document.addEventListener("keydown",e=>{
+ if($("exam").classList.contains("hidden"))return;
+ if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))return;
+ if(e.altKey||e.ctrlKey||e.metaKey)return;
+ const key=e.key.toUpperCase();
+ if(["A","B","C","D"].includes(key)&&!isLocked(state.index)){
+  choose(letters.indexOf(key));
+ }
+});
+
+/* =========================================================
+   RESTORE PROGRESS
+========================================================= */
+try{
+ const saved=JSON.parse(localStorage.getItem(STORAGE)||"null");
+ if(saved&&saved.name&&saved.cls&&
+   Array.isArray(saved.answers)&&saved.answers.length===12){
+  if(confirm("Bạn có bài làm trước đó. Bạn muốn tiếp tục không?")){
+   state={...newState(),...saved};
+   $("studentName").value=state.name;
+   $("studentClass").value=state.cls;
+   $("soundBtn").textContent=state.sound?
+    "🔊 Âm thanh":"🔇 Tắt tiếng";
+
+   if(state.finished){
+    showResults(false);
+   }else{
+    $("studentLabel").textContent=state.name+" · "+state.cls;
+    renderQuestion();
+    screen("exam");
+    if(Date.now()>=state.deadline){
+     finish(true);
+    }else{
+     startClock();
+    }
+   }
+  }else{
+   localStorage.removeItem(STORAGE);
+  }
+ }
+}catch(error){
+ localStorage.removeItem(STORAGE);
+}
+</script>
+</body>
+</html>

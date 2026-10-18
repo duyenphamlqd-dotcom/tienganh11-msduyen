@@ -1,0 +1,739 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đề cương GKI – Tự luận | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#f1f5f9;--panel:#fff;--ink:#17243b;
+ --muted:#52647b;--primary:#3658c9;--soft:#e9efff;
+ --border:#d9e2ef;--good:#137347;--bad:#ae3434;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.6 system-ui,"Segoe UI",sans-serif;
+ transition:background .25s,color .25s}
+body[data-theme="forest"]{--bg:#eaf4ec;--panel:#fff;
+ --ink:#183c2b;--primary:#18734b;--soft:#e0f3e7;
+ --border:#c7e3d0}
+body[data-theme="sunset"]{--bg:#fff1e8;--panel:#fff;
+ --ink:#56301e;--primary:#a84424;--soft:#fff0df;
+ --border:#edd3bf}
+body[data-theme="dark"]{--bg:#101b2e;--panel:#1d2c43;
+ --ink:#f5f8ff;--muted:#cbd6e5;--primary:#91b3ff;
+ --soft:#293f60;--border:#455875;--good:#8ce9b2;
+ --bad:#ffaaaa}
+body[data-theme="purple"]{--bg:#f4efff;--panel:#fff;
+ --ink:#332250;--primary:#7440b5;--soft:#eee4ff;
+ --border:#ddcef1}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;
+ padding:11px 15px;font-weight:700;transition:.15s}
+button:hover:not(:disabled){filter:brightness(.94);
+ transform:translateY(-1px)}
+button:disabled{opacity:.55;cursor:not-allowed}
+button:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible{
+ outline:3px solid #e7a83e;outline-offset:2px}
+.primary{background:var(--primary);color:white}
+body[data-theme="dark"] .primary{color:#102039}
+.secondary{background:var(--soft);color:var(--ink);
+ border:1px solid var(--border)}
+.danger{background:#a33a3a;color:white}
+.hidden{display:none!important}
+.shell{max-width:1250px;margin:auto;padding:18px}
+.panel{background:var(--panel);border:1px solid var(--border);
+ border-radius:20px;padding:22px;box-shadow:0 8px 28px #142e5210}
+.hero{text-align:center;padding:35px 18px}
+.script{font-family:"Segoe Script","Brush Script MT",cursive;
+ font-style:italic;font-weight:800;line-height:1.35;
+ font-size:clamp(30px,5vw,53px);color:var(--primary)}
+.sub{color:var(--muted)}
+.brand{font-weight:800;color:var(--primary);letter-spacing:.5px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.center{justify-content:center}
+input,textarea,select{background:var(--panel);color:var(--ink);
+ border:1.5px solid var(--border);border-radius:11px;padding:12px;
+ width:100%;min-width:0}
+input{max-width:360px}
+textarea{resize:vertical;min-height:155px;line-height:1.8}
+label{font-weight:650}
+.field{display:flex;flex-direction:column;gap:5px;flex:1;
+ min-width:200px;text-align:left}
+.topbar{display:flex;justify-content:space-between;
+ align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:15px}
+.pill{padding:7px 12px;background:var(--soft);
+ border-radius:30px;font-weight:700}
+.timer{font-variant-numeric:tabular-nums;font-size:22px}
+.progress{height:10px;background:var(--border);
+ border-radius:20px;overflow:hidden;margin:15px 0}
+.progress>div{height:100%;background:var(--primary);
+ width:0;transition:width .25s}
+.layout{display:grid;grid-template-columns:1fr 1.1fr;
+ gap:18px;align-items:start}
+.question{font-size:21px;font-weight:750;line-height:1.65}
+.stem{padding:15px;background:var(--soft);
+ border-radius:13px;margin:15px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.info{border-left:4px solid var(--primary);
+ background:var(--soft);border-radius:8px;padding:14px;
+ margin-top:13px;white-space:pre-line}
+.info h3{margin:0 0 7px;font-size:17px}
+.info p{margin:7px 0}
+.feedback{margin-top:15px;padding:14px;border-radius:12px;
+ border:1px solid var(--border)}
+.feedback.good{border-color:var(--good)}
+.feedback.bad{border-color:var(--bad)}
+.nav{display:flex;justify-content:space-between;
+ gap:10px;margin-top:18px;flex-wrap:wrap}
+.dots{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0}
+.dot{padding:7px 10px;border-radius:9px;background:var(--soft);
+ color:var(--ink);border:1px solid var(--border);min-width:38px}
+.dot.active{outline:2px solid var(--primary)}
+.dot.answered{border-color:var(--good)}
+.dot.correct{background:#d8f5e3;color:#145d37}
+.dot.wrong{background:#ffe1e1;color:#812525}
+.stat{font-size:clamp(32px,5vw,55px);font-weight:850;
+ color:var(--primary)}
+.certificate{border:6px double #bb9144;padding:30px;
+ margin-top:22px;text-align:center;border-radius:8px;
+ background:#fffdf4;color:#293047}
+.certificate h2{font-family:Georgia,serif;font-size:32px;
+ color:#856024}
+.certificate .signature{font-family:"Segoe Script",cursive;
+ font-size:27px;color:#75511d}
+.small{font-size:14px;color:var(--muted)}
+#toast{position:fixed;bottom:18px;left:50%;
+ transform:translateX(-50%);background:#17243b;color:white;
+ padding:12px 20px;border-radius:14px;z-index:50;
+ box-shadow:0 5px 25px #0003}
+@media(max-width:800px){
+ .layout{grid-template-columns:1fr}
+ .shell{padding:10px}
+ .panel{padding:17px}
+ .question{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{transition:none!important;animation:none!important}
+}
+@media print{
+ body{background:white!important}
+ #welcome,#exam,.no-print{display:none!important}
+ #result{display:block!important}
+ #result>*:not(#certificate){display:none!important}
+ #certificate{display:block!important;box-shadow:none}
+}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body data-theme="blue">
+<div class="shell">
+
+<section id="welcome" class="panel hero">
+ <div class="brand">ENGLISH 11 • GLOBAL SUCCESS</div>
+ <h1 class="script">Đề cương GKI – Tự luận</h1>
+ <h2>Writing Challenge • Tuần 6</h2>
+ <p>Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <p class="sub">12 câu viết lại câu • 50 phút • Thang điểm 10</p>
+ <p class="brand">Giáo viên thiết kế: Ms.Duyen</p>
+ <div class="row center" style="margin:22px auto;max-width:750px">
+  <div class="field"><label for="student">Họ và tên</label>
+   <input id="student" placeholder="Nhập họ tên học sinh" maxlength="100"></div>
+  <div class="field"><label for="studentClass">Lớp</label>
+   <input id="studentClass" placeholder="Ví dụ: 11A1" maxlength="30"></div>
+ </div>
+ <div class="row center">
+  <label for="themeStart">Màu giao diện</label>
+  <select id="themeStart" style="width:auto">
+   <option value="blue">Xanh học đường</option>
+   <option value="forest">Xanh lá</option>
+   <option value="sunset">Cam ấm</option>
+   <option value="purple">Tím</option>
+   <option value="dark">Tối</option>
+  </select>
+  <button id="soundStart" class="secondary">🔊 Âm thanh: Bật</button>
+ </div>
+ <p class="small">Chấm theo đáp án và các cách diễn đạt tương đương
+ được hỗ trợ. Học sinh có thể xem gợi ý và tự học sau khi làm bài.</p>
+ <button id="start" class="primary" style="margin-top:15px;font-size:19px">
+  Bắt đầu thử thách →
+ </button>
+ <div id="resumeArea" class="hidden" style="margin-top:15px">
+  <button id="resume" class="secondary">Tiếp tục bài đang làm</button>
+ </div>
+</section>
+
+<section id="exam" class="hidden">
+ <header class="panel topbar">
+  <div><div class="brand">ĐỀ CƯƠNG GKI – TỰ LUẬN</div>
+   <div id="studentInfo"></div></div>
+  <div class="row">
+   <span class="pill" id="counter">Câu 1/12</span>
+   <span class="pill timer" id="timer">50:00</span>
+   <select id="themeExam" aria-label="Đổi màu" style="width:auto">
+    <option value="blue">Xanh</option>
+    <option value="forest">Lá</option>
+    <option value="sunset">Cam</option>
+    <option value="purple">Tím</option>
+    <option value="dark">Tối</option>
+   </select>
+   <button id="soundExam" class="secondary">🔊</button>
+  </div>
+ </header>
+ <div class="progress"><div id="bar"></div></div>
+ <div class="dots" id="dots" aria-label="Chọn câu hỏi"></div>
+ <main class="layout">
+  <article class="panel">
+   <div class="brand" id="questionNumber"></div>
+   <h2 style="font-size:18px">Rewrite the following sentences so that it
+   has the same meaning as the first sentence. USING the word given.</h2>
+   <div class="stem">
+    <div class="question" id="questionText"></div>
+    <p id="given" class="brand"></p>
+   </div>
+   <p class="sub">Viết lại câu sao cho nghĩa không thay đổi,
+    bắt đầu bằng cụm từ đã cho.</p>
+   <div class="actions">
+    <button class="secondary" id="hintBtn">💡 Hint</button>
+    <button class="secondary" id="grammarBtn">📚 Ngữ pháp cần lưu ý</button>
+    <button class="secondary" id="translateBtn">🌏 Dịch đề và đáp án</button>
+   </div>
+   <div id="studyPanel" class="info hidden" aria-live="polite"></div>
+  </article>
+  <article class="panel">
+   <h2 style="margin-top:0">✍️ Your Answer</h2>
+   <label for="answer">Nhập câu viết lại hoàn chỉnh:</label>
+   <textarea id="answer" spellcheck="false"
+    placeholder="Type your complete sentence here..."></textarea>
+   <p class="small" id="saved">Bài làm được tự động lưu.</p>
+   <div class="actions">
+    <button id="checkOne" class="primary">✓ Check my answer</button>
+    <button id="correctBtn" class="secondary">📖 Correct answer</button>
+   </div>
+   <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+   <div class="nav">
+    <button id="prev" class="secondary">← Câu trước</button>
+    <button id="next" class="primary">Câu tiếp →</button>
+   </div>
+  </article>
+ </main>
+ <div class="panel" style="margin-top:18px">
+  <div class="row" style="justify-content:space-between">
+   <div><strong>Hoàn thành bài luyện tập</strong>
+    <div class="small">Câu chưa trả lời được tính 0 điểm.</div></div>
+   <div class="row">
+    <button id="reset" class="danger">Reset test</button>
+    <button id="submit" class="primary">Nộp bài & Xem kết quả</button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="result" class="panel hidden">
+ <div class="hero">
+  <div class="script">Congratulations!</div>
+  <h2>Hoàn thành thử thách Writing</h2>
+  <div class="stat" id="score"></div>
+  <h3 id="resultMessage"></h3>
+  <p id="resultDetail"></p>
+  <p id="resultTime" class="sub"></p>
+ </div>
+ <h3>Chi tiết kết quả</h3>
+ <div id="review"></div>
+ <div id="certificate" class="certificate hidden">
+  <div style="font-size:36px">🏆</div>
+  <h2>GIẤY CHỨNG NHẬN</h2>
+  <p>CERTIFICATE OF ACHIEVEMENT</p>
+  <p>Trân trọng chứng nhận học sinh</p>
+  <h2 id="certName"></h2>
+  <p id="certClass"></p>
+  <p>Đã hoàn thành xuất sắc thử thách</p>
+  <h3>ĐỀ CƯƠNG GKI – TỰ LUẬN</h3>
+  <p id="certScore"></p>
+  <p id="certDate"></p>
+  <p class="small" id="certId"></p>
+  <p>Giáo viên thiết kế</p>
+  <div class="signature">Ms.Duyên</div>
+  <strong>Ms.Duyen</strong>
+ </div>
+ <div class="row center no-print" style="margin-top:20px">
+  <button id="printCert" class="primary hidden">🖨 In / Lưu PDF chứng nhận</button>
+  <button id="restart" class="secondary">↻ Làm bài mới</button>
+ </div>
+</section>
+</div>
+<div id="toast" class="hidden" role="status"></div>
+
+<script>
+"use strict";
+
+/* Nội dung đề và đáp án giữ nguyên theo tài liệu cung cấp. */
+const questions=[
+{
+q:"The last time Jane ate junk food was two weeks ago.",
+given:"Jane hasn’t…..",
+a:"Jane hasn’t eaten junk food for two weeks",
+type:"present",subject:"Jane",verb:"eaten junk food",
+time:"for two weeks",
+hint:"The last time + S + V2 + was + khoảng thời gian + ago → S + haven't/hasn't + V3 + for + khoảng thời gian.",
+grammar:"Thì hiện tại hoàn thành: S + have/has + not + V3 + for + khoảng thời gian. Jane là ngôi thứ ba số ít nên dùng hasn't. eat – ate – eaten.",
+viq:"Lần cuối Jane ăn đồ ăn không lành mạnh là hai tuần trước.",
+via:"Jane đã không ăn đồ ăn không lành mạnh trong hai tuần.",
+vocab:"junk food: đồ ăn không lành mạnh; eat – ate – eaten: ăn."
+},
+{
+q:"If I were you, I would study harder to pass the exam.",
+given:"You should…",
+a:"You should study harder to pass the exam.",
+type:"modal",modal:"should",
+rest:"study harder to pass the exam",
+hint:"If I were you, I would + V → You should + V nguyên mẫu.",
+grammar:"Should + V nguyên mẫu diễn tả lời khuyên. Không dùng to sau should. If I were you là cách đưa lời khuyên giả định.",
+viq:"Nếu tôi là bạn, tôi sẽ học chăm chỉ hơn để vượt qua kỳ thi.",
+via:"Bạn nên học chăm chỉ hơn để vượt qua kỳ thi.",
+vocab:"study harder: học chăm chỉ hơn; pass the exam: vượt qua kỳ thi."
+},
+{
+q:"Tom began playing the piano 4 years ago.",
+given:"Tom has…",
+a:"Tom has played the piano for 4 years.",
+type:"present",subject:"Tom",verb:"played the piano",
+time:"for 4 years",
+hint:"S + began/started + V-ing + khoảng thời gian + ago → S + have/has + V3 + for + khoảng thời gian.",
+grammar:"Hiện tại hoàn thành: S + has + V3 + for + thời lượng. Tom dùng has. play là động từ có quy tắc: played.",
+viq:"Tom bắt đầu chơi đàn piano cách đây bốn năm.",
+via:"Tom đã chơi đàn piano được bốn năm.",
+vocab:"begin – began – begun: bắt đầu; play the piano: chơi đàn piano."
+},
+{
+q:"Taking photos inside the cave is forbidden.",
+given:"People mustn’t…",
+a:"People mustn’t take photos inside the cave.",
+type:"modal",modal:"mustn't",
+rest:"take photos inside the cave",
+hint:"It is forbidden / V-ing is forbidden → S + mustn't + V nguyên mẫu.",
+grammar:"Mustn't + V nguyên mẫu diễn tả điều bị cấm. Không dùng to sau mustn't. take photos là cụm động từ.",
+viq:"Việc chụp ảnh bên trong hang động bị cấm.",
+via:"Mọi người không được chụp ảnh bên trong hang động.",
+vocab:"take photos: chụp ảnh; inside the cave: bên trong hang động; forbidden: bị cấm."
+},
+{
+q:"I last ate junk food two weeks ago.",
+given:"I haven’t…..",
+a:"I haven’t eaten junk food for two weeks",
+type:"present",subject:"I",verb:"eaten junk food",
+time:"for two weeks",
+hint:"S + last + V2 + khoảng thời gian + ago → S + haven't/hasn't + V3 + for + khoảng thời gian.",
+grammar:"I + haven't + V3. Dùng for với khoảng thời gian; eat – ate – eaten.",
+viq:"Lần cuối tôi ăn đồ ăn không lành mạnh là hai tuần trước.",
+via:"Tôi đã không ăn đồ ăn không lành mạnh trong hai tuần.",
+vocab:"junk food: đồ ăn không lành mạnh; two weeks: hai tuần."
+},
+{
+q:"It’s not advisable for parents to compare their children to others.",
+given:"Parents shouldn’t…",
+a:"Parents shouldn't compare their children to others.",
+type:"modal",modal:"shouldn't",
+rest:"compare their children to others",
+hint:"It is not advisable for + O + to V → S + shouldn't + V nguyên mẫu.",
+grammar:"Shouldn't + V nguyên mẫu diễn tả lời khuyên không nên làm gì. Parents là chủ ngữ; their children là tân ngữ.",
+viq:"Cha mẹ không nên so sánh con mình với những người khác.",
+via:"Cha mẹ không nên so sánh con mình với những người khác.",
+vocab:"advisable: nên làm; compare ... to ...: so sánh ... với ...; others: những người khác."
+},
+{
+q:"He started going to the gym three months ago.",
+given:"He has…..",
+a:"He has gone to the gym for three months.",
+type:"present",subject:"He",verb:"gone to the gym",
+time:"for three months",
+hint:"S + started + V-ing + khoảng thời gian + ago → S + has/have + V3 + for + khoảng thời gian.",
+grammar:"He + has + V3. go – went – gone. for three months chỉ khoảng thời gian. Theo đáp án đề cương dùng has gone to the gym.",
+viq:"Anh ấy bắt đầu đi tập gym cách đây ba tháng.",
+via:"Anh ấy đã đi tập gym được ba tháng.",
+vocab:"go to the gym: đi tập gym; go – went – gone: đi."
+},
+{
+q:"My parents don’t allow me to stay overnight at my friend's house.",
+given:"I mustn’t…",
+a:"I mustn’t stay overnight at my friend's house.",
+type:"modal",modal:"mustn't",
+rest:"stay overnight at my friend's house",
+hint:"S + don't allow + O + to V → O (đổi thành chủ ngữ) + mustn't + V.",
+grammar:"Mustn't + V nguyên mẫu diễn tả sự cấm đoán. me đổi thành I khi làm chủ ngữ. Giữ my friend's house.",
+viq:"Bố mẹ không cho phép tôi ngủ qua đêm tại nhà bạn.",
+via:"Tôi không được ngủ qua đêm tại nhà bạn.",
+vocab:"allow somebody to do something: cho phép ai làm gì; stay overnight: ở lại qua đêm."
+},
+{
+q:"The last time she visited a dentist was in 2025.",
+given:"She hasn’t…..",
+a:"She hasn’t visited a dentist since 2025.",
+type:"present",subject:"She",verb:"visited a dentist",
+time:"since 2025",
+hint:"The last time + S + V2 + was + mốc thời gian → S + hasn't/haven't + V3 + since + mốc thời gian.",
+grammar:"She + hasn't + V3. Since đi với mốc thời gian (2025); for đi với khoảng thời gian. visit – visited – visited.",
+viq:"Lần cuối cô ấy đến nha sĩ là vào năm 2025.",
+via:"Cô ấy chưa đến nha sĩ kể từ năm 2025.",
+vocab:"visit a dentist: đến nha sĩ; since 2025: kể từ năm 2025."
+},
+{
+q:"If I were you, I would spend more time talking with my children.",
+given:"You should…",
+a:"You should spend more time talking with your children.",
+type:"modal",modal:"should",
+rest:"spend more time talking with your children",
+hint:"If I were you, I would + V → You should + V. Đổi my children thành your children.",
+grammar:"Should + V nguyên mẫu. spend + time + V-ing: dành thời gian làm gì. Cần đổi đại từ sở hữu my → your.",
+viq:"Nếu tôi là bạn, tôi sẽ dành nhiều thời gian hơn để trò chuyện với các con.",
+via:"Bạn nên dành nhiều thời gian hơn để trò chuyện với các con của mình.",
+vocab:"spend time doing something: dành thời gian làm gì; talk with: trò chuyện với."
+},
+{
+q:"She started practising yoga when she was 30.",
+given:"She has…..",
+a:"She has practised yoga since she was 30.",
+type:"present",subject:"She",verb:"practised yoga",
+time:"since she was 30",
+hint:"S + started + V-ing + when + mệnh đề → S + has/have + V3 + since + mệnh đề.",
+grammar:"She + has + V3 + since + mệnh đề chỉ mốc bắt đầu. practise – practised – practised (Anh-Anh).",
+viq:"Cô ấy bắt đầu tập yoga khi cô ấy 30 tuổi.",
+via:"Cô ấy đã tập yoga kể từ khi cô ấy 30 tuổi.",
+vocab:"practise yoga: tập yoga; since she was 30: kể từ khi cô ấy 30 tuổi."
+},
+{
+q:"It is forbidden for students to cheat in the exam.",
+given:"Students mustn’t…",
+a:"Students mustn't cheat in the exam.",
+type:"modal",modal:"mustn't",
+rest:"cheat in the exam",
+hint:"It is forbidden for + O + to V → S + mustn't + V nguyên mẫu.",
+grammar:"Mustn't + V nguyên mẫu: không được phép. Không viết mustn't to cheat. Students là chủ ngữ số nhiều.",
+viq:"Học sinh bị cấm gian lận trong kỳ thi.",
+via:"Học sinh không được gian lận trong kỳ thi.",
+vocab:"forbidden: bị cấm; cheat in the exam: gian lận trong kỳ thi."
+}
+];
+
+const $=id=>document.getElementById(id);
+const KEY="msduyen_gki11_writing_v1";
+let answers=Array(12).fill("");
+let checks=Array(12).fill(null);
+let current=0,deadline=0,tick=null,finished=false;
+let sound=true,submittedAt=null;
+
+function normalize(s){
+ return s.toLowerCase().normalize("NFKC")
+ .replace(/[’‘`]/g,"'")
+ .replace(/\b(has not)\b/g,"hasn't")
+ .replace(/\b(have not)\b/g,"haven't")
+ .replace(/\b(should not)\b/g,"shouldn't")
+ .replace(/\b(must not)\b/g,"mustn't")
+ .replace(/[.,!?;:]/g," ")
+ .replace(/\s+/g," ").trim();
+}
+function variants(s){
+ let out=new Set([normalize(s)]);
+ for(let i=0;i<3;i++){
+  for(const v of [...out]){
+   out.add(v.replace(/\bhasn't\b/g,"has not")
+    .replace(/\bhaven't\b/g,"have not")
+    .replace(/\bshouldn't\b/g,"should not")
+    .replace(/\bmustn't\b/g,"must not"));
+  }
+ }
+ return out;
+}
+function isCorrect(i,s){
+ const q=questions[i];
+ if(!s.trim())return false;
+ const v=normalize(s);
+ const acceptable=new Set([...variants(q.a)]);
+ if(q.type==="present"){
+  let auxiliary=q.subject==="I"?"haven't":"hasn't";
+  let alternate=q.verb;
+  if(i===2)alternate="been playing the piano";
+  if(i===6)alternate="been going to the gym";
+  if(i===10)alternate="been practising yoga";
+  if(alternate!==q.verb){
+   const alternative=q.subject+" "+(i===2||i===6||i===10?"has":"have")
+    +" "+alternate+" "+q.time;
+   for(const x of variants(alternative))acceptable.add(x);
+  }
+ }
+ if(i===10){
+  for(const x of variants("She has practiced yoga since she was 30"))
+   acceptable.add(x);
+  for(const x of variants("She has been practicing yoga since she was 30"))
+   acceptable.add(x);
+ }
+ if(i===6){
+  for(const x of variants("He has been to the gym for three months"))
+   acceptable.add(x);
+ }
+ return acceptable.has(v);
+}
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+ })[c]);
+}
+function save(){
+ if(finished)return;
+ try{localStorage.setItem(KEY,JSON.stringify({
+  answers,current,deadline,name:$("student").value,
+  cls:$("studentClass").value
+ }));}catch(e){}
+}
+function load(){
+ try{
+  const x=JSON.parse(localStorage.getItem(KEY));
+  if(x&&Array.isArray(x.answers)&&x.answers.length===12&&
+     x.deadline>Date.now()){
+   $("resumeArea").classList.remove("hidden");
+   return x;
+  }
+ }catch(e){}
+ return null;
+}
+function setTheme(t){
+ document.body.dataset.theme=t;
+ $("themeStart").value=t;
+ $("themeExam").value=t;
+ try{localStorage.setItem("msduyen_theme",t)}catch(e){}
+}
+function toggleSound(){
+ sound=!sound;
+ $("soundStart").textContent=sound?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+ $("soundExam").textContent=sound?"🔊":"🔇";
+}
+function beep(ok=true){
+ if(!sound)return;
+ try{
+  const C=window.AudioContext||window.webkitAudioContext;
+  if(!C)return;
+  const ctx=new C(),osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type="sine";osc.frequency.value=ok?660:350;
+  gain.gain.setValueAtTime(.035,ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.15);
+  osc.connect(gain);gain.connect(ctx.destination);
+  osc.start();osc.stop(ctx.currentTime+.15);
+  osc.onended=()=>ctx.close();
+ }catch(e){}
+}
+let toastTimeout;
+function toast(message){
+ $("toast").textContent=message;
+ $("toast").classList.remove("hidden");
+ clearTimeout(toastTimeout);
+ toastTimeout=setTimeout(()=>$("toast").classList.add("hidden"),2400);
+}
+function start(resume=false){
+ const data=resume?load():null;
+ if(resume&&!data){toast("Không còn bài đang làm.");return}
+ if(data){
+  answers=data.answers;current=data.current;deadline=data.deadline;
+  $("student").value=data.name;$("studentClass").value=data.cls;
+ }else{
+  if(!$("student").value.trim()||!$("studentClass").value.trim()){
+   toast("Vui lòng nhập họ tên và lớp.");return;
+  }
+  answers=Array(12).fill("");checks=Array(12).fill(null);
+  current=0;deadline=Date.now()+50*60*1000;
+ }
+ finished=false;
+ $("studentInfo").textContent=
+  $("student").value.trim()+" • "+$("studentClass").value.trim();
+ $("welcome").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("exam").classList.remove("hidden");
+ render();save();clearInterval(tick);
+ tick=setInterval(updateTimer,500);updateTimer();
+}
+function updateTimer(){
+ if(finished)return;
+ const left=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+ const m=String(Math.floor(left/60)).padStart(2,"0");
+ const s=String(left%60).padStart(2,"0");
+ $("timer").textContent=m+":"+s;
+ $("timer").style.color=left<=300?"var(--bad)":"var(--ink)";
+ if(left===0)finish(true);
+}
+function storeAnswer(){
+ if(finished)return;
+ answers[current]=$("answer").value;
+ checks[current]=null;save();
+}
+function render(){
+ $("questionNumber").textContent="QUESTION "+(current+1);
+ $("counter").textContent="Câu "+(current+1)+"/12";
+ $("questionText").textContent=questions[current].q;
+ $("given").textContent="Using: "+questions[current].given;
+ $("answer").value=answers[current];
+ $("feedback").classList.add("hidden");
+ $("studyPanel").classList.add("hidden");
+ $("bar").style.width=(answers.filter(x=>x.trim()).length/12*100)+"%";
+ $("prev").disabled=current===0;
+ $("next").textContent=current===11?"Đến câu 1 ↻":"Câu tiếp →";
+ $("dots").innerHTML="";
+ questions.forEach((q,i)=>{
+  const b=document.createElement("button");
+  b.textContent=i+1;
+  b.className="dot"+(i===current?" active":"")+
+   (answers[i].trim()?" answered":"");
+  b.setAttribute("aria-label","Câu "+(i+1));
+  b.onclick=()=>go(i);
+  $("dots").appendChild(b);
+ });
+}
+function go(i){
+ storeAnswer();current=i;render();save();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function showStudy(kind){
+ const q=questions[current];
+ let html="";
+ if(kind==="hint"){
+  html="<h3>💡 Hint – Gợi ý cấu trúc</h3><p>"+
+   escapeHTML(q.hint)+"</p>";
+ }else if(kind==="grammar"){
+  html="<h3>📚 Ngữ pháp cần lưu ý</h3><p>"+
+   escapeHTML(q.grammar)+"</p><h3>Vocabulary & Phrases</h3><p>"+
+   escapeHTML(q.vocab)+"</p>";
+ }else if(kind==="translation"){
+  html="<h3>🌏 Dịch đề</h3><p>"+escapeHTML(q.viq)+
+   "</p><h3>Dịch đáp án</h3><p>"+escapeHTML(q.via)+"</p>";
+ }else{
+  html="<h3>✅ Correct answer</h3><p><strong>"+
+   escapeHTML(q.a)+"</strong></p>"+
+   "<h3>Giải thích ngữ pháp</h3><p>"+
+   escapeHTML(q.grammar)+"</p>"+
+   "<h3>Gợi ý cách biến đổi</h3><p>"+
+   escapeHTML(q.hint)+"</p>"+
+   "<h3>Dịch tiếng Việt</h3><p>"+
+   escapeHTML(q.via)+"</p>"+
+   "<h3>Cụm từ cần nhớ</h3><p>"+
+   escapeHTML(q.vocab)+"</p>";
+ }
+ $("studyPanel").innerHTML=html;
+ $("studyPanel").classList.remove("hidden");
+}
+function checkOne(){
+ storeAnswer();
+ const s=answers[current];
+ const ok=isCorrect(current,s);
+ checks[current]=ok;
+ $("feedback").classList.remove("hidden","good","bad");
+ $("feedback").classList.add(ok?"good":"bad");
+ $("feedback").innerHTML=ok?
+  "<strong>🌟 Excellent! Chính xác!</strong><p>Bạn đã viết đúng câu. Hãy tiếp tục nhé!</p>":
+  "<strong>🌱 Keep trying!</strong><p>"+
+  (s.trim()?"Câu chưa khớp với đáp án được hỗ trợ. Hãy kiểm tra cấu trúc, động từ và từ chỉ thời gian. Bạn có thể xem Hint hoặc Correct answer.":"Hãy thử viết một câu trước nhé!")+
+  "</p>";
+ beep(ok);save();
+}
+function finish(auto=false){
+ if(finished)return;
+ storeAnswer();
+ if(!auto&&answers.some(x=>!x.trim())){
+  if(!confirm("Bạn còn câu chưa trả lời. Bạn vẫn muốn nộp bài?"))return;
+ }
+ finished=true;clearInterval(tick);
+ submittedAt=new Date();
+ const count=answers.reduce((n,a,i)=>n+(isCorrect(i,a)?1:0),0);
+ const score=count/12*10;
+ $("exam").classList.add("hidden");
+ $("result").classList.remove("hidden");
+ $("score").textContent=score.toFixed(2)+" / 10";
+ $("resultDetail").textContent=count+"/12 câu đúng • "+
+  (count/12*100).toFixed(1)+"%";
+ $("resultTime").textContent=auto?
+  "Hết 50 phút – hệ thống đã tự động chấm bài.":
+  "Bài đã được nộp và chấm điểm.";
+ $("resultMessage").textContent=count>=9?
+  "🌟 Wonderful! Bạn đã vượt qua thử thách!":
+  count>=6?"👏 Good effort! Hãy ôn thêm các cấu trúc nhé!":
+  "🌱 Mỗi lần luyện tập là một bước tiến!";
+ const review=$("review");review.innerHTML="";
+ questions.forEach((q,i)=>{
+  const ok=isCorrect(i,answers[i]);
+  const d=document.createElement("div");
+  d.className="feedback "+(ok?"good":"bad");
+  d.innerHTML="<strong>Câu "+(i+1)+" – "+
+   (ok?"✓ Đúng":"✗ Chưa đúng")+"</strong>"+
+   "<p><b>Đề:</b> "+escapeHTML(q.q)+"</p>"+
+   "<p><b>Bài làm:</b> "+escapeHTML(answers[i]||"(Chưa trả lời)")+"</p>"+
+   "<p><b>Đáp án:</b> "+escapeHTML(q.a)+"</p>"+
+   "<p><b>Giải thích:</b> "+escapeHTML(q.grammar)+"</p>"+
+   "<p><b>Dịch:</b> "+escapeHTML(q.via)+"</p>";
+  review.appendChild(d);
+ });
+ const pass=count/12>0.7;
+ $("certificate").classList.toggle("hidden",!pass);
+ $("printCert").classList.toggle("hidden",!pass);
+ if(pass){
+  $("certName").textContent=$("student").value.trim();
+  $("certClass").textContent="Lớp: "+$("studentClass").value.trim();
+  $("certScore").textContent="Kết quả: "+count+"/12 câu đúng • "+
+   score.toFixed(2)+"/10 điểm";
+  $("certDate").textContent="Ngày "+submittedAt.toLocaleDateString("vi-VN");
+  $("certId").textContent="Mã chứng nhận: MD-GKI11-"+
+   submittedAt.getTime();
+ }
+ try{localStorage.removeItem(KEY)}catch(e){}
+ beep(pass);
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function resetTest(){
+ if(!confirm("Bạn muốn xóa bài làm hiện tại và bắt đầu lại?"))return;
+ clearInterval(tick);finished=false;
+ try{localStorage.removeItem(KEY)}catch(e){}
+ answers=Array(12).fill("");checks=Array(12).fill(null);
+ current=0;
+ $("exam").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("welcome").classList.remove("hidden");
+ $("resumeArea").classList.add("hidden");
+ window.scrollTo(0,0);
+}
+$("start").onclick=()=>start(false);
+$("resume").onclick=()=>start(true);
+$("answer").addEventListener("input",()=>{
+ storeAnswer();
+ $("bar").style.width=(answers.filter(x=>x.trim()).length/12*100)+"%";
+ $("dots").children[current]?.classList.toggle("answered",
+  !!answers[current].trim());
+ $("feedback").classList.add("hidden");
+});
+$("prev").onclick=()=>go(Math.max(0,current-1));
+$("next").onclick=()=>go((current+1)%12);
+$("hintBtn").onclick=()=>showStudy("hint");
+$("grammarBtn").onclick=()=>showStudy("grammar");
+$("translateBtn").onclick=()=>showStudy("translation");
+$("correctBtn").onclick=()=>showStudy("correct");
+$("checkOne").onclick=checkOne;
+$("submit").onclick=()=>finish(false);
+$("reset").onclick=resetTest;
+$("restart").onclick=resetTest;
+$("printCert").onclick=()=>window.print();
+$("soundStart").onclick=toggleSound;
+$("soundExam").onclick=toggleSound;
+$("themeStart").onchange=e=>setTheme(e.target.value);
+$("themeExam").onchange=e=>setTheme(e.target.value);
+document.addEventListener("keydown",e=>{
+ if(e.ctrlKey&&e.key==="Enter"&&!finished&&
+  !$("exam").classList.contains("hidden")){
+  e.preventDefault();checkOne();
+ }
+});
+try{setTheme(localStorage.getItem("msduyen_theme")||"blue")}
+catch(e){setTheme("blue")}
+load();
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+

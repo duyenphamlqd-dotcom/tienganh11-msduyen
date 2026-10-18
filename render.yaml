@@ -1,0 +1,11 @@
+services:
+  # Dịch vụ 1: Static Site (Khuyên dùng - Chạy 24/24 MIỄN PHÍ KHÔNG BAO GIỜ NGỦ)
+  - type: web
+    name: tienganh11-msduyen
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
