@@ -227,15 +227,6 @@ footer{text-align:center;padding:30px;color:var(--muted)}
    <input id="studentClass" type="text" maxlength="30" placeholder="Ví dụ: 11A1">
   </label>
  </div>
- <div class="filebox" style="max-width:600px;margin:auto;text-align:left">
-  <b>🎧 Chọn file nghe gốc</b>
-  <p class="muted" style="margin:5px 0">
-   Chọn tệp “test 1. part 2 E11(1).mp3” đã được cung cấp.
-   Âm thanh được xử lý ngay trên thiết bị, không tải lên Internet.
-  </p>
-  <input type="file" id="audioFile" accept="audio/*" onchange="loadAudio(this.files[0])">
-  <p id="fileStatus" class="muted">Chưa chọn tệp âm thanh.</p>
- </div>
  <div class="actions" style="justify-content:center">
   <button class="primary" onclick="startTest()">BẮT ĐẦU KHÁM PHÁ →</button>
  </div>
@@ -591,10 +582,7 @@ function startTest(){
   alert("Vui lòng nhập họ tên và lớp.");
   return;
  }
- if(!audioLoaded){
-  alert("Vui lòng chọn file MP3 gốc để bắt đầu bài nghe.");
-  return;
- }
+ 
  answers=[null,null,null,null];
  current=0;remaining=3000;
  started=true;finished=false;

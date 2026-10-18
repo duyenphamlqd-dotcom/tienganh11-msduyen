@@ -107,12 +107,6 @@ footer{text-align:center;padding:25px;color:var(--muted)}
   <div class="field"><label for="student">Họ và tên</label><input id="student" type="text" placeholder="Nhập họ và tên"></div>
   <div class="field"><label for="studentClass">Lớp</label><input id="studentClass" type="text" placeholder="Ví dụ: 11A1"></div>
  </div>
- <div class="panel" style="max-width:650px;margin:auto;text-align:left">
-  <strong>🎵 Tệp nghe</strong>
-  <p class="small">Tệp âm thanh gốc đã được tích hợp sẵn vào hệ thống (audio/test1-part1.mp3). Bạn có thể chọn tệp khác từ máy nếu muốn.</p>
-  <input id="audioFile" type="file" accept="audio/*">
-  <p id="fileStatus" class="small">✓ Sẵn sàng phát trực tuyến (audio/test1-part1.mp3)</p>
- </div>
  <p><button class="primary" id="startButton">BẮT ĐẦU THỬ THÁCH →</button></p>
  <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
 </section>
@@ -325,26 +319,7 @@ function tone(success=true){
 const defaultAudio="../audio/test1-part1.mp3";
 player.src=defaultAudio;
 
-function updateAudio(file){
- if(audioURL)URL.revokeObjectURL(audioURL);
- audioURL=null;
- if(!file){
-  player.src=defaultAudio;
-  $("fileStatus").textContent="✓ Sẵn sàng phát trực tuyến (audio/test1-part1.mp3)";
-  $("audioNote").textContent="Tệp âm thanh mặc định: test 1. part 1 E11.mp3";
-  return;
- }
- if(!file.type.startsWith("audio/")&&!/\.mp3$/i.test(file.name)){
-  $("fileStatus").textContent="Vui lòng chọn tệp âm thanh.";
-  return;
- }
- audioURL=URL.createObjectURL(file);
- player.src=audioURL;
- $("fileStatus").textContent="✓ "+file.name;
- $("audioNote").textContent="Tệp tùy chỉnh: "+file.name;
-}
 
-$("audioFile").addEventListener("change",e=>updateAudio(e.target.files[0]));
 $("theme").onchange=e=>{document.body.dataset.theme=e.target.value;localStorage.setItem("listenTheme",e.target.value)};
 const storedTheme=localStorage.getItem("listenTheme");
 if(["blue","mint","peach","lavender","night"].includes(storedTheme)){
