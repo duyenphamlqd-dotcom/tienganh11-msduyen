@@ -31,6 +31,8 @@
     {
       group: "TEST 03",
       items: [
+        { file: "test03-listening-part1.html", title: "🎧 Test 03 - Listening Part 1 (Future Cities)", id: "test03-listening-part1" },
+        { file: "test03-listening-part2.html", title: "🎧 Test 03 - Listening Part 2 (Songkran)", id: "test03-listening-part2" },
         { file: "test03-reading-q9-13.html", title: "📖 Test 03 - Reading Q9–13", id: "test03-reading-q9-13" },
         { file: "test03-reading-q14-18.html", title: "📖 Test 03 - Reading Q14–18", id: "test03-reading-q14-18" },
       ]
@@ -84,7 +86,7 @@
 
           <div class="dsb-test-selector-wrapper">
             <button class="dsb-select-trigger" id="dsbToggleDropdown" type="button">
-              <span>📚 Danh sách 12 đề</span>
+              <span>📚 Danh sách 14 đề</span>
               <span style="font-size: 10px;">▼</span>
             </button>
             <div class="dsb-dropdown" id="dsbDropdown">

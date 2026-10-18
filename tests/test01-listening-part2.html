@@ -256,7 +256,7 @@ footer{text-align:center;padding:30px;color:var(--muted)}
   <div class="eyebrow">PART 1. LISTENING (2.0 points)</div>
   <h2>Conversation: Alex and a School Health Adviser</h2>
   <p><b>2. You will hear a conversation between a student and a school health adviser. Listen twice and choose the best answer.</b></p>
-  <audio id="player" controls preload="metadata"></audio>
+  <audio id="player" controls preload="metadata" src="../audio/test1-part2.mp3"></audio>
   <div class="actions">
    <button class="secondary" onclick="playFull()">▶ Bài nghe hoàn chỉnh</button>
    <button class="secondary" onclick="pauseAudio()">⏸ Tạm dừng</button>
@@ -567,7 +567,12 @@ function beep(correct){
   osc.onended=()=>ctx.close();
  }catch(e){}
 }
+const defaultAudio='../audio/test1-part2.mp3';
+$('player').src=defaultAudio;
+audioLoaded=true;
 function loadAudio(file){
+ if(!file){$('player').src=defaultAudio;audioLoaded=true;return;}
+
  if(!file)return;
  if(!file.type.startsWith("audio/")&&!/\.mp3$/i.test(file.name)){
   alert("Vui lòng chọn tệp âm thanh MP3.");

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test 03 - Listening - Part 2 | Ms.Duyen</title>
+<link rel="stylesheet" href="../assets/css/shared-nav.css">
+<style>
+:root{
+ --bg:#eef3fb;--panel:#fff;--ink:#172744;
+ --muted:#536580;--accent:#355bda;--soft:#e9efff;
+ --good:#087b59;--bad:#b43342;--line:#dce4f0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,Arial,sans-serif;transition:background .3s}
+body[data-theme="mint"]{--bg:#e7f6ef;--accent:#087b59;--soft:#d7f2e6}
+body[data-theme="peach"]{--bg:#fff0e7;--accent:#a44727;--soft:#ffe0cf}
+body[data-theme="night"]{--bg:#111b30;--panel:#1d2b43;--ink:#f3f6ff;--muted:#c2cee1;--accent:#93b5ff;--soft:#304363;--line:#41516c;--good:#80e6bd;--bad:#ff9aa6}
+body[data-theme="lavender"]{--bg:#f1ebff;--accent:#7046b5;--soft:#e8dcff}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;padding:11px 16px;font-weight:700}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.primary{background:var(--accent);color:white}
+.secondary{background:var(--soft);color:var(--ink)}
+.outline{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.wrap{max-width:1120px;margin:auto;padding:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:23px;margin:18px 0;box-shadow:0 7px 24px #182d5310}
+.hero{text-align:center;padding:40px 20px}
+.script{font-family:"Brush Script MT","Segoe Script",Georgia,serif;font-style:italic;font-weight:700;letter-spacing:.5px}
+h1{font-size:clamp(36px,7vw,68px);line-height:1.2;color:var(--accent);margin:15px 0}
+h2{font-size:25px;line-height:1.3;margin:0 0 15px}
+.small{font-size:14px;color:var(--muted)}
+.muted{color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+input[type=text]{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:12px;border-radius:10px;width:100%}
+.field{flex:1;min-width:190px}
+.field label{display:block;font-weight:700;margin-bottom:5px}
+.hidden{display:none!important}
+.progress{height:9px;border-radius:20px;background:var(--soft);overflow:hidden}
+.progress div{height:100%;background:var(--accent);width:0%;transition:width .3s}
+.question{border:1px solid var(--line);padding:17px;border-radius:16px;margin:14px 0}
+.option{display:block;width:100%;text-align:left;margin:8px 0;background:var(--soft);color:var(--ink);border:2px solid transparent}
+.option.selected{border-color:var(--accent)}
+.option.correct{border-color:var(--good);background:#e6f8f0}
+.option.wrong{border-color:var(--bad);background:#fdeeee}
+.feedback{padding:11px;border-radius:10px;background:var(--soft);margin-top:10px}
+.translation{color:var(--muted);padding:8px 12px;border-left:3px solid var(--accent);margin:8px 0}
+.sentence{display:block;width:100%;background:transparent;color:var(--ink);text-align:left;font-weight:400;padding:7px;border-bottom:1px solid var(--line)}
+.sentence:hover{background:var(--soft)}
+.pill{background:var(--soft);padding:4px 10px;border-radius:20px;font-size:13px}
+.timer{font-size:23px;font-weight:800;font-variant-numeric:tabular-nums}
+.certificate{border:7px double var(--accent);text-align:center;padding:30px;margin-top:20px;background:var(--panel)}
+.certificate h2{font-size:35px;color:var(--accent)}
+.score{font-size:50px;font-weight:800;color:var(--accent)}
+audio{width:100%;margin:10px 0}
+footer{text-align:center;padding:25px;color:var(--muted)}
+</style>
+</head>
+<body data-theme="blue">
+<div class="wrap row between no-print" style="padding-top:10px;padding-bottom:10px">
+ <strong>🎧 Test 03 - Listening - Part 2</strong>
+ <div class="row">
+  <span id="clock" class="timer">50:00</span>
+  <select id="theme" aria-label="Giao diện" style="width:auto;border-radius:8px;padding:5px 8px">
+   <option value="blue">💙 Blue</option>
+   <option value="mint">💚 Mint</option>
+   <option value="peach">🧡 Peach</option>
+   <option value="lavender">💜 Lavender</option>
+   <option value="night">🌙 Night</option>
+  </select>
+ </div>
+</div>
+
+<main class="wrap">
+<section id="welcome" class="panel hero">
+ <div style="font-size:55px">🌊 🇹🇭 🎆</div>
+ <h1 class="script">Test 03 - Part 2</h1>
+ <h2>Songkran · Thai New Year's Day</h2>
+ <p class="muted">English 11 · HKI Revision · Ms.Duyen</p>
+ <p>4 câu hỏi trắc nghiệm (Q5–8) · 2.0 điểm</p>
+ <div class="row" style="max-width:650px;margin:25px auto;text-align:left">
+  <div class="field"><label for="student">Họ và tên</label><input id="student" type="text" placeholder="Nhập họ và tên"></div>
+  <div class="field"><label for="studentClass">Lớp</label><input id="studentClass" type="text" placeholder="Ví dụ: 11A1"></div>
+ </div>
+ <p><button class="primary" id="startButton" style="font-size:18px;padding:14px 28px">BẮT ĐẦU BÀI NGHE →</button></p>
+</section>
+
+<section id="exam" class="hidden">
+ <div class="panel no-print">
+  <div class="row between">
+   <strong id="studentInfo"></strong>
+   <span id="answeredCount" class="pill">0/4 câu</span>
+  </div>
+  <div class="progress" style="margin:12px 0"><div id="bar"></div></div>
+ </div>
+
+ <div class="panel no-print">
+  <h2>🎧 Listening Audio (Songkran Festival)</h2>
+  <p class="small">Listen to the recording about Songkran, the traditional Thai New Year's Day, and choose the correct option (A, B, C, or D).</p>
+  <audio id="player" controls preload="metadata" src="../audio/test3-part2.mp3"></audio>
+  <div class="row">
+   <button class="secondary" onclick="player.currentTime=Math.max(0,player.currentTime-10)">↶ 10s</button>
+   <button class="secondary" onclick="player.currentTime=Math.min(player.duration||999,player.currentTime+10)">10s ↷</button>
+   <button class="secondary" id="speedBtn" onclick="toggleSpeed()">Tốc độ: 1×</button>
+   <button class="secondary" onclick="player.currentTime=0;player.play()">↻ Nghe lại</button>
+  </div>
+ </div>
+
+ <div class="panel no-print">
+  <h2>PART 1. LISTENING · SECTION 2 (2.0 points)</h2>
+  <p><em>2. Listen to the recording below and circle the best answer A, B, C, or D. You will listen TWICE.</em></p>
+  <div id="questions"></div>
+  <div class="row" style="margin-top:20px">
+   <button class="primary" id="checkAll">✓ Kiểm tra đáp án</button>
+   <button class="secondary" id="finishButton">🏁 Hoàn thành & Nộp bài</button>
+  </div>
+ </div>
+
+ <div class="panel no-print">
+  <h2>📖 Listening Transcript & Translation</h2>
+  <div class="row">
+   <button class="secondary" id="toggleScript">Hiện bản tiếng Anh</button>
+   <button class="secondary" id="toggleTrans">Hiện bản dịch tiếng Việt</button>
+  </div>
+  <div id="scriptArea" class="hidden" style="margin-top:14px"></div>
+ </div>
+</section>
+
+<section id="results" class="panel hidden">
+ <div style="text-align:center">
+  <h2>🎉 Kết quả bài kiểm tra</h2>
+  <p id="resultInfo"></p>
+  <div class="score" id="scoreDisplay">0.0 / 2.0</div>
+  <p id="scoreComment"></p>
+ </div>
+ <div id="certificate" class="certificate">
+  <p class="small">TRƯỜNG THPT CHUYÊN LÊ QUÝ ĐÔN</p>
+  <h2 class="script">Certificate of Completion</h2>
+  <p>Chứng nhận em</p>
+  <h3 id="certName" style="font-size:26px;color:var(--accent);margin:8px 0"></h3>
+  <p id="certClass"></p>
+  <p>Đã hoàn thành xuất sắc bài kiểm tra <strong>Test 03 - Listening - Part 2 (Songkran Festival)</strong></p>
+  <p>Điểm số: <strong id="certScore"></strong></p>
+  <p class="small" id="certDate"></p>
+  <p class="small">Giáo viên phụ trách: Ms. Duyên</p>
+ </div>
+ <div class="row" style="justify-content:center;margin-top:20px">
+  <button class="primary" onclick="window.print()">🖨️ In chứng nhận</button>
+  <button class="secondary" onclick="location.reload()">↻ Làm lại bài</button>
+  <a href="../index.html" class="outline" style="text-decoration:none;padding:11px 16px;border-radius:12px;font-weight:700">🏠 Về Trang Chủ</a>
+ </div>
+</section>
+</main>
+
+<footer>Giáo viên thiết kế: Ms.Duyen · Hệ thống ôn tập tiếng Anh 11</footer>
+
+<script>
+const qs = [
+ {
+  n: 5,
+  q: "What is the main topic of the conversation?",
+  vi: "Chủ đề chính của cuộc trò chuyện là gì?",
+  options: [
+   "Traditional days in Thailand",
+   "Thai culture",
+   "New Year's Day in America",
+   "Thai New Year's Day"
+  ],
+  answer: 3,
+  evidence: "The speakers talk specifically about Songkran, which is the traditional Thai New Year's Day.",
+  viExp: "Đoạn ghi âm giới thiệu về Songkran - Tết cổ truyền đón năm mới của người Thái Lan (Thai New Year's Day)."
+ },
+ {
+  n: 6,
+  q: "When is traditional Thai New Year's Day celebrated?",
+  vi: "Tết cổ truyền của người Thái Lan được tổ chức khi nào?",
+  options: [
+   "January 1st",
+   "April 13th to 15th",
+   "April 1st",
+   "December 31st"
+  ],
+  answer: 1,
+  evidence: "Songkran is celebrated annually from April 13th to April 15th.",
+  viExp: "Lễ hội Songkran được tổ chức từ ngày 13 đến 15 tháng 4 hằng năm."
+ },
+ {
+  n: 7,
+  q: "Which is NOT true about Songkran?",
+  vi: "Điều nào KHÔNG đúng về lễ hội Songkran?",
+  options: [
+   "People wear traditional clothes.",
+   "People have water fights.",
+   "It's celebrated in Thailand.",
+   "It is in April."
+  ],
+  answer: 0,
+  evidence: "In the audio, water fights, celebrating in Thailand, and the timing in April are all highlighted. Wearing traditional clothes is not mentioned as a key activity.",
+  viExp: "Bài nghe nói rõ về các trận té nước vui nhộn (water fights), diễn ra ở Thái Lan vào tháng 4. Việc 'mặc quần áo truyền thống' không phải là nội dung được đề cập."
+ },
+ {
+  n: 8,
+  q: "Why do people throw water on each other?",
+  vi: "Tại sao mọi người lại tạt nước vào nhau?",
+  options: [
+   "Because water makes people feel cool.",
+   "Because water makes people clean.",
+   "Because water is a symbol of washing away all the bad.",
+   "Because water is a good symbol."
+  ],
+  answer: 2,
+  evidence: "Throwing water symbolizes washing away all the bad luck, misfortunes, and misdeeds of the previous year to welcome a fresh start.",
+  viExp: "Tạt nước mang ý nghĩa biểu tượng là gột rửa đi mọi điều xui xẻo, xấu xa của năm cũ để bắt đầu năm mới may mắn."
+ }
+];
+
+const scriptEn = [
+ "Speaker 1: Hi everyone, welcome to our world culture series! Today we explore Songkran, Thailand's biggest and most famous festival.",
+ "Speaker 2: That's right! Songkran is the traditional Thai New Year's Day, celebrated from April 13th to 15th each year.",
+ "Speaker 1: Most people know Songkran as the world's biggest water fight! People take to the streets with buckets and water guns to splash water on everyone.",
+ "Speaker 2: But why do they throw water? Water is a symbol of cleansing and renewal. Splashing water represents washing away all the bad luck and misdeeds from the past year, welcoming good fortune and blessings for the year ahead!"
+];
+
+const scriptVi = [
+ "Người nói 1: Chào các bạn, chào mừng đến với chuỗi văn hóa thế giới! Hôm nay chúng ta cùng khám phá Songkran, lễ hội lớn nhất và nổi tiếng nhất của Thái Lan.",
+ "Người nói 2: Đúng vậy! Songkran là ngày Tết cổ truyền của người Thái Lan, được tổ chức từ ngày 13 đến 15 tháng 4 mỗi năm.",
+ "Người nói 1: Hầu hết mọi người biết đến Songkran như trận té nước lớn nhất thế giới! Người dân đổ ra đường với xô nước và súng nước để té nước vào nhau.",
+ "Người nói 2: Nhưng tại sao họ lại tạt nước? Nước là biểu tượng của sự thanh tẩy và khởi đầu mới. Việc té nước biểu thị cho việc gột rửa mọi điều xui xẻo và lỗi lầm của năm cũ, đón nhận may mắn và phước lành cho năm mới!"
+];
+
+let answers = [null, null, null, null];
+let checked = [false, false, false, false];
+let timer = null, remaining = 3000;
+const player = document.getElementById("player");
+
+function initProfile(){
+ try{
+  const p = JSON.parse(localStorage.getItem("global_student_profile")||"{}");
+  if(p.name) document.getElementById("student").value = p.name;
+  if(p.cls) document.getElementById("studentClass").value = p.cls;
+ }catch(e){}
+}
+initProfile();
+
+document.getElementById("startButton").onclick = () => {
+ const name = document.getElementById("student").value.trim();
+ const cls = document.getElementById("studentClass").value.trim();
+ if(!name || !cls){
+  alert("Vui lòng nhập họ tên và lớp.");
+  return;
+ }
+ try{
+  localStorage.setItem("global_student_profile", JSON.stringify({name, cls, updated: Date.now()}));
+ }catch(e){}
+ document.getElementById("studentInfo").textContent = name + " · " + cls;
+ document.getElementById("welcome").classList.add("hidden");
+ document.getElementById("exam").classList.remove("hidden");
+ renderQuestions();
+ timer = setInterval(() => {
+  remaining--;
+  const m = String(Math.floor(remaining/60)).padStart(2,'0');
+  const s = String(remaining%60).padStart(2,'0');
+  document.getElementById("clock").textContent = m + ":" + s;
+  if(remaining <= 0) finish();
+ }, 1000);
+};
+
+function renderQuestions(){
+ const div = document.getElementById("questions");
+ div.innerHTML = qs.map((q, i) => `
+  <div class="question" id="qbox_${i}">
+   <div class="row between">
+    <strong>Question ${q.n}. ${q.q}</strong>
+    <span class="pill">0.5 điểm</span>
+   </div>
+   <p class="small muted">🇻🇳 ${q.vi}</p>
+   <div style="margin:10px 0">
+    ${q.options.map((opt, j) => `
+     <button class="option ${answers[i]===j ? 'selected' : ''}" onclick="selectOpt(${i}, ${j})">
+      <b>${'ABCD'[j]}.</b> ${opt}
+     </button>
+    `).join('')}
+   </div>
+   <div class="row">
+    <button class="secondary" onclick="checkOne(${i})">Kiểm tra câu này</button>
+   </div>
+   <div id="fb_${i}" class="feedback hidden"></div>
+  </div>
+ `).join('');
+}
+
+function selectOpt(qi, optIdx){
+ if(checked[qi]) return;
+ answers[qi] = optIdx;
+ renderQuestions();
+ updateProgress();
+}
+
+function updateProgress(){
+ const count = answers.filter(a => a !== null).length;
+ document.getElementById("answeredCount").textContent = count + "/4 câu";
+ document.getElementById("bar").style.width = (count * 25) + "%";
+}
+
+function checkOne(qi){
+ if(answers[qi] === null){
+  alert("Vui lòng chọn đáp án trước.");
+  return;
+ }
+ checked[qi] = true;
+ const fb = document.getElementById("fb_" + qi);
+ const q = qs[qi];
+ const isCorrect = answers[qi] === q.answer;
+ fb.classList.remove("hidden");
+ fb.innerHTML = `
+  <strong>${isCorrect ? '✅ Chính xác!' : '❌ Chưa chính xác.'}</strong>
+  <p><b>Đáp án đúng:</b> ${'ABCD'[q.answer]}. ${q.options[q.answer]}</p>
+  <p class="small"><b>Bằng chứng bài nghe:</b> ${q.evidence}</p>
+  <p class="small"><b>Giải thích:</b> ${q.viExp}</p>
+ `;
+ const opts = document.querySelectorAll(`#qbox_${qi} .option`);
+ opts.forEach((btn, j) => {
+  if(j === q.answer) btn.classList.add("correct");
+  else if(j === answers[qi]) btn.classList.add("wrong");
+ });
+}
+
+document.getElementById("checkAll").onclick = () => {
+ qs.forEach((_, i) => { if(answers[i] !== null && !checked[i]) checkOne(i); });
+};
+
+document.getElementById("finishButton").onclick = () => finish();
+
+function finish(){
+ clearInterval(timer);
+ player.pause();
+ let correct = 0;
+ qs.forEach((q, i) => {
+  if(answers[i] === q.answer) correct++;
+ });
+ const score = correct * 0.5;
+ document.getElementById("exam").classList.add("hidden");
+ document.getElementById("results").classList.remove("hidden");
+ const name = document.getElementById("student").value.trim();
+ const cls = document.getElementById("studentClass").value.trim();
+ document.getElementById("resultInfo").textContent = name + " · " + cls;
+ document.getElementById("scoreDisplay").textContent = score.toFixed(1) + " / 2.0";
+ document.getElementById("scoreComment").textContent = `Bạn đã trả lời đúng ${correct}/4 câu hỏi (${(score*10/2).toFixed(1)}/10 điểm hệ số).`;
+ document.getElementById("certName").textContent = name;
+ document.getElementById("certClass").textContent = "Lớp: " + cls;
+ document.getElementById("certScore").textContent = `${score.toFixed(1)}/2.0 điểm (${correct}/4 câu đúng)`;
+ document.getElementById("certDate").textContent = "Ngày hoàn thành: " + new Date().toLocaleDateString('vi-VN');
+}
+
+function toggleSpeed(){
+ const speeds = [1, 1.25, 0.8];
+ let cur = player.playbackRate;
+ let next = speeds[(speeds.indexOf(cur)+1)%speeds.length];
+ player.playbackRate = next;
+ document.getElementById("speedBtn").textContent = "Tốc độ: " + next + "×";
+}
+
+document.getElementById("toggleScript").onclick = () => {
+ const a = document.getElementById("scriptArea");
+ a.classList.toggle("hidden");
+ a.innerHTML = scriptEn.map(s => `<p class="sentence">${s}</p>`).join('');
+};
+
+document.getElementById("toggleTrans").onclick = () => {
+ const a = document.getElementById("scriptArea");
+ a.classList.toggle("hidden");
+ a.innerHTML = scriptVi.map(s => `<p class="sentence">🇻🇳 ${s}</p>`).join('');
+};
+
+document.getElementById("theme").onchange = e => {
+ document.body.dataset.theme = e.target.value;
+};
+</script>
+<script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>

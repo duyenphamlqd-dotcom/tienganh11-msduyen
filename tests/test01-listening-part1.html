@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -108,10 +108,10 @@ footer{text-align:center;padding:25px;color:var(--muted)}
   <div class="field"><label for="studentClass">Lớp</label><input id="studentClass" type="text" placeholder="Ví dụ: 11A1"></div>
  </div>
  <div class="panel" style="max-width:650px;margin:auto;text-align:left">
-  <strong>🎵 Tệp nghe gốc</strong>
-  <p class="small">Chọn tệp MP3 được cung cấp cùng đề. Âm thanh được phát trực tiếp từ máy của bạn, không tải lên Internet.</p>
+  <strong>🎵 Tệp nghe</strong>
+  <p class="small">Tệp âm thanh gốc đã được tích hợp sẵn vào hệ thống (audio/test1-part1.mp3). Bạn có thể chọn tệp khác từ máy nếu muốn.</p>
   <input id="audioFile" type="file" accept="audio/*">
-  <p id="fileStatus" class="small">Chưa chọn tệp nghe.</p>
+  <p id="fileStatus" class="small">✓ Sẵn sàng phát trực tuyến (audio/test1-part1.mp3)</p>
  </div>
  <p><button class="primary" id="startButton">BẮT ĐẦU THỬ THÁCH →</button></p>
  <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
@@ -130,14 +130,14 @@ footer{text-align:center;padding:25px;color:var(--muted)}
  <div class="panel no-print">
   <h2>🎧 Listening Audio</h2>
   <p class="small">Listen to the conversation and do the exercises to practise and improve your listening skills.</p>
-  <audio id="player" controls preload="metadata"></audio>
+  <audio id="player" controls preload="metadata" src="../audio/test1-part1.mp3"></audio>
   <div class="row">
    <button class="secondary" id="rewind">↶ 10s</button>
    <button class="secondary" id="forward">10s ↷</button>
    <button class="secondary" id="slow">Speed: 1×</button>
    <button class="secondary" id="replay">↻ Replay</button>
   </div>
-  <p class="small" id="audioNote">Choose your original MP3 to enable listening.</p>
+  <p class="small" id="audioNote">Tệp âm thanh mặc định: test 1. part 1 E11.mp3</p>
  </div>
 
  <div class="panel no-print">
@@ -322,11 +322,18 @@ function tone(success=true){
  }catch(e){}
 }
 
+const defaultAudio="../audio/test1-part1.mp3";
+player.src=defaultAudio;
+
 function updateAudio(file){
  if(audioURL)URL.revokeObjectURL(audioURL);
  audioURL=null;
- player.removeAttribute("src");
- if(!file){$("fileStatus").textContent="Chưa chọn tệp nghe.";return;}
+ if(!file){
+  player.src=defaultAudio;
+  $("fileStatus").textContent="✓ Sẵn sàng phát trực tuyến (audio/test1-part1.mp3)";
+  $("audioNote").textContent="Tệp âm thanh mặc định: test 1. part 1 E11.mp3";
+  return;
+ }
  if(!file.type.startsWith("audio/")&&!/\.mp3$/i.test(file.name)){
   $("fileStatus").textContent="Vui lòng chọn tệp âm thanh.";
   return;
@@ -334,7 +341,7 @@ function updateAudio(file){
  audioURL=URL.createObjectURL(file);
  player.src=audioURL;
  $("fileStatus").textContent="✓ "+file.name;
- $("audioNote").textContent="Original recording: "+file.name;
+ $("audioNote").textContent="Tệp tùy chỉnh: "+file.name;
 }
 
 $("audioFile").addEventListener("change",e=>updateAudio(e.target.files[0]));

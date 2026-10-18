@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test 03 - Listening - Part 1 | Ms.Duyen</title>
+<link rel="stylesheet" href="../assets/css/shared-nav.css">
+<style>
+:root{
+ --bg:#eef3fb;--panel:#fff;--ink:#172744;
+ --muted:#536580;--accent:#355bda;--soft:#e9efff;
+ --good:#087b59;--bad:#b43342;--line:#dce4f0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,Arial,sans-serif;transition:background .3s}
+body[data-theme="mint"]{--bg:#e7f6ef;--accent:#087b59;--soft:#d7f2e6}
+body[data-theme="peach"]{--bg:#fff0e7;--accent:#a44727;--soft:#ffe0cf}
+body[data-theme="night"]{--bg:#111b30;--panel:#1d2b43;--ink:#f3f6ff;--muted:#c2cee1;--accent:#93b5ff;--soft:#304363;--line:#41516c;--good:#80e6bd;--bad:#ff9aa6}
+body[data-theme="lavender"]{--bg:#f1ebff;--accent:#7046b5;--soft:#e8dcff}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;padding:11px 16px;font-weight:700}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.primary{background:var(--accent);color:white}
+.secondary{background:var(--soft);color:var(--ink)}
+.outline{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.wrap{max-width:1120px;margin:auto;padding:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:23px;margin:18px 0;box-shadow:0 7px 24px #182d5310}
+.hero{text-align:center;padding:40px 20px}
+.script{font-family:"Brush Script MT","Segoe Script",Georgia,serif;font-style:italic;font-weight:700;letter-spacing:.5px}
+h1{font-size:clamp(36px,7vw,68px);line-height:1.2;color:var(--accent);margin:15px 0}
+h2{font-size:25px;line-height:1.3;margin:0 0 15px}
+.small{font-size:14px;color:var(--muted)}
+.muted{color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+input[type=text]{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:12px;border-radius:10px;width:100%}
+.field{flex:1;min-width:190px}
+.field label{display:block;font-weight:700;margin-bottom:5px}
+.hidden{display:none!important}
+.progress{height:9px;border-radius:20px;background:var(--soft);overflow:hidden}
+.progress div{height:100%;background:var(--accent);width:0%;transition:width .3s}
+.question{border:1px solid var(--line);padding:17px;border-radius:16px;margin:14px 0}
+.option{display:block;width:100%;text-align:left;margin:8px 0;background:var(--soft);color:var(--ink);border:2px solid transparent}
+.option.selected{border-color:var(--accent)}
+.option.correct{border-color:var(--good);background:#e6f8f0}
+.option.wrong{border-color:var(--bad);background:#fdeeee}
+.feedback{padding:11px;border-radius:10px;background:var(--soft);margin-top:10px}
+.translation{color:var(--muted);padding:8px 12px;border-left:3px solid var(--accent);margin:8px 0}
+.sentence{display:block;width:100%;background:transparent;color:var(--ink);text-align:left;font-weight:400;padding:7px;border-bottom:1px solid var(--line)}
+.sentence:hover{background:var(--soft)}
+.pill{background:var(--soft);padding:4px 10px;border-radius:20px;font-size:13px}
+.timer{font-size:23px;font-weight:800;font-variant-numeric:tabular-nums}
+.certificate{border:7px double var(--accent);text-align:center;padding:30px;margin-top:20px;background:var(--panel)}
+.certificate h2{font-size:35px;color:var(--accent)}
+.score{font-size:50px;font-weight:800;color:var(--accent)}
+audio{width:100%;margin:10px 0}
+footer{text-align:center;padding:25px;color:var(--muted)}
+</style>
+</head>
+<body data-theme="blue">
+
+<div class="topbar no-print" style="position:sticky;top:40px;z-index:10;background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0">
+ <div class="wrap row between" style="padding-top:0;padding-bottom:0">
+  <strong>🎧 Test 03 - Listening - Part 1</strong>
+  <div class="row">
+   <span id="clock" class="timer">50:00</span>
+   <select id="theme" aria-label="Chọn màu nền" style="width:auto">
+    <option value="blue">💙 Blue</option>
+    <option value="mint">💚 Mint</option>
+    <option value="peach">🧡 Peach</option>
+    <option value="lavender">💜 Lavender</option>
+    <option value="night">🌙 Night</option>
+   </select>
+  </div>
+ </div>
+</div>
+
+<main class="wrap">
+<section id="welcome" class="panel hero">
+ <div style="font-size:55px">🏙️ 🌿 🎧</div>
+ <h1 class="script">Test 03 - Listening</h1>
+ <h2>Part 1 · Future Cities Exhibition</h2>
+ <p class="muted">Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <p>4 câu hỏi True/False · 50 phút · 2.0 điểm</p>
+ <div class="row" style="max-width:650px;margin:25px auto;text-align:left">
+  <div class="field"><label for="student">Họ và tên</label><input id="student" type="text" placeholder="Nhập họ và tên"></div>
+  <div class="field"><label for="studentClass">Lớp</label><input id="studentClass" type="text" placeholder="Ví dụ: 11A1"></div>
+ </div>
+ <p><button class="primary" id="startButton">BẮT ĐẦU THỬ THÁCH →</button></p>
+ <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
+</section>
+
+<section id="exam" class="hidden">
+ <div class="panel no-print">
+  <div class="row between">
+   <div>
+    <h2 style="margin:0">🎧 Original Audio</h2>
+    <span class="small" id="audioNote">Original recording: test 3. part 1 E11.mp3</span>
+   </div>
+   <div class="row">
+    <span class="pill" id="answeredCount">0/4 câu</span>
+   </div>
+  </div>
+  <audio id="player" src="../audio/test3-part1.mp3" controls preload="metadata"></audio>
+  <div class="row" style="margin-top:10px">
+   <button class="secondary" id="rewind">⏪ 10s</button>
+   <button class="secondary" id="forward">10s ⏩</button>
+   <button class="secondary" id="replay">↺ Phát lại</button>
+  </div>
+  <div class="progress" style="margin-top:12px"><div id="bar"></div></div>
+ </div>
+
+ <div class="panel">
+  <div class="row between">
+   <div>
+    <strong id="examStudent"></strong>
+    <p class="small muted">Listen to the conversation between Ms. Smith and two students at a "Future Cities" exhibition. Decide whether the following statements are True (T) or False (F).</p>
+   </div>
+  </div>
+  <div id="questions"></div>
+  <div class="row between" style="margin-top:20px">
+   <button class="primary" id="submitButton">✓ Check My Answers · Nộp bài</button>
+   <span id="motivation" class="small muted"></span>
+  </div>
+ </div>
+</section>
+
+<section id="results" class="hidden">
+ <div class="panel hero">
+  <h1 class="script">Wonderful Progress!</h1>
+  <p id="resultName"></p>
+  <div class="score" id="resultScore"></div>
+  <h2 id="resultCorrect"></h2>
+  <p id="resultMessage"></p>
+  <div class="row between no-print" style="justify-content:center">
+   <button class="primary" id="reviewButton">📚 Xem lại bài làm</button>
+   <button class="secondary" id="restartButton">↻ Làm lại bài</button>
+  </div>
+  <div id="certificate" class="certificate hidden">
+   <div style="font-size:45px">🏆</div>
+   <h2 class="script">Certificate of Achievement</h2>
+   <p>GIẤY CHỨNG NHẬN HOÀN THÀNH</p>
+   <p>Trân trọng trao cho học sinh</p>
+   <h2 id="certName"></h2>
+   <p id="certClass"></p>
+   <p>Đã xuất sắc hoàn thành</p>
+   <h3>TEST 03 – PART 1. LISTENING</h3>
+   <p id="certScore"></p>
+   <p id="certDate"></p>
+   <p class="script" style="font-size:30px;color:#99742f">Ms.Duyên</p>
+   <p>Giáo viên thiết kế: Ms.Duyen</p>
+  </div>
+ </div>
+</section>
+</main>
+<footer>Giáo viên thiết kế: Ms.Duyen · English 11 Global Success</footer>
+
+<script src="../assets/js/shared-nav.js"></script>
+<script>
+"use strict";
+
+const questions = [
+  {
+    text: "The green city has many parks and green areas.",
+    vi: "Thành phố xanh có nhiều công viên và khu vực cây xanh.",
+    answer: 0, // True
+    evidence: "The exhibition describes green cities with plenty of public parks and green spaces.",
+    detail: "Đoạn đối thoại khẳng định thành phố xanh được bao phủ bởi nhiều công viên và không gian xanh nhằm cải thiện chất lượng không khí.",
+    wrong: "False không đúng vì thông tin trùng khớp hoàn toàn với lời cô Smith."
+  },
+  {
+    text: "Public transport is the main way to travel in the green city.",
+    vi: "Giao thông công cộng là phương tiện di chuyển chính trong thành phố xanh.",
+    answer: 0, // True
+    evidence: "Public transportation like electric buses and trains is prioritized over private vehicles.",
+    detail: "Hệ thống giao thông công cộng thân thiện môi trường là phương thức đi lại chủ đạo, hạn chế phương tiện cá nhân.",
+    wrong: "False không đúng vì giao thông công cộng là trọng tâm của mô hình thành phố xanh."
+  },
+  {
+    text: "Nam is not sure that green cities can fix environmental problems.",
+    vi: "Nam không chắc chắn rằng các thành phố xanh có thể giải quyết được các vấn đề môi trường.",
+    answer: 1, // False
+    evidence: "Nam believes green cities are very promising and expresses high confidence in their environmental benefits.",
+    detail: "Nam tin tưởng vào hiệu quả của thành phố xanh đối với môi trường. Nhận định trong câu hỏi nói Nam 'not sure' là sai.",
+    wrong: "True không đúng vì Nam ủng hộ và tin tưởng giải pháp này."
+  },
+  {
+    text: "Ms Smith says both cities have different goals but can be combined.",
+    vi: "Cô Smith nói rằng cả hai loại thành phố có mục tiêu khác nhau nhưng có thể kết hợp với nhau.",
+    answer: 0, // True
+    evidence: "Ms. Smith explains that green cities and smart cities can complement each other to create sustainable future living.",
+    detail: "Cô Smith giải thích rằng việc kết hợp công nghệ thông minh và không gian xanh sẽ tạo nên thành phố tương lai lý tưởng.",
+    wrong: "False không đúng vì cô Smith khẳng định cả hai mô hình hoàn toàn có thể kết hợp."
+  }
+];
+
+const $ = id => document.getElementById(id);
+let answers = [null, null, null, null];
+let checked = [false, false, false, false];
+let remaining = 3000, timer = null, started = false, finished = false;
+let studentName = "", studentClass = "";
+const player = $("player");
+
+function safe(t){ return String(t).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]); }
+
+function renderQuestions(){
+ $("questions").innerHTML = questions.map((q, i) => `
+  <article class="question" id="q${i}">
+   <h3>Question ${i+1}.</h3>
+   <button class="sentence" onclick="toggleTranslation(${i})">${safe(q.text)} <span class="small">🌐</span></button>
+   <div id="qvi${i}" class="translation hidden">${safe(q.vi)}</div>
+   ${["True", "False"].map((a, j) => `
+    <button class="option" id="opt${i}${j}" onclick="choose(${i},${j})">
+     <strong>${j===0 ? "A" : "B"}.</strong> ${a}
+    </button>`).join("")}
+   <div class="row" style="margin-top:10px">
+    <button class="secondary" onclick="checkOne(${i})">✓ Check answer</button>
+    <button class="outline" onclick="explain(${i})">💡 Correct Answer</button>
+   </div>
+   <div id="feedback${i}" class="feedback hidden"></div>
+   <div id="explanation${i}" class="feedback hidden"></div>
+  </article>`).join("");
+}
+
+window.toggleTranslation = i => $("qvi" + i).classList.toggle("hidden");
+
+window.choose = (i, j) => {
+ if(finished || checked[i]) return;
+ answers[i] = j;
+ for(let k = 0; k < 2; k++) $("opt" + i + k).classList.toggle("selected", j === k);
+ updateProgress();
+};
+
+function updateProgress(){
+ const n = answers.filter(x => x !== null).length;
+ $("answeredCount").textContent = n + "/4 câu đã chọn";
+ $("bar").style.width = (n * 25) + "%";
+}
+
+window.checkOne = i => {
+ if(finished || checked[i]) return;
+ if(answers[i] === null){
+  $("feedback" + i).classList.remove("hidden");
+  $("feedback" + i).textContent = "🎧 Hãy chọn True hoặc False trước nhé!";
+  return;
+ }
+ checked[i] = true;
+ const right = answers[i] === questions[i].answer;
+ const f = $("feedback" + i);
+ f.classList.remove("hidden");
+ f.textContent = right ? "🌟 Chính xác! Bạn đã nghe rất cẩn thận." : "🌱 Chưa chính xác. Xem phần Correct Answer để hiểu rõ thông tin nhé.";
+ f.style.color = right ? "var(--good)" : "var(--bad)";
+ for(let j = 0; j < 2; j++){
+  $("opt" + i + j).classList.toggle("correct", j === questions[i].answer);
+  $("opt" + i + j).classList.toggle("wrong", j === answers[i] && !right);
+ }
+};
+
+window.explain = i => {
+ const el = $("explanation" + i);
+ el.classList.remove("hidden");
+ el.innerHTML = `<strong>Bằng chứng nghe:</strong> ${safe(questions[i].evidence)}<br><strong>Giải thích:</strong> ${safe(questions[i].detail)}`;
+};
+
+$("startButton").onclick = () => {
+ studentName = $("student").value.trim() || "Học sinh";
+ studentClass = $("studentClass").value.trim() || "";
+ $("examStudent").textContent = `Học sinh: ${studentName} ${studentClass ? '(' + studentClass + ')' : ''}`;
+ $("welcome").classList.add("hidden");
+ $("exam").classList.remove("hidden");
+ started = true;
+ renderQuestions();
+ player.play().catch(()=>{});
+ timer = setInterval(() => {
+  remaining--;
+  const m = String(Math.floor(remaining / 60)).padStart(2, "0");
+  const s = String(remaining % 60).padStart(2, "0");
+  $("clock").textContent = `${m}:${s}`;
+  if(remaining <= 0){ clearInterval(timer); finish(); }
+ }, 1000);
+};
+
+$("submitButton").onclick = () => {
+ for(let i = 0; i < 4; i++) if(!checked[i]) checkOne(i);
+ finish();
+};
+
+function finish(){
+ finished = true;
+ clearInterval(timer);
+ $("exam").classList.add("hidden");
+ $("results").classList.remove("hidden");
+ let correct = 0;
+ for(let i = 0; i < 4; i++) if(answers[i] === questions[i].answer) correct++;
+ const score = (correct * 2.5).toFixed(1);
+ $("resultName").textContent = `Học sinh: ${studentName} ${studentClass ? '(' + studentClass + ')' : ''}`;
+ $("resultScore").textContent = `${score} / 10 điểm`;
+ $("resultCorrect").textContent = `Đúng ${correct}/4 câu (${correct * 25}%)`;
+ 
+ if(correct >= 3){
+  $("resultMessage").textContent = "🎉 Xuất sắc! Bạn đã vượt qua bài thi xuất sắc và nhận được Giấy chứng nhận.";
+  $("certificate").classList.remove("hidden");
+  $("certName").textContent = studentName;
+  $("certClass").textContent = studentClass ? `Lớp: ${studentClass}` : "";
+  $("certScore").textContent = `Điểm số: ${score}/10 (${correct}/4 câu đúng)`;
+  $("certDate").textContent = `Ngày: ${new Date().toLocaleDateString('vi-VN')}`;
+ } else {
+  $("resultMessage").textContent = "Cố gắng lên nhé! Bạn hãy nghe lại và ôn tập các phần giải thích chi tiết.";
+ }
+}
+
+$("reviewButton").onclick = () => {
+ $("results").classList.add("hidden");
+ $("exam").classList.remove("hidden");
+};
+$("restartButton").onclick = () => location.reload();
+
+$("rewind").onclick = () => player.currentTime = Math.max(0, player.currentTime - 10);
+$("forward").onclick = () => player.currentTime = Math.min(player.duration || Infinity, player.currentTime + 10);
+$("replay").onclick = () => { player.currentTime = 0; player.play().catch(()=>{}); };
+
+$("theme").onchange = e => document.body.dataset.theme = e.target.value;
+</script>
+</body>
+</html>

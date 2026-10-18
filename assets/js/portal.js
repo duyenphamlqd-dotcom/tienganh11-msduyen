@@ -120,6 +120,32 @@
 
     // --- TEST 03 ---
     {
+      id: "test03-listening-part1",
+      group: "TEST 03",
+      groupBadge: "Test 03",
+      title: "Test 03 · Part 1 · Listening",
+      desc: "Future Cities Exhibition: 4 câu True/False đối thoại giữa Ms. Smith và 2 học sinh, nghe audio trực tiếp, giải thích chi tiết và cấp chứng nhận.",
+      file: "tests/test03-listening-part1.html",
+      category: "listening",
+      skillText: "🎧 Listening",
+      questions: 4,
+      time: "50 phút",
+      points: "2.0 điểm"
+    },
+    {
+      id: "test03-listening-part2",
+      group: "TEST 03",
+      groupBadge: "Test 03",
+      title: "Test 03 · Part 2 · Listening",
+      desc: "Songkran - Thai New Year's Day: 4 câu trắc nghiệm A-B-C-D về lễ hội té nước Thái Lan, phát âm thanh nguyên bản, giải thích song ngữ.",
+      file: "tests/test03-listening-part2.html",
+      category: "listening",
+      skillText: "🎧 Listening",
+      questions: 4,
+      time: "50 phút",
+      points: "2.0 điểm"
+    },
+    {
       id: "test03-reading-q9-13",
       group: "TEST 03",
       groupBadge: "Test 03",
